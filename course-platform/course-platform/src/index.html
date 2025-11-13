@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IDQUIZ - Nền tảng khóa học trực tuyến</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                <span>IDQUIZ</span>
+            </div>
+            <nav class="nav">
+                <a href="#" class="nav-link active" data-tab="courses">
+                    <i class="fas fa-book"></i> Khóa học
+                </a>
+                <a href="#" class="nav-link" data-tab="library">
+                    <i class="fas fa-folder-open"></i> Đại học & Tài liệu
+                </a>
+                <a href="#" class="nav-link" data-tab="notifications">
+                    <i class="fas fa-bell"></i> Thông báo
+                </a>
+            </nav>
+            <div class="header-actions">
+                <button class="btn btn-create">
+                    <i class="fas fa-plus-circle"></i> Tạo lịch học tập
+                </button>
+                <button class="btn btn-my-courses">
+                    <i class="fas fa-clipboard-list"></i> Sở khóa học của tôi
+                </button>
+                <div class="user-profile">
+                    <div class="avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <span class="user-name">Admin</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">Khám phá kiến thức mới mỗi ngày</h1>
+            <p class="hero-subtitle">Nền tảng học trực tuyến với hàng ngàn khóa học chất lượng cao</p>
+            <div class="hero-search">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Tìm kiếm khóa học, giảng viên, chủ đề...">
+                <button class="btn-search">Tìm kiếm</button>
+            </div>
+        </div>
+        <div class="hero-stats">
+            <div class="stat-item">
+                <i class="fas fa-users"></i>
+                <div class="stat-info">
+                    <h3>10,000+</h3>
+                    <p>Học viên</p>
+                </div>
+            </div>
+            <div class="stat-item">
+                <i class="fas fa-book-open"></i>
+                <div class="stat-info">
+                    <h3>500+</h3>
+                    <p>Khóa học</p>
+                </div>
+            </div>
+            <div class="stat-item">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <div class="stat-info">
+                    <h3>100+</h3>
+                    <p>Giảng viên</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Filter Bar -->
+            <div class="filter-bar">
+                <div class="filter-left">
+                    <h2 class="section-title">Khóa học của tôi</h2>
+                    <span class="course-count">(12 khóa học)</span>
+                </div>
+                <div class="filter-right">
+                    <div class="filter-group">
+                        <label><i class="fas fa-filter"></i> Lọc:</label>
+                        <select class="filter-select">
+                            <option>Tất cả khóa học</option>
+                            <option>Đang học</option>
+                            <option>Hoàn thành</option>
+                            <option>Chưa bắt đầu</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label><i class="fas fa-sort"></i> Sắp xếp:</label>
+                        <select class="filter-select">
+                            <option>Mới nhất</option>
+                            <option>Cũ nhất</option>
+                            <option>Tên A-Z</option>
+                            <option>Tiến độ</option>
+                        </select>
+                    </div>
+                    <div class="view-toggle">
+                        <button class="view-btn active" data-view="grid">
+                            <i class="fas fa-th-large"></i>
+                        </button>
+                        <button class="view-btn" data-view="list">
+                            <i class="fas fa-list"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Course Grid -->
+            <div class="course-grid" id="courseGrid">
+                <!-- Courses will be loaded here -->
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <button class="pagination-btn" id="prevBtn">
+                    <i class="fas fa-chevron-left"></i> Trang trước
+                </button>
+                <div class="pagination-numbers" id="paginationNumbers">
+                    <span class="page-number active">1</span>
+                </div>
+                <button class="pagination-btn" id="nextBtn">
+                    Trang sau <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Video Modal -->
+    <div id="videoModal" class="modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-container">
+            <button class="modal-close"><i class="fas fa-times"></i></button>
+            <div class="modal-header">
+                <h2 id="videoTitle">HÀM SỐ CHẴN - HÀM SỐ LẺ</h2>
+                <div class="course-meta">
+                    <span><i class="fas fa-user-tie"></i> Giảng viên: Nguyễn Văn A</span>
+                    <span><i class="fas fa-clock"></i> Cập nhật: 10/11/2024</span>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="video-wrapper">
+                    <video id="mainVideo" controls controlsList="nodownload">
+                        <source src="" type="video/mp4">
+                        Trình duyệt của bạn không hỗ trợ video.
+                    </video>
+                    <div class="video-play-overlay">
+                        <button class="video-play-btn"><i class="fas fa-play"></i></button>
+                    </div>
+                </div>
+                
+                <!-- Tabs -->
+                <div class="content-tabs">
+                    <button class="tab-btn active" data-content="lessons">
+                        <i class="fas fa-list-ul"></i> Danh sách bài học
+                    </button>
+                    <button class="tab-btn" data-content="overview">
+                        <i class="fas fa-info-circle"></i> Tổng quan
+                    </button>
+                    <button class="tab-btn" data-content="materials">
+                        <i class="fas fa-file-pdf"></i> Tài liệu
+                    </button>
+                </div>
+
+                <!-- Lesson List -->
+                <div class="lesson-list" id="lessonList">
+                    <!-- Lessons will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Upload Modal -->
+    <div id="uploadModal" class="modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-container">
+            <button class="modal-close"><i class="fas fa-times"></i></button>
+            <div class="modal-header">
+                <h2><i class="fas fa-cloud-upload-alt"></i> Đăng khóa học mới</h2>
+            </div>
+            <div class="modal-body">
+                <form id="uploadForm" class="upload-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label><i class="fas fa-book"></i> Tên khóa học *</label>
+                            <input type="text" id="courseName" placeholder="Nhập tên khóa học" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label><i class="fas fa-user-tie"></i> Giảng viên *</label>
+                            <input type="text" id="instructorName" placeholder="Tên giảng viên" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label><i class="fas fa-align-left"></i> Mô tả</label>
+                        <textarea id="courseDescription" placeholder="Mô tả chi tiết về khóa học" rows="4"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label><i class="fas fa-video"></i> Upload Video</label>
+                        <div class="upload-area" id="videoUploadArea">
+                            <div class="upload-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                            <h4>Kéo thả video vào đây</h4>
+                            <p>hoặc <span class="upload-link">chọn file từ máy tính</span></p>
+                            <small>Hỗ trợ: MP4, AVI, MOV (Tối đa 500MB)</small>
+                            <input type="file" id="videoFile" accept="video/*" multiple>
+                        </div>
+                        <div id="videoFileList" class="file-list"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label><i class="fas fa-file-powerpoint"></i> Upload Slide</label>
+                        <div class="upload-area" id="slideUploadArea">
+                            <div class="upload-icon"><i class="fas fa-file-upload"></i></div>
+                            <h4>Kéo thả slide vào đây</h4>
+                            <p>hoặc <span class="upload-link">chọn file từ máy tính</span></p>
+                            <small>Hỗ trợ: PDF, PPT, PPTX (Tối đa 50MB)</small>
+                            <input type="file" id="slideFile" accept=".pdf,.ppt,.pptx" multiple>
+                        </div>
+                        <div id="slideFileList" class="file-list"></div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-submit">
+                        <i class="fas fa-check-circle"></i> Đăng khóa học
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3><i class="fas fa-graduation-cap"></i> IDQUIZ</h3>
+                    <p>Nền tảng học trực tuyến hàng đầu Việt Nam</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Khóa học</h4>
+                    <ul>
+                        <li><a href="#">Lập trình</a></li>
+                        <li><a href="#">Toán học</a></li>
+                        <li><a href="#">Vật lý</a></li>
+                        <li><a href="#">Hóa học</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Hỗ trợ</h4>
+                    <ul>
+                        <li><a href="#">Trung tâm trợ giúp</a></li>
+                        <li><a href="#">Liên hệ</a></li>
+                        <li><a href="#">Câu hỏi thường gặp</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Liên hệ</h4>
+                    <p><i class="fas fa-envelope"></i> support@idquiz.vn</p>
+                    <p><i class="fas fa-phone"></i> 1900 1234</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 IDQUIZ. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/app.js"></script>
+    <script src="js/video-player.js"></script>
+    <script src="js/slide-viewer.js"></script>
+</body>
+</html>
