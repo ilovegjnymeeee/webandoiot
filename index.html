@@ -5,959 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IDQUIZ - Nền tảng học trực tuyến hiện đại</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            --gradient-4: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-            --dark-1: #0a0e27;
-            --dark-2: #1a1f3a;
-            --dark-3: #2a2f4a;
-            --purple: #6366f1;
-            --pink: #ec4899;
-            --blue: #3b82f6;
-            --green: #10b981;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: var(--dark-1);
-            color: white;
-            overflow-x: hidden;
-        }
-
-        /* Animated Background */
-        .animated-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
-        }
-
-        .animated-bg::before {
-            content: '';
-            position: absolute;
-            width: 200%;
-            height: 200%;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(236, 72, 153, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 40% 20%, rgba(59, 130, 246, 0.15) 0%, transparent 50%);
-            animation: bgMove 20s ease infinite;
-        }
-
-        @keyframes bgMove {
-            0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(-50px, -50px); }
-        }
-
-        /* Header */
-        .header {
-            background: rgba(26, 31, 58, 0.95);
-            backdrop-filter: blur(20px);
-            padding: 20px 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .header-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            font-size: 32px;
-            font-weight: 900;
-            background: var(--gradient-1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-
-        .logo:hover {
-            transform: scale(1.05);
-        }
-
-        .nav {
-            display: flex;
-            gap: 10px;
-        }
-
-        .nav-link {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 12px 25px;
-            border-radius: 50px;
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
-            position: relative;
-        }
-
-        .nav-link::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: 50px;
-            padding: 2px;
-            background: var(--gradient-1);
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .nav-link:hover::before,
-        .nav-link.active::before {
-            opacity: 1;
-        }
-
-        .nav-link:hover,
-        .nav-link.active {
-            color: white;
-            background: rgba(102, 126, 234, 0.2);
-        }
-
-        .header-actions {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-        }
-
-        .btn {
-            padding: 12px 30px;
-            border: none;
-            border-radius: 50px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 14px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-        }
-
-        .btn:hover::before {
-            width: 300px;
-            height: 300px;
-        }
-
-        .btn span {
-            position: relative;
-            z-index: 1;
-        }
-
-        .btn-primary {
-            background: var(--gradient-1);
-            color: white;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
-        }
-
-        .btn-secondary {
-            background: var(--gradient-4);
-            color: white;
-            box-shadow: 0 10px 30px rgba(67, 233, 123, 0.4);
-        }
-
-        .btn-secondary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(67, 233, 123, 0.6);
-        }
-
-        .user-profile {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 8px 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s;
-            border: 2px solid transparent;
-        }
-
-        .user-profile:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: var(--purple);
-            transform: translateY(-2px);
-        }
-
-        .avatar {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            background: var(--gradient-1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-        }
-
-        /* Hero Section */
-        .hero {
-            padding: 100px 40px;
-            text-align: center;
-            position: relative;
-        }
-
-        .hero-content h1 {
-            font-size: 72px;
-            font-weight: 900;
-            margin-bottom: 25px;
-            background: var(--gradient-1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: fadeInUp 1s ease;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .hero-content p {
-            font-size: 24px;
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 40px;
-            animation: fadeInUp 1s ease 0.2s backwards;
-        }
-
-        .search-box {
-            max-width: 700px;
-            margin: 0 auto 60px;
-            display: flex;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 60px;
-            padding: 8px;
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            animation: fadeInUp 1s ease 0.4s backwards;
-        }
-
-        .search-box input {
-            flex: 1;
-            background: none;
-            border: none;
-            padding: 15px 30px;
-            color: white;
-            font-size: 16px;
-            outline: none;
-        }
-
-        .search-box input::placeholder {
-            color: rgba(255, 255, 255, 0.5);
-        }
-
-        .search-box button {
-            padding: 15px 40px;
-            background: var(--gradient-1);
-            border: none;
-            border-radius: 50px;
-            color: white;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .search-box button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.5);
-        }
-
-        .stats {
-            display: flex;
-            justify-content: center;
-            gap: 80px;
-            flex-wrap: wrap;
-            animation: fadeInUp 1s ease 0.6s backwards;
-        }
-
-        .stat-card {
-            text-align: center;
-            padding: 30px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 25px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s;
-            min-width: 200px;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.1);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
-        }
-
-        .stat-card i {
-            font-size: 50px;
-            margin-bottom: 15px;
-            background: var(--gradient-1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .stat-card h3 {
-            font-size: 42px;
-            font-weight: 900;
-            margin-bottom: 10px;
-            background: var(--gradient-1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .stat-card p {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 16px;
-        }
-
-        /* Main Content */
-        .main-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 60px 40px;
-        }
-
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 40px;
-            padding: 30px;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 25px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .section-title {
-            font-size: 36px;
-            font-weight: 800;
-        }
-
-        .section-title span {
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 18px;
-            font-weight: 400;
-            margin-left: 15px;
-        }
-
-        .filters {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-        }
-
-        .filter-select {
-            padding: 12px 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 50px;
-            color: white;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-weight: 600;
-        }
-
-        .filter-select:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: var(--purple);
-        }
-
-        .view-toggle {
-            display: flex;
-            gap: 8px;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 5px;
-            border-radius: 50px;
-        }
-
-        .view-btn {
-            width: 40px;
-            height: 40px;
-            border: none;
-            background: transparent;
-            color: rgba(255, 255, 255, 0.5);
-            cursor: pointer;
-            border-radius: 50%;
-            transition: all 0.3s;
-        }
-
-        .view-btn:hover,
-        .view-btn.active {
-            background: var(--gradient-1);
-            color: white;
-        }
-
-        /* Course Grid */
-        .course-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-            gap: 30px;
-            margin-bottom: 60px;
-        }
-
-        .course-card {
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 30px;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            cursor: pointer;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            position: relative;
-        }
-
-        .course-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: 30px;
-            padding: 2px;
-            background: var(--gradient-1);
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .course-card:hover::before {
-            opacity: 1;
-        }
-
-        .course-card:hover {
-            transform: translateY(-15px) scale(1.02);
-            box-shadow: 0 30px 60px rgba(102, 126, 234, 0.3);
-        }
-
-        .course-thumbnail {
-            height: 240px;
-            background: var(--gradient-1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .course-thumbnail::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
-            animation: shimmer 3s infinite;
-        }
-
-        @keyframes shimmer {
-            0% {
-                transform: translateX(-100%) translateY(-100%);
-            }
-            100% {
-                transform: translateX(100%) translateY(100%);
-            }
-        }
-
-        .course-icon {
-            font-size: 100px;
-            z-index: 1;
-            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
-        }
-
-        .course-body {
-            padding: 30px;
-        }
-
-        .course-title {
-            font-size: 22px;
-            font-weight: 700;
-            margin-bottom: 15px;
-            line-height: 1.4;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        .course-instructor {
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 14px;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .progress-section {
-            margin-bottom: 25px;
-        }
-
-        .progress-bar-bg {
-            height: 10px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            overflow: hidden;
-            margin-bottom: 12px;
-        }
-
-        .progress-bar-fill {
-            height: 100%;
-            background: var(--gradient-4);
-            border-radius: 10px;
-            transition: width 1s ease;
-            position: relative;
-        }
-
-        .progress-bar-fill::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            animation: progressShine 2s infinite;
-        }
-
-        @keyframes progressShine {
-            0% {
-                transform: translateX(-100%);
-            }
-            100% {
-                transform: translateX(100%);
-            }
-        }
-
-        .progress-text {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 14px;
-            font-weight: 600;
-        }
-
-        .course-actions {
-            display: flex;
-            gap: 12px;
-        }
-
-        .btn-action {
-            flex: 1;
-            padding: 15px;
-            border: none;
-            border-radius: 15px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .btn-join {
-            background: var(--gradient-4);
-            color: white;
-            box-shadow: 0 10px 25px rgba(67, 233, 123, 0.3);
-        }
-
-        .btn-join:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(67, 233, 123, 0.5);
-        }
-
-        .btn-detail {
-            background: var(--gradient-3);
-            color: white;
-            box-shadow: 0 10px 25px rgba(79, 172, 254, 0.3);
-        }
-
-        .btn-detail:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(79, 172, 254, 0.5);
-        }
-
-        /* Pagination */
-        .pagination {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-            margin-top: 60px;
-        }
-
-        .pagination-btn {
-            padding: 15px 30px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            color: white;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .pagination-btn:hover:not(:disabled) {
-            background: var(--gradient-1);
-            border-color: transparent;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
-        }
-
-        .pagination-btn:disabled {
-            opacity: 0.3;
-            cursor: not-allowed;
-        }
-
-        .page-number {
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            color: white;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .page-number:hover,
-        .page-number.active {
-            background: var(--gradient-1);
-            border-color: transparent;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
-        }
-
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal.active {
-            display: flex;
-        }
-
-        .modal-overlay {
-            position: absolute;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(20px);
-        }
-
-        .modal-container {
-            position: relative;
-            background: var(--dark-2);
-            border-radius: 30px;
-            max-width: 1200px;
-            width: 90%;
-            max-height: 90vh;
-            overflow-y: auto;
-            z-index: 2001;
-            animation: modalIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        @keyframes modalIn {
-            from {
-                opacity: 0;
-                transform: scale(0.8) translateY(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1) translateY(0);
-            }
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 25px;
-            right: 25px;
-            width: 50px;
-            height: 50px;
-            background: rgba(255, 0, 0, 0.2);
-            border: 2px solid rgba(255, 0, 0, 0.5);
-            border-radius: 50%;
-            color: #ff0000;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            z-index: 1;
-        }
-
-        .modal-close:hover {
-            background: #ff0000;
-            color: white;
-            transform: rotate(90deg) scale(1.1);
-        }
-
-        .modal-header {
-            padding: 40px 40px 25px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .modal-header h2 {
-            font-size: 32px;
-            font-weight: 800;
-            margin-bottom: 15px;
-        }
-
-        .modal-body {
-            padding: 40px;
-        }
-
-        .video-wrapper {
-            background: #000;
-            border-radius: 20px;
-            overflow: hidden;
-            margin-bottom: 30px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-        }
-
-        .video-wrapper video {
-            width: 100%;
-            display: block;
-        }
-
-        .lesson-list {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .lesson-item {
-            display: flex;
-            align-items: center;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 15px;
-            cursor: pointer;
-            transition: all 0.3s;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .lesson-item:hover {
-            background: rgba(255, 255, 255, 0.08);
-            transform: translateX(10px);
-            border-color: var(--purple);
-        }
-
-        .lesson-icon {
-            width: 60px;
-            height: 60px;
-            background: var(--gradient-1);
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            margin-right: 20px;
-        }
-
-        .lesson-info h4 {
-            font-size: 18px;
-            margin-bottom: 8px;
-        }
-
-        .lesson-info p {
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 14px;
-        }
-
-        /* Footer */
-        .footer {
-            background: var(--dark-2);
-            padding: 60px 40px 30px;
-            margin-top: 100px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .footer-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 60px;
-            margin-bottom: 40px;
-        }
-
-        .footer-section h3 {
-            font-size: 28px;
-            margin-bottom: 20px;
-            background: var(--gradient-1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .footer-section p {
-            color: rgba(255, 255, 255, 0.6);
-            line-height: 1.8;
-            margin-bottom: 20px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 15px;
-        }
-
-        .social-links a {
-            width: 50px;
-            height: 50px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            transition: all 0.3s;
-        }
-
-        .social-links a:hover {
-            background: var(--gradient-1);
-            transform: translateY(-5px);
-        }
-
-        .footer-section h4 {
-            font-size: 18px;
-            margin-bottom: 20px;
-        }
-
-        .footer-section ul {
-            list-style: none;
-        }
-
-        .footer-section ul li {
-            margin-bottom: 12px;
-        }
-
-        .footer-section ul li a {
-            color: rgba(255, 255, 255, 0.6);
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-
-        .footer-section ul li a:hover {
-            color: white;
-            padding-left: 10px;
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.5);
-        }
-
-        /* Responsive */
-        @media (max-width: 1200px) {
-            .course-grid {
-                grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            }
-        }
-
-        @media (max-width: 768px) {
-            .header-container {
-                flex-wrap: wrap;
-                gap: 20px;
-            }
-
-            .nav {
-                order: 3;
-                width: 100%;
-                justify-content: center;
-            }
-
-            .hero-content h1 {
-                font-size: 42px;
-            }
-
-            .stats {
-                gap: 30px;
-            }
-
-            .course-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-content {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-
-            .section-header {
-                flex-direction: column;
-                gap: 20px;
-            }
-
-            .filters {
-                flex-wrap: wrap;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="course-platform/course-platform/src/css/styles.css">
 </head>
 <body>
     <div class="animated-bg"></div>
@@ -984,7 +32,7 @@
                 </a>
             </nav>
             <div class="header-actions">
-                <button class="btn btn-primary" onclick="openUploadModal()">
+                <button class="btn btn-primary" onclick="app.openUploadModal()">
                     <i class="fas fa-plus-circle"></i>
                     <span>Tạo khóa học</span>
                 </button>
@@ -1037,24 +85,24 @@
     <main class="main-content">
         <div class="section-header">
             <div>
-                <h2 class="section-title">Khóa học của tôi <span>(12 khóa học)</span></h2>
+                <h2 class="section-title">Khóa học của tôi <span id="courseCount">(12 khóa học)</span></h2>
             </div>
             <div class="filters">
-                <select class="filter-select">
+                <select class="filter-select" id="filterStatus">
                     <option>🔥 Tất cả</option>
                     <option>📚 Đang học</option>
                     <option>✅ Hoàn thành</option>
                     <option>⏸️ Tạm dừng</option>
                 </select>
-                <select class="filter-select">
+                <select class="filter-select" id="filterSort">
                     <option>🆕 Mới nhất</option>
                     <option>⏰ Cũ nhất</option>
                     <option>🔤 Tên A-Z</option>
                     <option>📊 Tiến độ</option>
                 </select>
                 <div class="view-toggle">
-                    <button class="view-btn active"><i class="fas fa-th-large"></i></button>
-                    <button class="view-btn"><i class="fas fa-list"></i></button>
+                    <button class="view-btn active" data-view="grid"><i class="fas fa-th-large"></i></button>
+                    <button class="view-btn" data-view="list"><i class="fas fa-list"></i></button>
                 </div>
             </div>
         </div>
@@ -1064,13 +112,11 @@
         </div>
 
         <div class="pagination">
-            <button class="pagination-btn" id="prevBtn" disabled>
+            <button class="pagination-btn" id="prevBtn">
                 <i class="fas fa-chevron-left"></i> Trang trước
             </button>
             <div id="paginationNumbers">
-                <span class="page-number active">1</span>
-                <span class="page-number">2</span>
-                <span class="page-number">3</span>
+                <!-- Page numbers will be generated here -->
             </div>
             <button class="pagination-btn" id="nextBtn">
                 Trang sau <i class="fas fa-chevron-right"></i>
@@ -1078,28 +124,122 @@
         </div>
     </main>
 
-    <!-- Modal -->
+    <!-- Course Modal -->
     <div id="courseModal" class="modal">
-        <div class="modal-overlay" onclick="closeModal()"></div>
+        <div class="modal-overlay"></div>
         <div class="modal-container">
-            <button class="modal-close" onclick="closeModal()">
+            <button class="modal-close">
                 <i class="fas fa-times"></i>
             </button>
             <div class="modal-header">
                 <h2 id="modalTitle">HÀM SỐ CHẴN - HÀM SỐ LẺ</h2>
                 <p style="color: rgba(255,255,255,0.6);">
-                    <i class="fas fa-user-tie"></i> Giảng viên: ĐH/GĐT - Toán cao cấp & Vật lý đại cương
+                    <i class="fas fa-user-tie"></i> <span id="modalInstructor">Giảng viên</span>
                 </p>
             </div>
             <div class="modal-body">
                 <div class="video-wrapper">
                     <video id="courseVideo" controls>
                         <source src="" type="video/mp4">
+                        Trình duyệt không hỗ trợ video
                     </video>
+                    <div class="video-play-overlay">
+                        <button class="video-play-btn"><i class="fas fa-play"></i></button>
+                    </div>
                 </div>
-                <div class="lesson-list" id="lessonList">
-                    <!-- Lessons will be loaded here -->
+
+                <div class="content-tabs">
+                    <button class="tab-btn active" data-tab="lessons">
+                        <i class="fas fa-list-ul"></i> Danh sách bài học
+                    </button>
+                    <button class="tab-btn" data-tab="overview">
+                        <i class="fas fa-info-circle"></i> Tổng quan
+                    </button>
+                    <button class="tab-btn" data-tab="materials">
+                        <i class="fas fa-file-pdf"></i> Tài liệu
+                    </button>
                 </div>
+
+                <div class="tab-content active" id="tab-lessons">
+                    <div class="lesson-list" id="lessonList">
+                        <!-- Lessons will be loaded here -->
+                    </div>
+                </div>
+
+                <div class="tab-content" id="tab-overview">
+                    <div class="overview-content">
+                        <h3>Mô tả khóa học</h3>
+                        <p>Khóa học này sẽ giúp bạn nắm vững các kiến thức cơ bản và nâng cao.</p>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="tab-materials">
+                    <div class="materials-content">
+                        <h3>Tài liệu học tập</h3>
+                        <p>Chưa có tài liệu nào</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Upload Modal -->
+    <div id="uploadModal" class="modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-container upload-modal">
+            <button class="modal-close">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-header">
+                <h2><i class="fas fa-cloud-upload-alt"></i> Đăng khóa học mới</h2>
+            </div>
+            <div class="modal-body">
+                <form id="uploadForm" class="upload-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label><i class="fas fa-book"></i> Tên khóa học *</label>
+                            <input type="text" id="courseName" placeholder="Nhập tên khóa học" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label><i class="fas fa-user-tie"></i> Giảng viên *</label>
+                            <input type="text" id="instructorName" placeholder="Tên giảng viên" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label><i class="fas fa-align-left"></i> Mô tả</label>
+                        <textarea id="courseDescription" placeholder="Mô tả chi tiết về khóa học" rows="4"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label><i class="fas fa-video"></i> Upload Video</label>
+                        <div class="upload-area" id="videoUploadArea">
+                            <div class="upload-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                            <h4>Kéo thả video vào đây</h4>
+                            <p>hoặc <span class="upload-link">chọn file từ máy tính</span></p>
+                            <small>Hỗ trợ: MP4, AVI, MOV (Tối đa 500MB)</small>
+                            <input type="file" id="videoFile" accept="video/*" multiple>
+                        </div>
+                        <div id="videoFileList" class="file-list"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label><i class="fas fa-file-powerpoint"></i> Upload Slide</label>
+                        <div class="upload-area" id="slideUploadArea">
+                            <div class="upload-icon"><i class="fas fa-file-upload"></i></div>
+                            <h4>Kéo thả slide vào đây</h4>
+                            <p>hoặc <span class="upload-link">chọn file từ máy tính</span></p>
+                            <small>Hỗ trợ: PDF, PPT, PPTX (Tối đa 50MB)</small>
+                            <input type="file" id="slideFile" accept=".pdf,.ppt,.pptx" multiple>
+                        </div>
+                        <div id="slideFileList" class="file-list"></div>
+                    </div>
+                    
+                    <button type="submit" class="btn-submit">
+                        <i class="fas fa-check-circle"></i> Đăng khóa học
+                    </button>
+                </form>
             </div>
         </div>
     </div>
@@ -1149,147 +289,8 @@
         </div>
     </footer>
 
-    <script>
-        // Sample course data
-        const courses = [
-            {
-                id: 1,
-                title: 'Giải tích 1 - Hàm số chẵn và hàm số lẻ',
-                instructor: 'ĐH/GĐT - Toán cao cấp & Vật lý đại cương',
-                progress: 65,
-                icon: '📐',
-                gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                lessons: [
-                    { title: 'Bài 1: Hàm số chẵn - lẻ', duration: '08:43' },
-                    { title: 'Bài 2: Hàm số tuần hoàn', duration: '18:41' },
-                    { title: 'Bài 3: Hàm hợp', duration: '07:52' }
-                ]
-            },
-            {
-                id: 2,
-                title: 'Giải tích 2 - Tích phân và ứng dụng',
-                instructor: 'ĐH/GĐT - Toán cao cấp & Vật lý đại cương',
-                progress: 0,
-                icon: '∫',
-                gradient: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)'
-            },
-            {
-                id: 3,
-                title: 'Vật lý đại cương 2 - Điện từ học',
-                instructor: 'ĐH/GĐT - Toán cao cấp & Vật lý đại cương',
-                progress: 30,
-                icon: '⚡',
-                gradient: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)'
-            },
-            {
-                id: 4,
-                title: 'Xác suất thống kê 2025',
-                instructor: 'ĐH/GĐT - Toán cao cấp & Vật lý đại cương',
-                progress: 0,
-                icon: '📊',
-                gradient: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)'
-            },
-            {
-                id: 5,
-                title: '[HUST] TIN HỌC ĐẠI CƯƠNG',
-                instructor: 'ĐH/GĐT - Toán cao cấp & Vật lý đại cương',
-                progress: 45,
-                icon: '💻',
-                gradient: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)'
-            },
-            {
-                id: 6,
-                title: 'Lập trình Python từ cơ bản đến nâng cao',
-                instructor: 'Trung tâm đào tạo lập trình',
-                progress: 80,
-                icon: '🐍',
-                gradient: 'linear-gradient(135deg, #30cfd0 0%, #330867 100%)'
-            }
-        ];
-
-        // Load courses
-        function loadCourses() {
-            const grid = document.getElementById('courseGrid');
-            grid.innerHTML = courses.map(course => `
-                <div class="course-card" onclick="openCourse(${course.id})">
-                    <div class="course-thumbnail" style="background: ${course.gradient}">
-                        <div class="course-icon">${course.icon}</div>
-                    </div>
-                    <div class="course-body">
-                        <h3 class="course-title">${course.title}</h3>
-                        <p class="course-instructor">
-                            <i class="fas fa-user-tie"></i> ${course.instructor}
-                        </p>
-                        <div class="progress-section">
-                            <div class="progress-bar-bg">
-                                <div class="progress-bar-fill" style="width: ${course.progress}%"></div>
-                            </div>
-                            <p class="progress-text">✨ Hoàn thành ${course.progress}%</p>
-                        </div>
-                        <div class="course-actions">
-                            <button class="btn-action btn-join">
-                                <i class="fas fa-play-circle"></i> Vào học
-                            </button>
-                            <button class="btn-action btn-detail">
-                                <i class="fas fa-info-circle"></i> Chi tiết
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        // Open course modal
-        function openCourse(courseId) {
-            const course = courses.find(c => c.id === courseId);
-            const modal = document.getElementById('courseModal');
-            const modalTitle = document.getElementById('modalTitle');
-            const lessonList = document.getElementById('lessonList');
-
-            modalTitle.textContent = course.title;
-            
-            if (course.lessons) {
-                lessonList.innerHTML = course.lessons.map(lesson => `
-                    <div class="lesson-item">
-                        <div class="lesson-icon">
-                            <i class="fas fa-play"></i>
-                        </div>
-                        <div class="lesson-info">
-                            <h4>${lesson.title}</h4>
-                            <p><i class="fas fa-clock"></i> ${lesson.duration}</p>
-                        </div>
-                    </div>
-                `).join('');
-            } else {
-                lessonList.innerHTML = '<p style="text-align:center;padding:40px;color:rgba(255,255,255,0.5);">Chưa có bài học nào</p>';
-            }
-
-            modal.classList.add('active');
-        }
-
-        // Close modal
-        function closeModal() {
-            document.getElementById('courseModal').classList.remove('active');
-        }
-
-        // Open upload modal
-        function openUploadModal() {
-            alert('🚀 Tính năng đang phát triển!\n\nChức năng upload khóa học sẽ sớm ra mắt.');
-        }
-
-        // Initialize
-        loadCourses();
-
-        // Animate progress bars on load
-        window.addEventListener('load', () => {
-            document.querySelectorAll('.progress-bar-fill').forEach(bar => {
-                const width = bar.style.width;
-                bar.style.width = '0';
-                setTimeout(() => {
-                    bar.style.width = width;
-                }, 100);
-            });
-        });
-    </script>
+    <script src="course-platform/course-platform/src/js/app.js"></script>
+    <script src="course-platform/course-platform/src/js/video-player.js"></script>
+    <script src="course-platform/course-platform/src/js/slide-viewer.js"></script>
 </body>
 </html>
