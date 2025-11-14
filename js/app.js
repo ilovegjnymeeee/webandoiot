@@ -11,27 +11,39 @@ class CourseApp {
         this.viewMode = 'grid';
         this.currentCourse = null;
         this.currentLesson = null;
+        this.deleteTargetId = null;
         
-        // ✅ FIX: Load courses khi khởi tạo
         this.init();
     }
 
     async init() {
         try {
-            // ✅ FIX: Load từ courses.json
-            const response = await fetch('./courses.json');
+            // ✅ Thử load từ localStorage trước
+            const savedCourses = localStorage.getItem('webandoiot_courses');
             
-            if (!response.ok) {
-                throw new Error('Không thể load courses.json');
+            if (savedCourses) {
+                console.log('📦 Loading from localStorage...');
+                this.courses = JSON.parse(savedCourses);
+            } else {
+                // ✅ Nếu chưa có, load từ courses.json
+                console.log('📥 Loading from courses.json...');
+                const response = await fetch('./courses.json');
+                
+                if (!response.ok) {
+                    throw new Error('Không thể load courses.json');
+                }
+                
+                const data = await response.json();
+                this.courses = data.courses || [];
+                
+                // Save to localStorage
+                this.saveCourses();
             }
             
-            const data = await response.json();
-            this.courses = data.courses || [];
             this.filteredCourses = [...this.courses];
             
             console.log('✅ Loaded courses:', this.courses.length);
             
-            // Render courses
             this.renderCourses();
             this.updateStats();
             this.renderPagination();
@@ -40,21 +52,26 @@ class CourseApp {
             console.error('❌ Error loading courses:', error);
             this.showNotification('Không thể tải danh sách khóa học!', 'error');
             
-            // Hiển thị thông báo trên UI
+            // Hiển thị empty state
             const coursesGrid = document.getElementById('coursesGrid');
             if (coursesGrid) {
                 coursesGrid.innerHTML = `
-                    <div class="error-message">
-                        <i class="fas fa-exclamation-triangle"></i>
-                        <h3>Không thể tải khóa học</h3>
-                        <p>Vui lòng kiểm tra file courses.json</p>
-                        <button class="btn-primary" onclick="location.reload()">
-                            <i class="fas fa-sync-alt"></i> Thử lại
+                    <div class="empty-state">
+                        <i class="fas fa-inbox"></i>
+                        <h3>Chưa có khóa học nào</h3>
+                        <p>Thêm khóa học mới để bắt đầu học tập</p>
+                        <button class="btn-primary" onclick="courseApp.openUploadModal()">
+                            <i class="fas fa-plus"></i> Thêm khóa học đầu tiên
                         </button>
                     </div>
                 `;
             }
         }
+    }
+
+    saveCourses() {
+        localStorage.setItem('webandoiot_courses', JSON.stringify(this.courses));
+        console.log('💾 Courses saved to localStorage');
     }
 
     renderCourses() {
@@ -63,15 +80,14 @@ class CourseApp {
         
         if (!coursesGrid) return;
 
-        // ✅ FIX: Kiểm tra có courses không
         if (!this.filteredCourses || this.filteredCourses.length === 0) {
             coursesGrid.innerHTML = `
                 <div class="empty-state">
                     <i class="fas fa-inbox"></i>
-                    <h3>Chưa có khóa học nào</h3>
-                    <p>Thêm khóa học mới để bắt đầu học tập</p>
-                    <button class="btn-primary" onclick="courseApp.openUploadModal()">
-                        <i class="fas fa-plus"></i> Thêm khóa học đầu tiên
+                    <h3>Không tìm thấy khóa học</h3>
+                    <p>Thử thay đổi bộ lọc hoặc tìm kiếm khác</p>
+                    <button class="btn-secondary" onclick="courseApp.resetFilters()">
+                        <i class="fas fa-redo"></i> Đặt lại bộ lọc
                     </button>
                 </div>
             `;
@@ -81,20 +97,16 @@ class CourseApp {
             return;
         }
 
-        // Calculate pagination
         const startIndex = (this.currentPage - 1) * this.itemsPerPage;
         const endIndex = startIndex + this.itemsPerPage;
         const paginatedCourses = this.filteredCourses.slice(startIndex, endIndex);
 
-        // Update course count
         if (courseCount) {
             courseCount.textContent = `Hiển thị ${startIndex + 1}-${Math.min(endIndex, this.filteredCourses.length)} / ${this.filteredCourses.length} khóa học`;
         }
 
-        // Set grid/list view class
         coursesGrid.className = `courses-${this.viewMode}`;
 
-        // Render course cards
         coursesGrid.innerHTML = paginatedCourses.map(course => {
             const progress = this.calculateProgress(course);
             const statusClass = this.getStatusClass(progress);
@@ -115,9 +127,6 @@ class CourseApp {
                         <div class="course-header">
                             <h3 class="course-title">${course.title}</h3>
                             <div class="course-actions">
-                                <button class="btn-icon" onclick="courseApp.editCourse(${course.id})" title="Chỉnh sửa">
-                                    <i class="fas fa-edit"></i>
-                                </button>
                                 <button class="btn-icon btn-delete" onclick="courseApp.confirmDelete(${course.id})" title="Xóa">
                                     <i class="fas fa-trash"></i>
                                 </button>
@@ -127,7 +136,6 @@ class CourseApp {
                         <div class="course-meta">
                             <span><i class="fas fa-user"></i> ${course.instructor}</span>
                             <span><i class="fas fa-clock"></i> ${course.duration}</span>
-                            <span><i class="fas fa-layer-group"></i> ${course.category}</span>
                         </div>
 
                         <div class="course-stats">
@@ -189,6 +197,38 @@ class CourseApp {
         document.getElementById('completedCourses').textContent = completed;
         document.getElementById('inProgressCourses').textContent = inProgress;
         document.getElementById('notStartedCourses').textContent = notStarted;
+    }
+
+    resetFilters() {
+        document.getElementById('searchInput').value = '';
+        document.getElementById('filterStatus').value = 'all';
+        document.getElementById('filterStage').value = 'all';
+        document.getElementById('sortSelect').value = 'newest';
+        
+        this.filteredCourses = [...this.courses];
+        this.currentPage = 1;
+        this.renderCourses();
+        this.renderPagination();
+    }
+
+    async refreshCourses() {
+        this.showNotification('Đang làm mới...', 'info');
+        await this.init();
+    }
+
+    showNotification(message, type = 'success') {
+        const notification = document.getElementById('notification');
+        const notificationText = document.getElementById('notificationText');
+        
+        if (notification && notificationText) {
+            notificationText.textContent = message;
+            notification.className = `notification ${type}`;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
     }
 
     // Search
@@ -332,28 +372,6 @@ class CourseApp {
         
         // Scroll to top
         document.getElementById('courses-section').scrollIntoView({ behavior: 'smooth' });
-    }
-
-    // Notification
-    showNotification(message, type = 'success') {
-        const notification = document.getElementById('notification');
-        const notificationText = document.getElementById('notificationText');
-        
-        if (notification && notificationText) {
-            notificationText.textContent = message;
-            notification.className = `notification ${type}`;
-            notification.classList.add('show');
-            
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 3000);
-        }
-    }
-
-    // Refresh courses
-    async refreshCourses() {
-        this.showNotification('Đang làm mới...', 'info');
-        await this.init();
     }
 
     // Modal methods (giữ nguyên code cũ)
