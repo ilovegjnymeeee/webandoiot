@@ -2,109 +2,81 @@
     "courses":  [
                     {
                         "id":  1001,
-                        "students":  849,
+                        "students":  1375,
                         "lessons":  [
                                         {
-                                            "duration":  "15:00",
-                                            "title":  "Bài 1: Bài 1. Hướng Dẫn Sử Dụng Dev C++",
+                                            "duration":  "16:00",
+                                            "title":  "Bài 1: Hướng Dẫn Sử Dụng Dev C++",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 1. KIỂU DỮ LIỆU , BIẾN , VÒNG LẶP , HÀM/Bài 1. Hướng dẫn sử dụng DEV C++.mp4",
                                             "id":  1,
                                             "completed":  false
                                         },
                                         {
-                                            "duration":  "15:00",
-                                            "title":  "Bài 2: Bài 170. Hướng Dẫn Giải Contest 0",
-                                            "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 9. KIẾN THỨC BỔ SUNG/Bài 170. Hướng dẫn giải contest 0.mp4",
-                                            "id":  2,
-                                            "completed":  false
-                                        },
-                                        {
-                                            "duration":  "15:00",
-                                            "title":  "Bài 3: Bài 171. Giải Phương Trình Bậc 2",
-                                            "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 9. KIẾN THỨC BỔ SUNG/Bài 171. Giải phương trình bậc 2.mp4",
-                                            "id":  3,
-                                            "completed":  false
-                                        },
-                                        {
-                                            "duration":  "15:00",
-                                            "title":  "Bài 4: Bài 172. Cài Đặt Các Hàm Sắp Xếp Cho Struct",
-                                            "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 9. KIẾN THỨC BỔ SUNG/Bài 172. Cài đặt các hàm sắp xếp cho struct.mp4",
-                                            "id":  4,
-                                            "completed":  false
-                                        },
-                                        {
-                                            "duration":  "15:00",
-                                            "title":  "Bài 5: Bài Cuối. Lời Cảm Ơn",
-                                            "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 9. KIẾN THỨC BỔ SUNG/Bài Cuối. Lời cảm ơn.mp4",
-                                            "id":  5,
-                                            "completed":  false
-                                        },
-                                        {
-                                            "duration":  "15:00",
-                                            "title":  "Bài 46: Tgf",
+                                            "duration":  "45:00",
+                                            "title":  "Bài 46: Bài học 46",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 2. KỸ THUẬT ĐỆ QUY/bai46-tgf.mp4",
                                             "id":  46,
                                             "completed":  false
                                         },
                                         {
-                                            "duration":  "15:00",
-                                            "title":  "Bài 47: Tad",
+                                            "duration":  "76:00",
+                                            "title":  "Bài 47: Bài học 47",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 2. KỸ THUẬT ĐỆ QUY/bai47-tad.mp4",
                                             "id":  47,
                                             "completed":  false
                                         },
                                         {
-                                            "duration":  "15:00",
-                                            "title":  "Bài 48: Nbg",
+                                            "duration":  "81:00",
+                                            "title":  "Bài 48: Bài học 48",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 2. KỸ THUẬT ĐỆ QUY/bai48-nbg.mp4",
                                             "id":  48,
                                             "completed":  false
                                         },
                                         {
-                                            "duration":  "15:00",
-                                            "title":  "Bài 49: Ppp",
+                                            "duration":  "147:00",
+                                            "title":  "Bài 49: Bài học 49",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 2. KỸ THUẬT ĐỆ QUY/bai49-ppp.mp4",
                                             "id":  49,
                                             "completed":  false
                                         },
                                         {
-                                            "duration":  "15:00",
-                                            "title":  "Bài 50: Yht",
+                                            "duration":  "72:00",
+                                            "title":  "Bài 50: Bài học 50",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 2. KỸ THUẬT ĐỆ QUY/Bai50-yht.mp4",
                                             "id":  50,
                                             "completed":  false
                                         },
                                         {
                                             "duration":  "193:00",
-                                            "title":  "Bài 51: Uuoaow",
+                                            "title":  "Bài 51: Bài học 51",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 3. MẢNG 1 CHIỀU , MẢNG 2 CHIỀU , THUẬT TOÁN TÌM KIẾM , SẮP XẾP , CON TRỎ/Bai51-uuoaow.mp4",
                                             "id":  51,
                                             "completed":  false
                                         },
                                         {
                                             "duration":  "81:00",
-                                            "title":  "Bài 52: Llllaw",
+                                            "title":  "Bài 52: Bài học 52",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 3. MẢNG 1 CHIỀU , MẢNG 2 CHIỀU , THUẬT TOÁN TÌM KIẾM , SẮP XẾP , CON TRỎ/bai52-llllaw.mp4",
                                             "id":  52,
                                             "completed":  false
                                         },
                                         {
                                             "duration":  "94:00",
-                                            "title":  "Bài 53: Ttttteee",
+                                            "title":  "Bài 53: Bài học 53",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 3. MẢNG 1 CHIỀU , MẢNG 2 CHIỀU , THUẬT TOÁN TÌM KIẾM , SẮP XẾP , CON TRỎ/bai53-ttttteee.mp4",
                                             "id":  53,
                                             "completed":  false
                                         },
                                         {
                                             "duration":  "97:00",
-                                            "title":  "Bài 54: Lnmbh",
+                                            "title":  "Bài 54: Bài học 54",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 3. MẢNG 1 CHIỀU , MẢNG 2 CHIỀU , THUẬT TOÁN TÌM KIẾM , SẮP XẾP , CON TRỎ/Bai54-lnmbh.mp4",
                                             "id":  54,
                                             "completed":  false
                                         },
                                         {
                                             "duration":  "78:00",
-                                            "title":  "Bài 55: Bgvf",
+                                            "title":  "Bài 55: Bài học 55",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 3. MẢNG 1 CHIỀU , MẢNG 2 CHIỀU , THUẬT TOÁN TÌM KIẾM , SẮP XẾP , CON TRỎ/Bai55-bgvf.mp4",
                                             "id":  55,
                                             "completed":  false
@@ -118,548 +90,576 @@
                                         },
                                         {
                                             "duration":  "103:00",
-                                            "title":  "Bài 57: Qqqqqqqww",
+                                            "title":  "Bài 57: Bài học 57",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 3. MẢNG 1 CHIỀU , MẢNG 2 CHIỀU , THUẬT TOÁN TÌM KIẾM , SẮP XẾP , CON TRỎ/Bai57-qqqqqqqww.mp4",
                                             "id":  57,
                                             "completed":  false
                                         },
                                         {
                                             "duration":  "100:00",
-                                            "title":  "Bài 58: Bbbbccc",
+                                            "title":  "Bài 58: Bài học 58",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 3. MẢNG 1 CHIỀU , MẢNG 2 CHIỀU , THUẬT TOÁN TÌM KIẾM , SẮP XẾP , CON TRỎ/Bai58-bbbbccc.mp4",
                                             "id":  58,
                                             "completed":  false
                                         },
                                         {
                                             "duration":  "68:00",
-                                            "title":  "Bài 59: Vcdsw",
+                                            "title":  "Bài 59: Bài học 59",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 3. MẢNG 1 CHIỀU , MẢNG 2 CHIỀU , THUẬT TOÁN TÌM KIẾM , SẮP XẾP , CON TRỎ/Bai59-vcdsw.mp4",
                                             "id":  59,
                                             "completed":  false
                                         },
                                         {
                                             "duration":  "60:00",
-                                            "title":  "Bài 60: Mmmmccc",
+                                            "title":  "Bài 60: Bài học 60",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 3. MẢNG 1 CHIỀU , MẢNG 2 CHIỀU , THUẬT TOÁN TÌM KIẾM , SẮP XẾP , CON TRỎ/bai60-mmmmccc.mp4",
                                             "id":  60,
                                             "completed":  false
                                         },
                                         {
                                             "duration":  "90:00",
-                                            "title":  "Bài 61: Aaaagggg",
+                                            "title":  "Bài 61: Bài học 61",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 3. MẢNG 1 CHIỀU , MẢNG 2 CHIỀU , THUẬT TOÁN TÌM KIẾM , SẮP XẾP , CON TRỎ/Bai61-aaaagggg.mp4",
                                             "id":  61,
                                             "completed":  false
                                         },
                                         {
                                             "duration":  "39:00",
-                                            "title":  "Bài 62: Nbcdty",
+                                            "title":  "Bài 62: Bài học 62",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 3. MẢNG 1 CHIỀU , MẢNG 2 CHIỀU , THUẬT TOÁN TÌM KIẾM , SẮP XẾP , CON TRỎ/Bai62-nbcdty.mp4",
                                             "id":  62,
                                             "completed":  false
                                         },
                                         {
                                             "duration":  "125:00",
-                                            "title":  "Bài 63: Ccceeey",
+                                            "title":  "Bài 63: Bài học 63",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 3. MẢNG 1 CHIỀU , MẢNG 2 CHIỀU , THUẬT TOÁN TÌM KIẾM , SẮP XẾP , CON TRỎ/Bai63-ccceeey.mp4",
                                             "id":  63,
                                             "completed":  false
                                         },
                                         {
                                             "duration":  "129:00",
-                                            "title":  "Bài 64: Bbbee",
+                                            "title":  "Bài 64: Bài học 64",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 3. MẢNG 1 CHIỀU , MẢNG 2 CHIỀU , THUẬT TOÁN TÌM KIẾM , SẮP XẾP , CON TRỎ/Bai64-bbbee.mp4",
                                             "id":  64,
                                             "completed":  false
                                         },
                                         {
                                             "duration":  "100:00",
-                                            "title":  "Bài 65: Vcbc",
+                                            "title":  "Bài 65: Bài học 65",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 3. MẢNG 1 CHIỀU , MẢNG 2 CHIỀU , THUẬT TOÁN TÌM KIẾM , SẮP XẾP , CON TRỎ/bai65-vcbc.mp4",
                                             "id":  65,
                                             "completed":  false
                                         },
                                         {
                                             "duration":  "71:00",
-                                            "title":  "Bài 66: Mkmkl",
+                                            "title":  "Bài 66: Bài học 66",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 3. MẢNG 1 CHIỀU , MẢNG 2 CHIỀU , THUẬT TOÁN TÌM KIẾM , SẮP XẾP , CON TRỎ/Bai66-mkmkl.mp4",
                                             "id":  66,
                                             "completed":  false
                                         },
                                         {
                                             "duration":  "120:00",
-                                            "title":  "Bài 67: Truoi",
+                                            "title":  "Bài 67: Bài học 67",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 3. MẢNG 1 CHIỀU , MẢNG 2 CHIỀU , THUẬT TOÁN TÌM KIẾM , SẮP XẾP , CON TRỎ/bai67-truoi.mp4",
                                             "id":  67,
                                             "completed":  false
                                         },
                                         {
                                             "duration":  "126:00",
-                                            "title":  "Bài 68: Bbbbtiii",
+                                            "title":  "Bài 68: Bài học 68",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 3. MẢNG 1 CHIỀU , MẢNG 2 CHIỀU , THUẬT TOÁN TÌM KIẾM , SẮP XẾP , CON TRỎ/Bai68-bbbbtiii.mp4",
                                             "id":  68,
                                             "completed":  false
                                         },
                                         {
                                             "duration":  "156:00",
-                                            "title":  "Bài 69: Ccccsss",
+                                            "title":  "Bài 69: Bài học 69",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 3. MẢNG 1 CHIỀU , MẢNG 2 CHIỀU , THUẬT TOÁN TÌM KIẾM , SẮP XẾP , CON TRỎ/Bai69-ccccsss.mp4",
                                             "id":  69,
                                             "completed":  false
                                         },
                                         {
                                             "duration":  "143:00",
-                                            "title":  "Bài 70: Pppmmmn",
+                                            "title":  "Bài 70: Bài học 70",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 3. MẢNG 1 CHIỀU , MẢNG 2 CHIỀU , THUẬT TOÁN TÌM KIẾM , SẮP XẾP , CON TRỎ/Bai70-pppmmmn.mp4",
                                             "id":  70,
                                             "completed":  false
                                         },
                                         {
                                             "duration":  "158:00",
-                                            "title":  "Bài 71: Iaiweawe",
+                                            "title":  "Bài 71: Bài học 71",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 3. MẢNG 1 CHIỀU , MẢNG 2 CHIỀU , THUẬT TOÁN TÌM KIẾM , SẮP XẾP , CON TRỎ/Bai71-iaiweawe.mp4",
                                             "id":  71,
                                             "completed":  false
                                         },
                                         {
                                             "duration":  "120:00",
-                                            "title":  "Bài 72: Yasttas",
+                                            "title":  "Bài 72: Bài học 72",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 3. MẢNG 1 CHIỀU , MẢNG 2 CHIỀU , THUẬT TOÁN TÌM KIẾM , SẮP XẾP , CON TRỎ/Bai72-yasttas.mp4",
                                             "id":  72,
                                             "completed":  false
                                         },
                                         {
                                             "duration":  "183:00",
-                                            "title":  "Bài 73: Kaskdoasd",
+                                            "title":  "Bài 73: Bài học 73",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 3. MẢNG 1 CHIỀU , MẢNG 2 CHIỀU , THUẬT TOÁN TÌM KIẾM , SẮP XẾP , CON TRỎ/Bai73-kaskdoasd.mp4",
                                             "id":  73,
                                             "completed":  false
                                         },
                                         {
                                             "duration":  "85:00",
-                                            "title":  "Bài 74: Masnd",
+                                            "title":  "Bài 74: Bài học 74",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 3. MẢNG 1 CHIỀU , MẢNG 2 CHIỀU , THUẬT TOÁN TÌM KIẾM , SẮP XẾP , CON TRỎ/Bai74-masnd.mp4",
                                             "id":  74,
                                             "completed":  false
                                         },
                                         {
                                             "duration":  "88:00",
-                                            "title":  "Bài 75: Aiwewe",
+                                            "title":  "Bài 75: Bài học 75",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 3. MẢNG 1 CHIỀU , MẢNG 2 CHIỀU , THUẬT TOÁN TÌM KIẾM , SẮP XẾP , CON TRỎ/Bai75-aiwewe.mp4",
                                             "id":  75,
                                             "completed":  false
                                         },
                                         {
                                             "duration":  "76:00",
-                                            "title":  "Bài 76: Kasodas",
+                                            "title":  "Bài 76: Bài học 76",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 3. MẢNG 1 CHIỀU , MẢNG 2 CHIỀU , THUẬT TOÁN TÌM KIẾM , SẮP XẾP , CON TRỎ/Bai76-kasodas.mp4",
                                             "id":  76,
                                             "completed":  false
                                         },
                                         {
                                             "duration":  "148:00",
-                                            "title":  "Bài 77: Uasoda",
+                                            "title":  "Bài 77: Bài học 77",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 3. MẢNG 1 CHIỀU , MẢNG 2 CHIỀU , THUẬT TOÁN TÌM KIẾM , SẮP XẾP , CON TRỎ/Bai77-uasoda.mp4",
                                             "id":  77,
                                             "completed":  false
                                         },
                                         {
                                             "duration":  "117:00",
-                                            "title":  "Bài 78: Iasodw",
+                                            "title":  "Bài 78: Bài học 78",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 3. MẢNG 1 CHIỀU , MẢNG 2 CHIỀU , THUẬT TOÁN TÌM KIẾM , SẮP XẾP , CON TRỎ/Bai78-iasodw.mp4",
                                             "id":  78,
                                             "completed":  false
                                         },
                                         {
                                             "duration":  "116:00",
-                                            "title":  "Bài 79: Uuaiow",
+                                            "title":  "Bài 79: Bài học 79",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 3. MẢNG 1 CHIỀU , MẢNG 2 CHIỀU , THUẬT TOÁN TÌM KIẾM , SẮP XẾP , CON TRỎ/Bai79-uuaiow.mp4",
                                             "id":  79,
                                             "completed":  false
                                         },
                                         {
                                             "duration":  "102:00",
-                                            "title":  "Bài 80: Kasolw",
+                                            "title":  "Bài 80: Bài học 80",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 3. MẢNG 1 CHIỀU , MẢNG 2 CHIỀU , THUẬT TOÁN TÌM KIẾM , SẮP XẾP , CON TRỎ/Bai80-kasolw.mp4",
                                             "id":  80,
                                             "completed":  false
                                         },
                                         {
                                             "duration":  "107:00",
-                                            "title":  "Bài 81: Oqweq",
+                                            "title":  "Bài 81: Bài học 81",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 3. MẢNG 1 CHIỀU , MẢNG 2 CHIỀU , THUẬT TOÁN TÌM KIẾM , SẮP XẾP , CON TRỎ/Bai81-oqweq.mp4",
                                             "id":  81,
                                             "completed":  false
                                         },
                                         {
                                             "duration":  "90:00",
-                                            "title":  "Bài 82: Ppoq",
+                                            "title":  "Bài 82: Bài học 82",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 3. MẢNG 1 CHIỀU , MẢNG 2 CHIỀU , THUẬT TOÁN TÌM KIẾM , SẮP XẾP , CON TRỎ/bai82-ppoq.mp4",
                                             "id":  82,
                                             "completed":  false
                                         },
                                         {
                                             "duration":  "43:00",
-                                            "title":  "Bài 83: Oqwieqw",
+                                            "title":  "Bài 83: Bài học 83",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 3. MẢNG 1 CHIỀU , MẢNG 2 CHIỀU , THUẬT TOÁN TÌM KIẾM , SẮP XẾP , CON TRỎ/Bai83-oqwieqw.mp4",
                                             "id":  83,
                                             "completed":  false
                                         },
                                         {
                                             "duration":  "90:00",
-                                            "title":  "Bài 84: Iqwuea",
+                                            "title":  "Bài 84: Bài học 84",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 3. MẢNG 1 CHIỀU , MẢNG 2 CHIỀU , THUẬT TOÁN TÌM KIẾM , SẮP XẾP , CON TRỎ/Bai84-iqwuea.mp4",
                                             "id":  84,
                                             "completed":  false
                                         },
                                         {
                                             "duration":  "48:00",
-                                            "title":  "Bài 85: Oqwiea",
+                                            "title":  "Bài 85: Bài học 85",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 3. MẢNG 1 CHIỀU , MẢNG 2 CHIỀU , THUẬT TOÁN TÌM KIẾM , SẮP XẾP , CON TRỎ/Bai85-oqwiea.mp4",
                                             "id":  85,
                                             "completed":  false
                                         },
                                         {
                                             "duration":  "158:00",
-                                            "title":  "Bài 86: Uquweja",
+                                            "title":  "Bài 86: Bài học 86",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 3. MẢNG 1 CHIỀU , MẢNG 2 CHIỀU , THUẬT TOÁN TÌM KIẾM , SẮP XẾP , CON TRỎ/Bai86-uquweja.mp4",
                                             "id":  86,
                                             "completed":  false
                                         },
                                         {
                                             "duration":  "102:00",
-                                            "title":  "Bài 87: Iaiweo",
+                                            "title":  "Bài 87: Bài học 87",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 3. MẢNG 1 CHIỀU , MẢNG 2 CHIỀU , THUẬT TOÁN TÌM KIẾM , SẮP XẾP , CON TRỎ/bai87-iaiweo.mp4",
                                             "id":  87,
                                             "completed":  false
                                         },
                                         {
                                             "duration":  "88:00",
-                                            "title":  "Bài 88: Ppoqw",
+                                            "title":  "Bài 88: Bài học 88",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 4. XÂU KÝ TỰ VÀ TOÁN TỬ  BIT/bai88-ppoqw.mp4",
                                             "id":  88,
                                             "completed":  false
                                         },
                                         {
                                             "duration":  "112:00",
-                                            "title":  "Bài 89: Oqowe",
+                                            "title":  "Bài 89: Bài học 89",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 4. XÂU KÝ TỰ VÀ TOÁN TỬ  BIT/Bai89-oqowe.mp4",
                                             "id":  89,
                                             "completed":  false
                                         },
                                         {
                                             "duration":  "120:00",
-                                            "title":  "Bài 90: Oqweaaa",
+                                            "title":  "Bài 90: Bài học 90",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 4. XÂU KÝ TỰ VÀ TOÁN TỬ  BIT/Bai90-oqweaaa.mp4",
                                             "id":  90,
                                             "completed":  false
                                         },
                                         {
                                             "duration":  "32:00",
-                                            "title":  "Bài 91: Iiow",
+                                            "title":  "Bài 91: Bài học 91",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 4. XÂU KÝ TỰ VÀ TOÁN TỬ  BIT/Bai91-iiow.mp4",
                                             "id":  91,
                                             "completed":  false
                                         },
                                         {
                                             "duration":  "65:00",
-                                            "title":  "Bài 92: Contest 9 Bai 1   Bai 10",
+                                            "title":  "Bài 92: Contest 9 Bai 1 Bai 10",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 4. XÂU KÝ TỰ VÀ TOÁN TỬ  BIT/Bai92 - Contest 9 Bai 1 - Bai 10-.mp4",
                                             "id":  92,
                                             "completed":  false
                                         },
                                         {
                                             "duration":  "28:00",
-                                            "title":  "Bài 93: Oaosw",
+                                            "title":  "Bài 93: Bài học 93",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 4. XÂU KÝ TỰ VÀ TOÁN TỬ  BIT/Bai93-oaosw.mp4",
                                             "id":  93,
                                             "completed":  false
                                         },
                                         {
                                             "duration":  "51:00",
-                                            "title":  "Bài 94: Kkowp",
+                                            "title":  "Bài 94: Bài học 94",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 4. XÂU KÝ TỰ VÀ TOÁN TỬ  BIT/Bai94-kkowp.mp4",
                                             "id":  94,
                                             "completed":  false
                                         },
                                         {
+                                            "duration":  "56:00",
+                                            "title":  "Bài 94: Bài Cuối. Lời Cảm Ơn",
+                                            "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 9. KIẾN THỨC BỔ SUNG/Bài Cuối. Lời cảm ơn.mp4",
+                                            "id":  94,
+                                            "completed":  false
+                                        },
+                                        {
                                             "duration":  "135:00",
-                                            "title":  "Bài 95: Opasw",
+                                            "title":  "Bài 95: Bài học 95",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 4. XÂU KÝ TỰ VÀ TOÁN TỬ  BIT/Bai95-opasw.mp4",
                                             "id":  95,
                                             "completed":  false
                                         },
                                         {
                                             "duration":  "64:00",
-                                            "title":  "Bài 96: Oawiea",
+                                            "title":  "Bài 96: Bài học 96",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 4. XÂU KÝ TỰ VÀ TOÁN TỬ  BIT/Bai96-oawiea.mp4",
                                             "id":  96,
                                             "completed":  false
                                         },
                                         {
                                             "duration":  "111:00",
-                                            "title":  "Bài 97: Opaweaw",
+                                            "title":  "Bài 97: Bài học 97",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 4. XÂU KÝ TỰ VÀ TOÁN TỬ  BIT/Bai97-opaweaw.mp4",
                                             "id":  97,
                                             "completed":  false
                                         },
                                         {
                                             "duration":  "27:00",
-                                            "title":  "Bài 98: Pawea",
+                                            "title":  "Bài 98: Bài học 98",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 4. XÂU KÝ TỰ VÀ TOÁN TỬ  BIT/Bai98-pawea.mp4",
                                             "id":  98,
                                             "completed":  false
                                         },
                                         {
                                             "duration":  "114:00",
-                                            "title":  "Bài 99: Pawoea",
+                                            "title":  "Bài 99: Bài học 99",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 4. XÂU KÝ TỰ VÀ TOÁN TỬ  BIT/Bai99-pawoea.mp4",
                                             "id":  99,
                                             "completed":  false
                                         },
                                         {
                                             "duration":  "144:00",
-                                            "title":  "Bài 100: Oawea",
+                                            "title":  "Bài 100: Bài học 100",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 4. XÂU KÝ TỰ VÀ TOÁN TỬ  BIT/bai100-oawea.mp4",
                                             "id":  100,
                                             "completed":  false
                                         },
                                         {
                                             "duration":  "183:00",
-                                            "title":  "Bài 101: Awea",
+                                            "title":  "Bài 101: Bài học 101",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 4. XÂU KÝ TỰ VÀ TOÁN TỬ  BIT/Bai101-awea.mp4",
                                             "id":  101,
                                             "completed":  false
                                         },
                                         {
                                             "duration":  "170:00",
-                                            "title":  "Bài 102: Pppq",
+                                            "title":  "Bài 102: Bài học 102",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 4. XÂU KÝ TỰ VÀ TOÁN TỬ  BIT/bai102-pppq.mp4",
                                             "id":  102,
                                             "completed":  false
                                         },
                                         {
                                             "duration":  "142:00",
-                                            "title":  "Bài 103: Aosoeawe",
+                                            "title":  "Bài 103: Bài học 103",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 4. XÂU KÝ TỰ VÀ TOÁN TỬ  BIT/Bai103-aosoeawe.mp4",
                                             "id":  103,
                                             "completed":  false
                                         },
                                         {
                                             "duration":  "209:00",
-                                            "title":  "Bài 104: Thun",
+                                            "title":  "Bài 104: Bài học 104",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 4. XÂU KÝ TỰ VÀ TOÁN TỬ  BIT/bai104-thun.mp4",
                                             "id":  104,
                                             "completed":  false
                                         },
                                         {
                                             "duration":  "48:00",
-                                            "title":  "Bài 105: Akwiea",
+                                            "title":  "Bài 105: Bài học 105",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 4. XÂU KÝ TỰ VÀ TOÁN TỬ  BIT/Bai105-akwiea.mp4",
                                             "id":  105,
                                             "completed":  false
                                         },
                                         {
-                                            "duration":  "15:00",
-                                            "title":  "Bài 106: Oioqwea",
+                                            "duration":  "96:00",
+                                            "title":  "Bài 106: Bài học 106",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 5.KIỂU CẤU TRÚC - STRUCT/Bai106-oioqwea.mp4",
                                             "id":  106,
                                             "completed":  false
                                         },
                                         {
-                                            "duration":  "15:00",
-                                            "title":  "Bài 107: Aoweas",
+                                            "duration":  "145:00",
+                                            "title":  "Bài 107: Bài học 107",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 5.KIỂU CẤU TRÚC - STRUCT/Bai107-aoweas.mp4",
                                             "id":  107,
                                             "completed":  false
                                         },
                                         {
-                                            "duration":  "15:00",
-                                            "title":  "Bài 108: Owaaawwwwc",
+                                            "duration":  "139:00",
+                                            "title":  "Bài 108: Bài học 108",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 5.KIỂU CẤU TRÚC - STRUCT/Bai108-owaaawwwwc.mp4",
                                             "id":  108,
                                             "completed":  false
                                         },
                                         {
-                                            "duration":  "15:00",
-                                            "title":  "Bài 109: Aoweoasdaa",
+                                            "duration":  "129:00",
+                                            "title":  "Bài 109: Bài học 109",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 5.KIỂU CẤU TRÚC - STRUCT/Bai109-aoweoasdaa.mp4",
                                             "id":  109,
                                             "completed":  false
                                         },
                                         {
-                                            "duration":  "15:00",
-                                            "title":  "Bài 110: Pppqqa",
+                                            "duration":  "118:00",
+                                            "title":  "Bài 110: Bài học 110",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 5.KIỂU CẤU TRÚC - STRUCT/Bai110-pppqqa.mp4",
                                             "id":  110,
                                             "completed":  false
                                         },
                                         {
-                                            "duration":  "15:00",
-                                            "title":  "Bài 111: Asdww",
+                                            "duration":  "70:00",
+                                            "title":  "Bài 111: Bài học 111",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 6. ỨNG DỤNG CỦA CON TRỎ VÀ DANH SÁCH LIÊN KẾT/Bai111-asdww.mp4",
                                             "id":  111,
                                             "completed":  false
                                         },
                                         {
-                                            "duration":  "15:00",
-                                            "title":  "Bài 112: Uuqui",
+                                            "duration":  "34:00",
+                                            "title":  "Bài 112: Bài học 112",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 6. ỨNG DỤNG CỦA CON TRỎ VÀ DANH SÁCH LIÊN KẾT/Bai112-uuqui.mp4",
                                             "id":  112,
                                             "completed":  false
                                         },
                                         {
-                                            "duration":  "15:00",
-                                            "title":  "Bài 113: Oapq",
+                                            "duration":  "32:00",
+                                            "title":  "Bài 113: Bài học 113",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 6. ỨNG DỤNG CỦA CON TRỎ VÀ DANH SÁCH LIÊN KẾT/Bai113-oapq.mp4",
                                             "id":  113,
                                             "completed":  false
                                         },
                                         {
-                                            "duration":  "15:00",
-                                            "title":  "Bài 114: Ooqpa",
+                                            "duration":  "163:00",
+                                            "title":  "Bài 114: Bài học 114",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 6. ỨNG DỤNG CỦA CON TRỎ VÀ DANH SÁCH LIÊN KẾT/Bai114-ooqpa.mp4",
                                             "id":  114,
                                             "completed":  false
                                         },
                                         {
-                                            "duration":  "15:00",
-                                            "title":  "Bài 115: Oqpas",
+                                            "duration":  "103:00",
+                                            "title":  "Bài 115: Bài học 115",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 6. ỨNG DỤNG CỦA CON TRỎ VÀ DANH SÁCH LIÊN KẾT/Bai115-oqpas.mp4",
                                             "id":  115,
                                             "completed":  false
                                         },
                                         {
-                                            "duration":  "15:00",
-                                            "title":  "Bài 116: Piowa",
+                                            "duration":  "26:00",
+                                            "title":  "Bài 116: Bài học 116",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 6. ỨNG DỤNG CỦA CON TRỎ VÀ DANH SÁCH LIÊN KẾT/Bai116-piowa.mp4",
                                             "id":  116,
                                             "completed":  false
                                         },
                                         {
-                                            "duration":  "15:00",
-                                            "title":  "Bài 117: Oasjqaw",
+                                            "duration":  "24:00",
+                                            "title":  "Bài 117: Bài học 117",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 6. ỨNG DỤNG CỦA CON TRỎ VÀ DANH SÁCH LIÊN KẾT/Bai117-oasjqaw.mp4",
                                             "id":  117,
                                             "completed":  false
                                         },
                                         {
-                                            "duration":  "15:00",
-                                            "title":  "Bài 118: Ioajma",
+                                            "duration":  "78:00",
+                                            "title":  "Bài 118: Bài học 118",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 6. ỨNG DỤNG CỦA CON TRỎ VÀ DANH SÁCH LIÊN KẾT/Bai118-ioajma.mp4",
                                             "id":  118,
                                             "completed":  false
                                         },
                                         {
-                                            "duration":  "15:00",
-                                            "title":  "Bài 119: Ppqa",
+                                            "duration":  "97:00",
+                                            "title":  "Bài 119: Bài học 119",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 6. ỨNG DỤNG CỦA CON TRỎ VÀ DANH SÁCH LIÊN KẾT/Bai119-ppqa.mp4",
                                             "id":  119,
                                             "completed":  false
                                         },
                                         {
-                                            "duration":  "15:00",
-                                            "title":  "Bài 120: Opoaw",
+                                            "duration":  "38:00",
+                                            "title":  "Bài 120: Bài học 120",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 6. ỨNG DỤNG CỦA CON TRỎ VÀ DANH SÁCH LIÊN KẾT/Bai120-opoaw.mp4",
                                             "id":  120,
                                             "completed":  false
                                         },
                                         {
-                                            "duration":  "15:00",
+                                            "duration":  "128:00",
                                             "title":  "Bài 121: Bài học 121",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 6. ỨNG DỤNG CỦA CON TRỎ VÀ DANH SÁCH LIÊN KẾT/Bai121.mp4",
                                             "id":  121,
                                             "completed":  false
                                         },
                                         {
-                                            "duration":  "15:00",
+                                            "duration":  "116:00",
                                             "title":  "Bài 122: Bài học 122",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 6. ỨNG DỤNG CỦA CON TRỎ VÀ DANH SÁCH LIÊN KẾT/Bai122.mp4",
                                             "id":  122,
                                             "completed":  false
                                         },
                                         {
-                                            "duration":  "15:00",
+                                            "duration":  "46:00",
                                             "title":  "Bài 126: Bài học 126",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 7. XỬ LÝ FILE/bai126.mp4",
                                             "id":  126,
                                             "completed":  false
                                         },
                                         {
-                                            "duration":  "15:00",
+                                            "duration":  "19:00",
                                             "title":  "Bài 132: Bài học 132",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 7. XỬ LÝ FILE/bai132.mp4",
                                             "id":  132,
                                             "completed":  false
                                         },
                                         {
-                                            "duration":  "15:00",
+                                            "duration":  "57:00",
                                             "title":  "Bài 147: Bài học 147",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 8. BÀI TẬP TRẮC NGHIỆM/bai147.mp4",
                                             "id":  147,
                                             "completed":  false
                                         },
                                         {
-                                            "duration":  "15:00",
+                                            "duration":  "61:00",
                                             "title":  "Bài 148: Bài học 148",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 8. BÀI TẬP TRẮC NGHIỆM/bai148.mp4",
                                             "id":  148,
                                             "completed":  false
                                         },
                                         {
-                                            "duration":  "15:00",
+                                            "duration":  "91:00",
                                             "title":  "Bài 153: Bài học 153",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 8. BÀI TẬP TRẮC NGHIỆM/bai153.mp4",
                                             "id":  153,
                                             "completed":  false
                                         },
                                         {
-                                            "duration":  "15:00",
+                                            "duration":  "77:00",
                                             "title":  "Bài 158: Bài học 158",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 8. BÀI TẬP TRẮC NGHIỆM/bai158.mp4",
                                             "id":  158,
                                             "completed":  false
                                         },
                                         {
-                                            "duration":  "15:00",
+                                            "duration":  "69:00",
                                             "title":  "Bài 159: Bài học 159",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 8. BÀI TẬP TRẮC NGHIỆM/bai159.mp4",
                                             "id":  159,
                                             "completed":  false
                                         },
                                         {
-                                            "duration":  "15:00",
+                                            "duration":  "93:00",
                                             "title":  "Bài 160: Bài học 160",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 8. BÀI TẬP TRẮC NGHIỆM/bai160.mp4",
                                             "id":  160,
                                             "completed":  false
                                         },
                                         {
-                                            "duration":  "15:00",
+                                            "duration":  "78:00",
                                             "title":  "Bài 161: Bài học 161",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 8. BÀI TẬP TRẮC NGHIỆM/bai161.mp4",
                                             "id":  161,
                                             "completed":  false
                                         },
                                         {
-                                            "duration":  "15:00",
+                                            "duration":  "75:00",
                                             "title":  "Bài 164: Bài học 164",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 8. BÀI TẬP TRẮC NGHIỆM/bai164.mp4",
                                             "id":  164,
                                             "completed":  false
                                         },
                                         {
-                                            "duration":  "15:00",
+                                            "duration":  "34:00",
                                             "title":  "Bài 165: Bài học 165",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 8. BÀI TẬP TRẮC NGHIỆM/bai165.mp4",
                                             "id":  165,
                                             "completed":  false
                                         },
                                         {
-                                            "duration":  "15:00",
+                                            "duration":  "106:00",
                                             "title":  "Bài 168: Bài học 168",
                                             "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 8. BÀI TẬP TRẮC NGHIỆM/Bai168.mp4",
                                             "id":  168,
+                                            "completed":  false
+                                        },
+                                        {
+                                            "duration":  "126:00",
+                                            "title":  "Bài 170: Hướng Dẫn Giải Contest 0",
+                                            "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 9. KIẾN THỨC BỔ SUNG/Bài 170. Hướng dẫn giải contest 0.mp4",
+                                            "id":  170,
+                                            "completed":  false
+                                        },
+                                        {
+                                            "duration":  "20:00",
+                                            "title":  "Bài 171: Giải Phương Trình Bậc 2",
+                                            "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 9. KIẾN THỨC BỔ SUNG/Bài 171. Giải phương trình bậc 2.mp4",
+                                            "id":  171,
+                                            "completed":  false
+                                        },
+                                        {
+                                            "duration":  "64:00",
+                                            "title":  "Bài 172: Cài Đặt Các Hàm Sắp Xếp Cho Struct",
+                                            "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 9. KIẾN THỨC BỔ SUNG/Bài 172. Cài đặt các hàm sắp xếp cho struct.mp4",
+                                            "id":  172,
                                             "completed":  false
                                         }
                                     ],
