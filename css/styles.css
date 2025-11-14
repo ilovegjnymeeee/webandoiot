@@ -1336,6 +1336,249 @@ body {
     pointer-events: none;
 }
 
+/* Admin Password Modal */
+.admin-password-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 4000;
+    align-items: center;
+    justify-content: center;
+}
+
+.admin-password-modal.active {
+    display: flex;
+}
+
+.admin-password-modal .modal-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(20px);
+}
+
+.admin-password-modal .modal-container {
+    max-width: 450px;
+    width: 90%;
+    background: var(--dark-2);
+    border-radius: 25px;
+    padding: 40px;
+    text-align: center;
+    animation: modalIn 0.3s ease;
+    border: 2px solid rgba(102, 126, 234, 0.5);
+    position: relative;
+}
+
+.admin-icon {
+    font-size: 70px;
+    margin-bottom: 20px;
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: pulse 2s ease infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.admin-title {
+    font-size: 28px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.admin-subtitle {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 30px;
+}
+
+.password-input-group {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.password-input-group input {
+    width: 100%;
+    padding: 18px 55px 18px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-align: center;
+    transition: all 0.3s;
+    font-family: 'Courier New', monospace;
+}
+
+.password-input-group input:focus {
+    outline: none;
+    border-color: #667eea;
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+}
+
+.password-input-group input::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+    letter-spacing: normal;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.toggle-password-btn {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    padding: 8px;
+    font-size: 18px;
+    transition: all 0.3s;
+}
+
+.toggle-password-btn:hover {
+    color: white;
+}
+
+.password-error {
+    display: none;
+    padding: 12px 20px;
+    background: rgba(255, 0, 0, 0.1);
+    border: 1px solid rgba(255, 0, 0, 0.3);
+    border-radius: 10px;
+    color: #ff6b6b;
+    font-size: 14px;
+    margin-bottom: 20px;
+    animation: shake 0.5s ease;
+}
+
+.password-error.active {
+    display: block;
+}
+
+.admin-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.btn-admin-submit {
+    flex: 1;
+    padding: 16px 30px;
+    background: var(--gradient-1);
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 16px;
+}
+
+.btn-admin-submit:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.5);
+}
+
+.btn-admin-submit:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn-admin-cancel {
+    flex: 1;
+    padding: 16px 30px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 16px;
+}
+
+.btn-admin-cancel:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-3px);
+}
+
+.admin-hint {
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(102, 126, 234, 0.1);
+    border-radius: 10px;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(102, 126, 234, 0.2);
+}
+
+.admin-hint i {
+    color: #667eea;
+    margin-right: 8px;
+}
+
+/* Success Animation */
+@keyframes checkmark {
+    0% {
+        transform: scale(0) rotate(45deg);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.2) rotate(45deg);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1) rotate(45deg);
+        opacity: 1;
+    }
+}
+
+.password-success {
+    display: none;
+    font-size: 60px;
+    color: #43e97b;
+    animation: checkmark 0.5s ease;
+}
+
+.password-success.active {
+    display: block;
+}
+
+/* Loading State */
+.btn-admin-submit.loading::after {
+    content: '';
+    width: 16px;
+    height: 16px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin-left: 10px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
 /* Responsive */
 @media (max-width: 1200px) {
     .course-grid {
