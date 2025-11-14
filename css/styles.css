@@ -1162,13 +1162,13 @@ body {
 
 /* Confirm Delete Modal */
 .confirm-modal {
-    display: none;
     position: fixed;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 3500;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+    display: none;
     align-items: center;
     justify-content: center;
 }
@@ -1179,371 +1179,141 @@ body {
 
 .confirm-modal .modal-overlay {
     position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.9);
-    backdrop-filter: blur(10px);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    z-index: 1;
 }
 
 .confirm-modal .modal-container {
-    max-width: 500px;
-    width: 90%;
-    background: var(--dark-2);
-    border-radius: 25px;
+    position: relative;
+    z-index: 2;
+    background: linear-gradient(135deg, #1e1e2e 0%, #2a2a3e 100%);
+    border-radius: 24px;
     padding: 40px;
-    text-align: center;
-    animation: modalIn 0.3s ease;
-    border: 2px solid rgba(255, 0, 0, 0.5);
+    max-width: 480px;
+    width: 90%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    animation: modalSlideUp 0.4s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@keyframes modalSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
 .confirm-icon {
-    font-size: 80px;
-    color: #ff0000;
-    margin-bottom: 20px;
-    animation: shake 0.5s ease;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 24px;
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: pulse 2s ease infinite;
 }
 
-@keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-10px); }
-    75% { transform: translateX(10px); }
+.confirm-icon i {
+    font-size: 40px;
+    color: white;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.7);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 0 20px rgba(255, 107, 107, 0);
+    }
 }
 
 .confirm-title {
     font-size: 28px;
-    font-weight: 800;
-    margin-bottom: 15px;
+    font-weight: 700;
     color: white;
+    margin-bottom: 16px;
+    text-align: center;
 }
 
 .confirm-message {
     font-size: 16px;
     color: rgba(255, 255, 255, 0.7);
-    margin-bottom: 30px;
     line-height: 1.6;
+    margin-bottom: 24px;
+    text-align: center;
 }
 
 .confirm-course-name {
-    padding: 15px 20px;
-    background: rgba(255, 0, 0, 0.1);
+    background: rgba(255, 107, 107, 0.15);
+    border: 2px solid rgba(255, 107, 107, 0.3);
     border-radius: 12px;
+    padding: 16px 20px;
+    font-size: 18px;
+    font-weight: 600;
     color: #ff6b6b;
-    font-weight: 700;
-    margin-bottom: 30px;
-    border: 1px solid rgba(255, 0, 0, 0.3);
+    text-align: center;
+    margin-bottom: 32px;
 }
 
 .confirm-actions {
     display: flex;
-    gap: 15px;
-    justify-content: center;
-}
-
-.btn-confirm-delete {
-    flex: 1;
-    padding: 15px 30px;
-    background: linear-gradient(135deg, #ff0844 0%, #ff6b6b 100%);
-    border: none;
-    border-radius: 12px;
-    color: white;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.3s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    font-size: 16px;
-}
-
-.btn-confirm-delete:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(255, 8, 68, 0.5);
-}
-
-.btn-cancel-delete {
-    flex: 1;
-    padding: 15px 30px;
-    background: rgba(255, 255, 255, 0.1);
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    border-radius: 12px;
-    color: white;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.3s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    font-size: 16px;
-}
-
-.btn-cancel-delete:hover {
-    background: rgba(255, 255, 255, 0.2);
-    border-color: rgba(255, 255, 255, 0.5);
-    transform: translateY(-3px);
-}
-
-/* Deleted Animation */
-@keyframes deleteOut {
-    0% {
-        opacity: 1;
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.1) rotate(5deg);
-    }
-    100% {
-        opacity: 0;
-        transform: scale(0.5) rotate(-5deg);
-    }
-}
-
-.course-card.deleting {
-    animation: deleteOut 0.5s ease forwards;
-    pointer-events: none;
-}
-
-/* Admin Password Modal */
-.admin-password-modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 4000;
-    align-items: center;
-    justify-content: center;
-}
-
-.admin-password-modal.active {
-    display: flex;
-}
-
-.admin-password-modal .modal-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.95);
-    backdrop-filter: blur(20px);
-}
-
-.admin-password-modal .modal-container {
-    max-width: 450px;
-    width: 90%;
-    background: var(--dark-2);
-    border-radius: 25px;
-    padding: 40px;
-    text-align: center;
-    animation: modalIn 0.3s ease;
-    border: 2px solid rgba(102, 126, 234, 0.5);
-    position: relative;
-}
-
-.admin-icon {
-    font-size: 70px;
-    margin-bottom: 20px;
-    background: var(--gradient-1);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: pulse 2s ease infinite;
-}
-
-@keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-}
-
-.admin-title {
-    font-size: 28px;
-    font-weight: 800;
-    margin-bottom: 10px;
-    color: white;
-}
-
-.admin-subtitle {
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.6);
-    margin-bottom: 30px;
-}
-
-.password-input-group {
-    position: relative;
-    margin-bottom: 25px;
-}
-
-.password-input-group input {
-    width: 100%;
-    padding: 18px 55px 18px 20px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    border-radius: 15px;
-    color: white;
-    font-size: 18px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-align: center;
-    transition: all 0.3s;
-    font-family: 'Courier New', monospace;
-}
-
-.password-input-group input:focus {
-    outline: none;
-    border-color: #667eea;
-    background: rgba(255, 255, 255, 0.08);
-    box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
-}
-
-.password-input-group input::placeholder {
-    color: rgba(255, 255, 255, 0.3);
-    letter-spacing: normal;
-    font-family: 'Segoe UI', sans-serif;
-}
-
-.toggle-password-btn {
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    color: rgba(255, 255, 255, 0.5);
-    cursor: pointer;
-    padding: 8px;
-    font-size: 18px;
-    transition: all 0.3s;
-}
-
-.toggle-password-btn:hover {
-    color: white;
-}
-
-.password-error {
-    display: none;
-    padding: 12px 20px;
-    background: rgba(255, 0, 0, 0.1);
-    border: 1px solid rgba(255, 0, 0, 0.3);
-    border-radius: 10px;
-    color: #ff6b6b;
-    font-size: 14px;
-    margin-bottom: 20px;
-    animation: shake 0.5s ease;
-}
-
-.password-error.active {
-    display: block;
-}
-
-.admin-actions {
-    display: flex;
     gap: 12px;
 }
 
-.btn-admin-submit {
+.btn-cancel-delete,
+.btn-confirm-delete {
     flex: 1;
-    padding: 16px 30px;
-    background: var(--gradient-1);
+    padding: 16px 24px;
     border: none;
     border-radius: 12px;
-    color: white;
-    font-weight: 700;
+    font-weight: 600;
+    font-size: 16px;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
-    font-size: 16px;
+    gap: 8px;
 }
 
-.btn-admin-submit:hover:not(:disabled) {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.5);
-}
-
-.btn-admin-submit:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-
-.btn-admin-cancel {
-    flex: 1;
-    padding: 16px 30px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    border-radius: 12px;
-    color: white;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.3s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    font-size: 16px;
-}
-
-.btn-admin-cancel:hover {
+.btn-cancel-delete {
     background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn-cancel-delete:hover {
+    background: rgba(255, 255, 255, 0.15);
     border-color: rgba(255, 255, 255, 0.3);
-    transform: translateY(-3px);
+    transform: translateY(-2px);
 }
 
-.admin-hint {
-    margin-top: 20px;
-    padding: 15px;
-    background: rgba(102, 126, 234, 0.1);
-    border-radius: 10px;
-    font-size: 13px;
-    color: rgba(255, 255, 255, 0.6);
-    border: 1px solid rgba(102, 126, 234, 0.2);
+.btn-confirm-delete {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
 }
 
-.admin-hint i {
-    color: #667eea;
-    margin-right: 8px;
+.btn-confirm-delete:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.6);
 }
 
-/* Success Animation */
-@keyframes checkmark {
-    0% {
-        transform: scale(0) rotate(45deg);
-        opacity: 0;
-    }
-    50% {
-        transform: scale(1.2) rotate(45deg);
-        opacity: 1;
-    }
-    100% {
-        transform: scale(1) rotate(45deg);
-        opacity: 1;
-    }
-}
-
-.password-success {
-    display: none;
-    font-size: 60px;
-    color: #43e97b;
-    animation: checkmark 0.5s ease;
-}
-
-.password-success.active {
-    display: block;
-}
-
-/* Loading State */
-.btn-admin-submit.loading::after {
-    content: '';
-    width: 16px;
-    height: 16px;
-    border: 3px solid rgba(255, 255, 255, 0.3);
-    border-top-color: white;
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-    margin-left: 10px;
-}
-
-@keyframes spin {
-    to { transform: rotate(360deg); }
+.btn-confirm-delete:active {
+    transform: translateY(0);
 }
 
 /* ===================================
@@ -1700,4 +1470,167 @@ body {
     border-top-color: white;
     border-radius: 50%;
     animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ===================================
+   CONFIRM DELETE MODAL
+   =================================== */
+
+.confirm-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.confirm-modal.active {
+    display: flex;
+}
+
+.confirm-modal .modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    z-index: 1;
+}
+
+.confirm-modal .modal-container {
+    position: relative;
+    z-index: 2;
+    background: linear-gradient(135deg, #1e1e2e 0%, #2a2a3e 100%);
+    border-radius: 24px;
+    padding: 40px;
+    max-width: 480px;
+    width: 90%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    animation: modalSlideUp 0.4s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@keyframes modalSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.confirm-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 24px;
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: pulse 2s ease infinite;
+}
+
+.confirm-icon i {
+    font-size: 40px;
+    color: white;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.7);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 0 20px rgba(255, 107, 107, 0);
+    }
+}
+
+.confirm-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.confirm-message {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.6;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.confirm-course-name {
+    background: rgba(255, 107, 107, 0.15);
+    border: 2px solid rgba(255, 107, 107, 0.3);
+    border-radius: 12px;
+    padding: 16px 20px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #ff6b6b;
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.confirm-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.btn-cancel-delete,
+.btn-confirm-delete {
+    flex: 1;
+    padding: 16px 24px;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-cancel-delete {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn-cancel-delete:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.btn-confirm-delete {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+}
+
+.btn-confirm-delete:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.6);
+}
+
+.btn-confirm-delete:active {
+    transform: translateY(0);
 }

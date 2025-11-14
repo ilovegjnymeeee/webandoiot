@@ -762,20 +762,31 @@ class CourseApp {
     }
 
     proceedDeleteCourse() {
-        if (!this.courseToDelete) return;
+        console.log('🔵 proceedDeleteCourse called');
+        console.log('🔵 courseToDelete:', this.courseToDelete);
+        
+        if (!this.courseToDelete) {
+            console.error('❌ No course to delete in proceedDeleteCourse');
+            this.showNotification('⚠️ Lỗi: Không tìm thấy khóa học', 'error');
+            return;
+        }
+
+        console.log('⚠️ Showing final confirmation for:', this.courseToDelete.title);
 
         let confirmModal = document.getElementById('confirmDeleteModal');
+        
         if (!confirmModal) {
+            console.log('🆕 Creating confirm modal...');
             confirmModal = document.createElement('div');
             confirmModal.id = 'confirmDeleteModal';
             confirmModal.className = 'confirm-modal';
             confirmModal.innerHTML = `
-                <div class="modal-overlay"></div>
+                <div class="modal-overlay" onclick="app.cancelDelete()"></div>
                 <div class="modal-container">
                     <div class="confirm-icon">
                         <i class="fas fa-exclamation-triangle"></i>
                     </div>
-                    <h2 class="confirm-title">Xác nhận xóa khóa học?</h2>
+                    <h2 class="confirm-title">⚠️ Xác nhận xóa khóa học?</h2>
                     <p class="confirm-message">
                         Hành động này không thể hoàn tác. Tất cả dữ liệu và tiến độ học tập sẽ bị xóa vĩnh viễn.
                     </p>
@@ -791,20 +802,19 @@ class CourseApp {
                 </div>
             `;
             document.body.appendChild(confirmModal);
-
-            const overlay = confirmModal.querySelector('.modal-overlay');
-            if (overlay) {
-                overlay.addEventListener('click', () => this.cancelDelete());
-            }
+            console.log('✅ Confirm modal created and added to DOM');
         }
 
         const courseNameElement = document.getElementById('confirmCourseName');
         if (courseNameElement) {
-            courseNameElement.textContent = this.courseToDelete.title;
+            courseNameElement.textContent = `"${this.courseToDelete.title}"`;
+            console.log('✅ Course name set:', this.courseToDelete.title);
         }
 
         confirmModal.classList.add('active');
         document.body.style.overflow = 'hidden';
+        
+        console.log('✅ Confirm modal shown');
     }
 
     proceedOpenUploadModal() {
@@ -825,39 +835,62 @@ class CourseApp {
     }
 
     deleteCourse() {
-        if (!this.courseToDelete) return;
+        console.log('🔴 deleteCourse called');
+        console.log('🔴 courseToDelete:', this.courseToDelete);
+        
+        if (!this.courseToDelete) {
+            console.error('❌ No course to delete');
+            this.showNotification('⚠️ Không tìm thấy khóa học cần xóa', 'warning');
+            this.cancelDelete();
+            return;
+        }
 
         const courseId = this.courseToDelete.id;
         const courseName = this.courseToDelete.title;
 
+        console.log(`🗑️ Deleting course: ${courseName} (ID: ${courseId})`);
+
+        // Animate card
         const courseCards = document.querySelectorAll('.course-card');
-        let cardIndex = -1;
-        
         const filteredCourses = this.getFilteredCourses();
         const startIndex = (this.currentPage - 1) * this.coursesPerPage;
         const endIndex = startIndex + this.coursesPerPage;
         const coursesToShow = filteredCourses.slice(startIndex, endIndex);
         
-        cardIndex = coursesToShow.findIndex(c => c.id === courseId);
+        const cardIndex = coursesToShow.findIndex(c => c.id === courseId);
+        console.log('📍 Card index:', cardIndex);
 
         if (cardIndex >= 0 && courseCards[cardIndex]) {
             courseCards[cardIndex].classList.add('deleting');
+            console.log('✅ Card animation started');
         }
 
         setTimeout(() => {
+            // XÓA KHỎI ARRAY
             const index = this.courses.findIndex(c => c.id === courseId);
+            console.log('📍 Array index:', index);
+            
             if (index !== -1) {
                 this.courses.splice(index, 1);
+                console.log(`✅ Course removed. Remaining: ${this.courses.length}`);
+            } else {
+                console.error('❌ Course not found in array');
             }
 
-            this.cancelDelete();
+            // LƯU VÀO LOCALSTORAGE
             this.saveCoursesToStorage();
             this.saveProgress();
+
+            // ĐÓNG MODAL
+            this.cancelDelete();
+
+            // RE-RENDER
             this.renderCourses();
 
-            this.showNotification(`🗑️ Đã xóa khóa học "${courseName}"`, 'success');
-            console.log(`🗑️ Deleted course: ${courseName} (ID: ${courseId})`);
-            console.log(`📊 Remaining courses: ${this.courses.length}`);
+            // THÔNG BÁO
+            this.showNotification(`🗑️ Đã xóa "${courseName}"`, 'success');
+            
+            console.log(`📊 Final count: ${this.courses.length}`);
         }, 500);
     }
 
