@@ -1827,52 +1827,61 @@ body {
 }
 
 /* ===================================
-   RESPONSIVE MODAL
+   EMPTY & ERROR STATES
    =================================== */
 
-@media (max-width: 768px) {
-    .modal-content {
-        padding: 16px;
-        width: 90%;
-    }
-
-    .video-wrapper {
-        padding-top: 75%; /* 4:3 Aspect Ratio */
-    }
-
-    .tab-btn {
-        font-size: 14px;
-        padding: 8px 12px;
-    }
+/* Empty State */
+.empty-state {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 80px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    border: 2px dashed rgba(255, 255, 255, 0.1);
 }
 
-@media (max-width: 480px) {
-    .modal-title-section h2 {
-        font-size: 24px;
-    }
+.empty-state i {
+    font-size: 80px;
+    color: rgba(255, 255, 255, 0.2);
+    margin-bottom: 20px;
+}
 
-    .modal-meta span {
-        font-size: 12px;
-    }
+.empty-state h3 {
+    font-size: 24px;
+    color: #fff;
+    margin-bottom: 10px;
+}
 
-    .btn-close-modal {
-        font-size: 16px;
-    }
+.empty-state p {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 30px;
+}
 
-    .video-controls {
-        gap: 8px;
-    }
+/* Error Message */
+.error-message {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 80px 20px;
+    background: rgba(255, 59, 48, 0.1);
+    border-radius: 20px;
+    border: 2px solid rgba(255, 59, 48, 0.3);
+}
 
-    .progress-header h4 {
-        font-size: 14px;
-    }
+.error-message i {
+    font-size: 80px;
+    color: #ff3b30;
+    margin-bottom: 20px;
+}
 
-    .progress-text {
-        font-size: 12px;
-    }
+.error-message h3 {
+    font-size: 24px;
+    color: #ff3b30;
+    margin-bottom: 10px;
+}
 
-    .tab-btn {
-        font-size: 12px;
-        padding: 6px 10px;
-    }
+.error-message p {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 30px;
 }
