@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WebAndoIoT - Nền tảng học tập AIoT</title>
     
-    <!-- ✅ FIX: Add favicon -->
+    <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
     
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Nền tảng học tập AIoT toàn diện">
-    <meta name="keywords" content="AIoT, Arduino, Raspberry Pi, ESP32, IoT">
+    <!-- Meta Tags -->
+    <meta name="description" content="Nền tảng học tập AIoT toàn diện - Arduino, Raspberry Pi, ESP32, IoT, AI">
+    <meta name="keywords" content="AIoT, Arduino, Raspberry Pi, ESP32, IoT, AI, Machine Learning">
+    <meta name="author" content="WebAndoIoT Team">
     
     <!-- Stylesheets -->
     <link rel="stylesheet" href="css/styles.css">
@@ -19,1237 +20,404 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- ===================================
-       GLOBAL RESET & BASE STYLES
-       =================================== -->
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }   
-
-    :root {
-        --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        --bg-dark: #0f0f1e;
-        --bg-card: #1a1a2e;
-        --text-primary: #ffffff;
-        --text-secondary: rgba(255, 255, 255, 0.7);
-        --border-color: rgba(255, 255, 255, 0.1);
-        --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
-        --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
-        --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.5);
-    }   
-
-    body {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
-        background: var(--bg-dark);
-        color: var(--text-primary);
-        line-height: 1.6;
-        overflow-x: hidden;
-    }           
-
-    /* ===================================
-       HEADER & NAVIGATION
-       =================================== */
-    .header {
-        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-        padding: 20px 0;
-        box-shadow: var(--shadow-md);
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-        border-bottom: 1px solid var(--border-color);
-    }       
-
-    .header-content {
-        max-width: 1400px;
-        margin: 0 auto;
-        padding: 0 24px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }        
-
-    .logo {
-        font-size: 28px;
-        font-weight: 800;
-        background: var(--primary-gradient);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-    }       
-
-    .btn-header {
-        padding: 12px 24px;
-        border: none;
-        border-radius: 12px;
-        font-weight: 600;
-        font-size: 14px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    }       
-
-    .btn-add-course {
-        background: var(--primary-gradient);
-        color: white;
-        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-    }       
-
-    .btn-add-course:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
-    }   
-
-    /* ===================================
-       HERO SECTION
-       =================================== */
-    .hero-header {
-        position: relative;
-        overflow: hidden;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 80px 0;
-        background: var(--bg-dark);
-    }       
-
-    .hero-content {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 24px;
-        text-align: center;
-    }       
-
-    .hero-title {
-        font-size: 36px;
-        font-weight: 700;
-        color: var(--text-primary);
-        margin-bottom: 16px;
-    }       
-
-    .hero-subtitle {
-        font-size: 18px;
-        color: var(--text-secondary);
-        margin-bottom: 32px;
-    }       
-
-    .hero-actions {
-        display: flex;
-        justify-content: center;
-        gap: 16px;
-    }       
-
-    /* ===================================
-       MAIN CONTAINER
-       =================================== */
-    .main-container {
-        max-width: 1400px;
-        margin: 0 auto;
-        padding: 40px 24px;
-    }       
-
-    .section-title {
-        font-size: 28px;
-        font-weight: 700;
-        color: var(--text-primary);
-        margin-bottom: 24px;
-        position: relative;
-    }       
-
-    .section-title:after {
-        content: '';
-        position: absolute;
-        width: 100%;
-        height: 2px;
-        bottom: -4px;
-        left: 0;
-        background: var(--primary-gradient);
-    }       
-
-    .container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 24px;
-    }       
-
-    /* ===================================
-       FOOTER
-       =================================== */
-    .footer {
-        background: #161622;
-        padding: 40px 0;
-        color: rgba(255, 255, 255, 0.8);
-        position: relative;
-        overflow: hidden;
-    }       
-
-    .footer-content {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 24px;
-        display: flex;
-        flex-direction: column;
-        gap: 24px;
-        position: relative;
-    }       
-
-    .footer-logo {
-        font-size: 28px;
-        font-weight: 800;
-        color: var(--text-primary);
-    }       
-
-    .footer-description {
-        font-size: 16px;
-        color: rgba(255, 255, 255, 0.7);
-        line-height: 1.6;
-    }       
-
-    .footer-links {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 16px;
-    }       
-
-    .footer-link {
-        font-size: 14px;
-        color: rgba(255, 255, 255, 0.8);
-        transition: color 0.3s ease;
-    }       
-
-    .footer-link:hover {
-        color: var(--primary-gradient);
-    }       
-
-    .footer-social {
-        display: flex;
-        gap: 16px;
-    }       
-
-    .footer-social-icon {
-        width: 40px;
-        height: 40px;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: background 0.3s ease;
-    }       
-
-    .footer-social-icon:hover {
-        background: rgba(255, 255, 255, 0.2);
-    }       
-
-    /* ===================================
-       BUTTONS
-       =================================== */
-    .btn {
-        display: inline-block;
-        padding: 12px 24px;
-        border: none;
-        border-radius: 8px;
-        font-weight: 600;
-        font-size: 14px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        position: relative;
-        overflow: hidden;
-    }       
-
-    .btn-primary {
-        background: var(--primary-gradient);
-        color: white;
-        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
-    }       
-
-    .btn-primary::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(135deg, #7c8ff0 0%, #8b5ab5 100%);
-        opacity: 0;
-        transition: opacity 0.3s ease;
-    }       
-
-    .btn-primary:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
-    }       
-
-    .btn-primary:hover::before {
-        opacity: 1;
-    }       
-
-    .btn-primary:hover svg {
-        transform: translateX(3px);
-    }       
-
-    .btn-secondary {
-        background: rgba(255, 255, 255, 0.08);
-        color: white;
-        border: 1.5px solid rgba(255, 255, 255, 0.2);
-    }       
-
-    .btn-secondary:hover {
-        background: rgba(255, 255, 255, 0.15);
-        border-color: rgba(255, 255, 255, 0.35);
-        transform: translateY(-2px);
-    }       
-
-    .btn-secondary:hover svg {
-        transform: scale(1.1);
-    }   
-
-    /* ===================================
-       CARDS
-       =================================== */
-    .card {
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 12px;
-        padding: 24px;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        position: relative;
-        overflow: hidden;
-    }       
-
-    .card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-    }       
-
-    .card-title {
-        font-size: 18px;
-        font-weight: 700;
-        color: var(--text-primary);
-        margin-bottom: 12px;
-    }       
-
-    .card-subtitle {
-        font-size: 14px;
-        color: rgba(255, 255, 255, 0.7);
-        margin-bottom: 16px;
-    }       
-
-    .card-content {
-        font-size: 14px;
-        color: rgba(255, 255, 255, 0.8);
-        line-height: 1.6;
-    }       
-
-    /* ===================================
-       FORMS
-       =================================== */
-    .form-group {
-        margin-bottom: 16px;
-    }       
-
-    .form-label {
-        font-size: 14px;
-        color: rgba(255, 255, 255, 0.9);
-        margin-bottom: 8px;
-        display: block;
-    }       
-
-    .form-input {
-        width: 100%;
-        padding: 12px 16px;
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 8px;
-        color: rgba(255, 255, 255, 0.9);
-        font-size: 14px;
-        transition: border-color 0.3s ease;
-    }       
-
-    .form-input:focus {
-        outline: none;
-        border-color: var(--primary-gradient);
-    }       
-
-    .form-select {
-        width: 100%;
-        padding: 12px 16px;
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 8px;
-        color: rgba(255, 255, 255, 0.9);
-        font-size: 14px;
-        appearance: none;
-        background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"%3E%3Cpath d="M6 9l6 6 6-6H6z" fill="%23667eea"/%3E%3C/svg%3E');
-        background-repeat: no-repeat;
-        background-position: right 12px center;
-        transition: border-color 0.3s ease;
-    }       
-
-    .form-select:focus {
-        outline: none;
-        border-color: var(--primary-gradient);
-    }       
-
-    /* ===================================
-       TABLES
-       =================================== */
-    .table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-bottom: 32px;
-    }       
-
-    .table th, .table td {
-        padding: 12px 16px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 8px;
-        color: rgba(255, 255, 255, 0.9);
-        font-size: 14px;
-        text-align: left;
-    }       
-
-    .table th {
-        background: rgba(255, 255, 255, 0.05);
-        font-weight: 700;
-    }       
-
-    .table-striped tbody tr:nth-child(odd) {
-        background: rgba(255, 255, 255, 0.02);
-    }       
-
-    /* ===================================
-       MISC
-       =================================== */
-    .divider {
-        height: 1px;
-        background: rgba(255, 255, 255, 0.1);
-        margin: 24px 0;
-    }       
-
-    .badge {
-        display: inline-block;
-        padding: 6px 12px;
-        border-radius: 12px;
-        font-size: 12px;
-        font-weight: 600;
-        color: white;
-        background: var(--primary-gradient);
-    }       
-
-    /* ===================================
-       ANIMATIONS
-       =================================== */
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-        }
-        to {
-            opacity: 1;
-        }
-    }       
-
-    @keyframes slideIn {
-        from {
-            transform: translateY(10px);
-            opacity: 0;
-        }
-        to {
-            transform: translateY(0);
-            opacity: 1;
-        }
-    }       
-
-    @keyframes slideUp {
-        from {
-            transform: translateY(50px);
-            opacity: 0;
-        }
-        to {
-            transform: translateY(0);
-            opacity: 1;
-        }
-    }       
-
-    @keyframes rotateIn {
-        from {
-            transform: rotate(10deg) translateY(10px);
-            opacity: 0;
-        }
-        to {
-            transform: rotate(0) translateY(0);
-            opacity: 1;
-        }
-    }       
-
-    @keyframes bounceIn {
-        0%, 20%, 50%, 80%, 100% {
-            transform: translateY(0);
-        }
-        40% {
-            transform: translateY(-10px);
-        }
-        60% {
-            transform: translateY(-5px);
-        }
-    }   
-
-    /* ===================================
-       MEDIA QUERIES
-       =================================== */
-    @media (max-width: 1200px) {
-        .modal-content {
-            grid-template-columns: 1fr;
-            gap: 20px;
-        }       
-
-        .sidebar-section {
-            max-height: 400px;
-        }
-    }   
-
-    @media (max-width: 768px) {
-        .modal-container {
-            width: 100%;
-            height: 100vh;
-            border-radius: 0;
-        }       
-
-        .modal-header {
-            padding: 16px 20px;
-        }       
-
-        .modal-title-section h2 {
-            font-size: 20px;
-        }       
-
-        .modal-content {
-            padding: 16px 20px;
-        }       
-
-        .btn {
-            padding: 10px 20px;
-            font-size: 14px;
-        }       
-
-        .section-title {
-            font-size: 24px;
-        }       
-
-        .card {
-            padding: 20px;
-        }       
-
-        .form-input, .form-select {
-            padding: 10px 14px;
-        }       
-
-        .table th, .table td {
-            padding: 10px 14px;
-        }       
-
-        .footer {
-            padding: 32px 0;
-        }       
-
-        .footer-content {
-            gap: 16px;
-        }       
-
-        .divider {
-            margin: 16px 0;
-        }
-    }   
-
-    /* ===================================
-       JavaScript Variables
-       =================================== */
-    :root {
-        --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        --bg-dark: #0f0f1e;
-        --bg-card: #1a1a2e;
-        --text-primary: #ffffff;
-        --text-secondary: rgba(255, 255, 255, 0.7);
-        --border-color: rgba(255, 255, 255, 0.1);
-        --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
-        --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
-        --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.5);
-    }   
-
-    /* ===================================
-       JavaScript Variables - Course Card
-       =================================== */
-    .course-card {
-        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-        border-radius: 20px;
-        overflow: hidden;
-        box-shadow: var(--shadow-md);
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        cursor: pointer;
-        position: relative;
-        border: 1px solid var(--border-color);
-    }       
-
-    .course-card:hover {
-        transform: translateY(-4px) scale(1.02);
-        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
-    }       
-
-    .course-icon {
-        font-size: 80px;
-        z-index: 1;
-        filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
-        transition: transform 0.4s ease;
-    }       
-
-    .course-card:hover .course-icon {
-        transform: scale(1.1) rotate(5deg);
-    }       
-
-    .course-title {
-        font-size: 20px;
-        font-weight: 700;
-        color: white;
-        margin-bottom: 12px;
-        line-height: 1.4;
-    }       
-
-    .course-instructor {
-        color: var(--text-secondary);
-        font-size: 14px;
-        margin-bottom: 8px;
-    }       
-
-    .course-meta {
-        display: flex;
-        gap: 15px;
-        margin-bottom: 15px;
-        padding-bottom: 15px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    }       
-
-    .course-meta span {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        font-size: 13px;
-        color: rgba(255, 255, 255, 0.6);
-    }       
-
-    .course-meta i {
-        color: #667eea;
-        font-size: 14px;
-    }   
-
-    /* ===================================
-       JavaScript Variables - Progress Section
-       =================================== */
-    .progress-section {
-        margin-bottom: 20px;
-    }       
-
-    .progress-bar-bg {
-        width: 100%;
-        height: 8px;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 20px;
-        overflow: hidden;
-        margin-bottom: 10px;
-    }       
-
-    .progress-bar-fill {
-        height: 100%;
-        background: var(--primary-gradient);
-        border-radius: 20px;
-        transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
-        box-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
-    }       
-
-    .progress-text {
-        font-size: 13px;
-        color: rgba(255, 255, 255, 0.6);
-        text-align: right;
-        font-weight: 600;
-    }   
-
-    /* ===================================
-       JavaScript Variables - Course Actions
-       =================================== */
-    .course-actions {
-        display: flex;
-        gap: 12px;
-        margin-top: 20px;
-        padding-top: 20px;
-        border-top: 1px solid rgba(255, 255, 255, 0.08);
-    }       
-
-    .btn-action {
-        flex: 1;
-        padding: 13px 18px;
-        border: none;
-        border-radius: 10px;
-        font-weight: 600;
-        font-size: 14px;
-        cursor: pointer;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        position: relative;
-        overflow: hidden;
-    }       
-
-    .btn-action svg {
-        transition: transform 0.3s ease;
-    }       
-
-    .btn-primary {
-        background: var(--primary-gradient);
-        color: white;
-        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
-    }       
-
-    .btn-primary::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(135deg, #7c8ff0 0%, #8b5ab5 100%);
-        opacity: 0;
-        transition: opacity 0.3s ease;
-    }       
-
-    .btn-primary:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
-    }       
-
-    .btn-primary:hover::before {
-        opacity: 1;
-    }       
-
-    .btn-primary:hover svg {
-        transform: translateX(3px);
-    }       
-
-    .btn-secondary {
-        background: rgba(255, 255, 255, 0.08);
-        color: white;
-        border: 1.5px solid rgba(255, 255, 255, 0.2);
-    }       
-
-    .btn-secondary:hover {
-        background: rgba(255, 255, 255, 0.15);
-        border-color: rgba(255, 255, 255, 0.35);
-        transform: translateY(-2px);
-    }       
-
-    .btn-secondary:hover svg {
-        transform: scale(1.1);
-    }   
-
-    /* ===================================
-       PAGINATION
-       =================================== */
-    .pagination {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 16px;
-        margin-top: 40px;
-        padding: 32px;
-        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-        border-radius: 20px;
-        box-shadow: var(--shadow-md);
-    }       
-
-    .page-btn {
-        padding: 12px 24px;
-        background: rgba(255, 255, 255, 0.08);
-        border: 2px solid rgba(255, 255, 255, 0.15);
-        border-radius: 12px;
-        color: white;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        font-weight: 600;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    }       
-
-    .page-btn:hover:not(:disabled) {
-        background: rgba(255, 255, 255, 0.15);
-        border-color: rgba(255, 255, 255, 0.3);
-        transform: translateY(-2px);
-    }       
-
-    .page-btn:disabled {
-        opacity: 0.3;
-        cursor: not-allowed;
-    }       
-
-    .page-info {
-        padding: 12px 24px;
-        background: var(--primary-gradient);
-        border-radius: 12px;
-        font-weight: 600;
-        min-width: 120px;
-        text-align: center;
-    }   
-
-    /* ===================================
-       MODAL BASE
-       =================================== */
-    .modal {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 10000;
-        animation: fadeIn 0.3s ease;
-    }       
-
-    .modal.active {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }       
-
-    .modal-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.85);
-        backdrop-filter: blur(10px);
-    }       
-
-    .modal-container {
-        position: relative;
-        width: 95%;
-        max-width: 1400px;
-        height: 90vh;
-        background: linear-gradient(145deg, #1a1f3a 0%, #0f1419 100%);
-        border-radius: 24px;
-        box-shadow: 0 25px 100px rgba(0, 0, 0, 0.5);
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-        animation: slideUp 0.4s ease;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-    }       
-
-    .modal-header {
-        padding: 24px 32px;
-        background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }       
-
-    .modal-title-section h2 {
-        font-size: 28px;
-        font-weight: 700;
-        color: #fff;
-        margin-bottom: 8px;
-    }       
-
-    .modal-meta {
-        display: flex;
-        gap: 24px;
-        font-size: 14px;
-        color: rgba(255, 255, 255, 0.7);
-    }       
-
-    .modal-meta span {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-    }       
-
-    .btn-close-modal {
-        width: 44px;
-        height: 44px;
-        border-radius: 12px;
-        background: rgba(255, 255, 255, 0.1);
-        border: none;
-        color: #fff;
-        font-size: 24px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }       
-
-    .btn-close-modal:hover {
-        background: rgba(255, 59, 48, 0.2);
-        transform: scale(1.1);
-    }   
-
-    /* ===================================
-       MODAL CONTENT LAYOUT
-       =================================== */
-    .modal-content {
-        display: grid;
-        grid-template-columns: 1fr 420px;
-        gap: 24px;
-        padding: 24px 32px;
-        flex: 1;
-        overflow: hidden;
-    }   
-
-    /* ===================================
-       VIDEO SECTION - LARGER
-       =================================== */
-    .video-section {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        overflow: hidden;
-    }       
-
-    .video-wrapper {
-        background: #000;
-        border-radius: 16px;
-        overflow: hidden;
-        position: relative;
-        aspect-ratio: 16 / 9;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-    }       
-
-    .main-video {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-        background: #000;
-    }       
-
-    .video-controls {
-        background: rgba(15, 20, 25, 0.95);
-        padding: 20px;
-        border-radius: 16px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-    }       
-
-    .progress-section {
-        margin-bottom: 16px;
-    }       
-
-    .progress-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 12px;
-    }       
-
-    .progress-header h4 {
-        font-size: 14px;
-        font-weight: 600;
-        color: rgba(255, 255, 255, 0.7);
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }       
-
-    .progress-text {
-        font-size: 16px;
-        font-weight: 600;
-        color: #4facfe;
-    }       
-
-    .progress-bar-bg {
-        height: 8px;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 10px;
-        overflow: hidden;
-    }       
-
-    .progress-bar-fill {
-        height: 100%;
-        background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-        border-radius: 10px;
-        transition: width 0.5s ease;
-    }   
-
-    /* ===================================
-       TABS SECTION
-       =================================== */
-    .tabs-container {
-        display: flex;
-        gap: 12px;
-        margin-top: 16px;
-    }       
-
-    .tab-btn {
-        flex: 1;
-        padding: 12px 20px;
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 12px;
-        color: rgba(255, 255, 255, 0.7);
-        font-size: 14px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-    }       
-
-    .tab-btn:hover {
-        background: rgba(255, 255, 255, 0.1);
-        border-color: rgba(255, 255, 255, 0.2);
-    }       
-
-    .tab-btn.active {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        border-color: transparent;
-        color: #fff;
-    }   
-
-    /* ===================================
-       SIDEBAR SECTION
-       =================================== */
-    .sidebar-section {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        overflow-y: auto;
-        padding-right: 8px;
-    }       
-
-    .sidebar-section::-webkit-scrollbar {
-        width: 6px;
-    }       
-
-    .sidebar-section::-webkit-scrollbar-track {
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 10px;
-    }       
-
-    .sidebar-section::-webkit-scrollbar-thumb {
-        background: rgba(255, 255, 255, 0.2);
-        border-radius: 10px;
-    }       
-
-    .tab-content {
-        display: none;
-        animation: fadeIn 0.3s ease;
-    }       
-
-    .tab-content.active {
-        display: block;
-    }   
-
-    /* ===================================
-       LESSONS LIST
-       =================================== */
-    .lessons-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 16px;
-    }       
-
-    .lessons-header h3 {
-        font-size: 18px;
-        font-weight: 700;
-        color: #fff;
-    }       
-
-    .lessons-count {
-        font-size: 14px;
-        color: rgba(255, 255, 255, 0.6);
-    }       
-
-    .lessons-list {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-    }       
-
-    .lesson-item {
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 12px;
-        padding: 16px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        display: flex;
-        gap: 16px;
-        align-items: center;
-    }       
-
-    .lesson-item:hover {
-        background: rgba(255, 255, 255, 0.08);
-        border-color: rgba(102, 126, 234, 0.5);
-        transform: translateX(4px);
-    }       
-
-    .lesson-item.completed {
-        background: rgba(67, 233, 123, 0.1);
-        border-color: rgba(67, 233, 123, 0.3);
-    }       
-
-    .lesson-number {
-        width: 40px;
-        height: 40px;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        border-radius: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 16px;
-        font-weight: 700;
-        color: #fff;
-        flex-shrink: 0;
-    }       
-
-    .lesson-item.completed .lesson-number {
-        background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-    }       
-
-    .lesson-info {
-        flex: 1;
-    }       
-
-    .lesson-info h4 {
-        font-size: 15px;
-        font-weight: 600;
-        color: #fff;
-        margin-bottom: 4px;
-    }       
-
-    .lesson-info span {
-        font-size: 13px;
-        color: rgba(255, 255, 255, 0.6);
-    }       
-
-    .lesson-status {
-        font-size: 20px;
-        color: rgba(255, 255, 255, 0.4);
-    }       
-
-    .lesson-item.completed .lesson-status {
-        color: #43e97b;
-    }   
-
-    /* ===================================
-       COURSE INFO TAB
-       =================================== */
-    .course-description {
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 12px;
-        padding: 20px;
-    }       
-
-    .course-description h3 {
-        font-size: 18px;
-        font-weight: 700;
-        color: #fff;
-        margin-bottom: 12px;
-    }       
-
-    .course-description p {
-        font-size: 14px;
-        line-height: 1.6;
-        color: rgba(255, 255, 255, 0.7);
-    }   
-
-    /* ===================================
-       RESPONSIVE
-       =================================== */
-    @media (max-width: 1200px) {
-        .modal-content {
-            grid-template-columns: 1fr;
-            gap: 20px;
-        }       
-
-        .sidebar-section {
-            max-height: 400px;
-        }
-    }   
-
-    @media (max-width: 768px) {
-        .modal-container {
-            width: 100%;
-            height: 100vh;
-            border-radius: 0;
-        }       
-
-        .modal-header {
-            padding: 16px 20px;
-        }       
-
-        .modal-title-section h2 {
-            font-size: 20px;
-        }       
-
-        .modal-content {
-            padding: 16px 20px;
-        }       
-
-        .btn {
-            padding: 10px 20px;
-            font-size: 14px;
-        }       
-
-        .section-title {
-            font-size: 24px;
-        }       
-
-        .card {
-            padding: 20px;
-        }       
-
-        .form-input, .form-select {
-            padding: 10px 14px;
-        }       
-
-        .table th, .table td {
-            padding: 10px 14px;
-        }       
-
-        .footer {
-            padding: 32px 0;
-        }       
-
-        .footer-content {
-            gap: 16px;
-        }       
-
-        .divider {
-            margin: 16px 0;
-        }
-    }   
-
-    /* ===================================
-       ANIMATIONS
-       =================================== */
-    @keyframes slideUp {
-        from {
-            opacity: 0;
-            transform: translateY(30px);
-        }       
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }   
-
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-        }
-        to {
-            opacity: 1;
-        }
-    }
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-robot"></i>
+                    <span>WebAndoIoT</span>
+                </div>
+                <nav class="nav-menu">
+                    <button class="btn-primary" onclick="courseApp.openUploadModal()">
+                        <i class="fas fa-plus"></i> Thêm khóa học
+                    </button>
+                    <button class="btn-secondary" onclick="courseApp.refreshCourses()">
+                        <i class="fas fa-sync-alt"></i> Làm mới
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-background">
+            <div class="hero-shape shape-1"></div>
+            <div class="hero-shape shape-2"></div>
+            <div class="hero-shape shape-3"></div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <i class="fas fa-graduation-cap icon-bounce"></i>
+                    Nền tảng học tập AIoT
+                </h1>
+                <p class="hero-subtitle">Khám phá thế giới IoT, AI và Embedded Systems</p>
+                <div class="hero-actions">
+                    <button class="btn-hero-primary" onclick="document.getElementById('courses-section').scrollIntoView({behavior: 'smooth'})">
+                        <i class="fas fa-rocket"></i> Bắt đầu học
+                    </button>
+                    <button class="btn-hero-secondary" onclick="courseApp.openUploadModal()">
+                        <i class="fas fa-plus-circle"></i> Thêm khóa học
+                    </button>
+                </div>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number" id="totalCourses">0</div>
+                        <div class="stat-label">Tổng khóa học</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon completed">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number" id="completedCourses">0</div>
+                        <div class="stat-label">Đã hoàn thành</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon in-progress">
+                        <i class="fas fa-play-circle"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number" id="inProgressCourses">0</div>
+                        <div class="stat-label">Đang học</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon not-started">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number" id="notStartedCourses">0</div>
+                        <div class="stat-label">Chưa bắt đầu</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section id="courses-section" class="courses-section">
+        <div class="container">
+            <!-- Controls -->
+            <div class="controls-bar">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Tìm kiếm khóa học..." 
+                           onkeyup="courseApp.handleSearch(this.value)">
+                </div>
+                
+                <div class="filter-group">
+                    <select id="filterStatus" onchange="courseApp.handleFilterStatus(this.value)">
+                        <option value="all">Tất cả trạng thái</option>
+                        <option value="completed">Đã hoàn thành</option>
+                        <option value="in-progress">Đang học</option>
+                        <option value="not-started">Chưa bắt đầu</option>
+                    </select>
+                    
+                    <select id="filterStage" onchange="courseApp.handleFilterStage(this.value)">
+                        <option value="all">Tất cả giai đoạn</option>
+                        <option value="Giai đoạn 1">Giai đoạn 1</option>
+                        <option value="Giai đoạn 2">Giai đoạn 2</option>
+                    </select>
+                    
+                    <select id="sortSelect" onchange="courseApp.handleSort(this.value)">
+                        <option value="newest">Mới nhất</option>
+                        <option value="oldest">Cũ nhất</option>
+                        <option value="name-asc">Tên A-Z</option>
+                        <option value="name-desc">Tên Z-A</option>
+                        <option value="progress">Tiến độ</option>
+                    </select>
+                </div>
+
+                <div class="view-toggle">
+                    <button class="view-btn active" data-view="grid" onclick="courseApp.toggleView('grid')">
+                        <i class="fas fa-th"></i>
+                    </button>
+                    <button class="view-btn" data-view="list" onclick="courseApp.toggleView('list')">
+                        <i class="fas fa-list"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Course Count -->
+            <div class="course-count">
+                <span id="courseCount">Đang tải...</span>
+            </div>
+
+            <!-- Courses Grid -->
+            <div id="coursesGrid" class="courses-grid">
+                <!-- Courses will be rendered here by JavaScript -->
+            </div>
+
+            <!-- Pagination -->
+            <div id="pagination" class="pagination">
+                <!-- Pagination will be rendered here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Modal -->
+    <div id="courseModal" class="modal">
+        <div class="modal-content modal-large">
+            <span class="close-modal" onclick="courseApp.closeModal()">&times;</span>
+            
+            <div class="modal-header">
+                <h2 id="modalCourseTitle">Course Title</h2>
+                <div class="modal-meta">
+                    <span><i class="fas fa-user"></i> <span id="modalInstructor"></span></span>
+                    <span><i class="fas fa-clock"></i> <span id="modalDuration"></span></span>
+                    <span><i class="fas fa-users"></i> <span id="modalStudents"></span> học viên</span>
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <div class="modal-tabs">
+                    <button class="tab-btn active" onclick="courseApp.switchTab('lessons')">
+                        <i class="fas fa-play-circle"></i> Bài học
+                    </button>
+                    <button class="tab-btn" onclick="courseApp.switchTab('info')">
+                        <i class="fas fa-info-circle"></i> Thông tin
+                    </button>
+                    <button class="tab-btn" onclick="courseApp.switchTab('slides')">
+                        <i class="fas fa-file-powerpoint"></i> Slides
+                    </button>
+                </div>
+
+                <div class="tab-content">
+                    <!-- Lessons Tab -->
+                    <div id="tab-lessons" class="tab-pane active">
+                        <div class="video-container">
+                            <video id="courseVideo" controls>
+                                <source src="" type="video/mp4">
+                                Trình duyệt không hỗ trợ video.
+                            </video>
+                        </div>
+                        <div id="lessonsList" class="lessons-list">
+                            <!-- Lessons will be rendered here -->
+                        </div>
+                    </div>
+
+                    <!-- Info Tab -->
+                    <div id="tab-info" class="tab-pane">
+                        <div class="course-description">
+                            <h3>Mô tả khóa học</h3>
+                            <p id="courseDescription">Đang tải thông tin...</p>
+                        </div>
+                    </div>
+
+                    <!-- Slides Tab -->
+                    <div id="tab-slides" class="tab-pane">
+                        <div class="course-description">
+                            <h3>📊 Tài liệu Slides</h3>
+                            <p>Slides sẽ được hiển thị tại đây...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Upload Modal -->
+    <div id="uploadModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="courseApp.closeUploadModal()">&times;</span>
+            
+            <div class="modal-header">
+                <h2><i class="fas fa-cloud-upload-alt"></i> Thêm khóa học mới</h2>
+            </div>
+
+            <div class="modal-body">
+                <form id="uploadForm" class="upload-form">
+                    <!-- Course Info -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-info-circle"></i> Thông tin khóa học</h3>
+                        
+                        <div class="form-group">
+                            <label for="courseTitle">Tên khóa học *</label>
+                            <input type="text" id="courseTitle" placeholder="VD: Lập trình Python cơ bản" required>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="courseInstructor">Giảng viên *</label>
+                                <input type="text" id="courseInstructor" placeholder="VD: 28tech Academy" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="courseDuration">Thời lượng *</label>
+                                <input type="text" id="courseDuration" placeholder="VD: 12 tuần" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="courseStudents">Số học viên *</label>
+                                <input type="number" id="courseStudents" placeholder="VD: 1000" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="courseCategory">Giai đoạn học tập *</label>
+                                <select id="courseCategory" required>
+                                    <option value="">Chọn giai đoạn</option>
+                                    <option value="Giai đoạn 1 - Trụ cột 1">Giai đoạn 1 - Trụ cột 1</option>
+                                    <option value="Giai đoạn 1 - Trụ cột 2">Giai đoạn 1 - Trụ cột 2</option>
+                                    <option value="Giai đoạn 1 - Trụ cột 3">Giai đoạn 1 - Trụ cột 3</option>
+                                    <option value="Giai đoạn 2 - Trụ cột 4">Giai đoạn 2 - Trụ cột 4</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="courseThumbnail">Emoji Icon *</label>
+                            <input type="text" id="courseThumbnail" placeholder="VD: 🤖 💻 🚀 🧠" maxlength="2" required>
+                            <small>Chọn 1 emoji làm icon khóa học</small>
+                        </div>
+                    </div>
+
+                    <!-- Upload Files -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-file-upload"></i> Tải lên tài liệu</h3>
+                        
+                        <div class="form-group">
+                            <label for="videoUpload">Video bài giảng</label>
+                            <div class="file-upload-area">
+                                <input type="file" id="videoUpload" accept="video/*" multiple>
+                                <div class="upload-placeholder">
+                                    <i class="fas fa-video"></i>
+                                    <p>Kéo thả video hoặc click để chọn</p>
+                                    <small>Hỗ trợ: MP4, AVI, MOV (tối đa 500MB/file)</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="slideUpload">Slides bài giảng</label>
+                            <div class="file-upload-area">
+                                <input type="file" id="slideUpload" accept=".pdf,.ppt,.pptx" multiple>
+                                <div class="upload-placeholder">
+                                    <i class="fas fa-file-powerpoint"></i>
+                                    <p>Kéo thả slides hoặc click để chọn</p>
+                                    <small>Hỗ trợ: PDF, PPT, PPTX</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Submit -->
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" onclick="courseApp.closeUploadModal()">
+                            <i class="fas fa-times"></i> Hủy
+                        </button>
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-check"></i> Thêm khóa học
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Password Modal -->
+    <div id="adminPasswordModal" class="modal">
+        <div class="modal-content modal-small">
+            <span class="close-modal" onclick="courseApp.closePasswordModal()">&times;</span>
+            
+            <div class="modal-header">
+                <h2><i class="fas fa-lock"></i> Xác thực Admin</h2>
+            </div>
+
+            <div class="modal-body">
+                <p>Vui lòng nhập mật khẩu admin để tiếp tục:</p>
+                <form id="passwordForm" onsubmit="courseApp.verifyAdminPassword(event)">
+                    <div class="form-group">
+                        <input type="password" id="adminPassword" placeholder="Nhập mật khẩu" required autofocus>
+                        <small>Mật khẩu mặc định: <code>admin123</code></small>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" onclick="courseApp.closePasswordModal()">
+                            Hủy
+                        </button>
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-check"></i> Xác nhận
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirm Delete Modal -->
+    <div id="confirmDeleteModal" class="modal">
+        <div class="modal-content modal-small">
+            <div class="modal-header">
+                <h2><i class="fas fa-exclamation-triangle"></i> Xác nhận xóa</h2>
+            </div>
+
+            <div class="modal-body">
+                <p>Bạn có chắc chắn muốn xóa khóa học này?</p>
+                <p class="text-warning"><strong>Hành động này không thể hoàn tác!</strong></p>
+                
+                <div class="form-actions">
+                    <button class="btn-secondary" onclick="courseApp.closeConfirmDeleteModal()">
+                        <i class="fas fa-times"></i> Hủy
+                    </button>
+                    <button class="btn-danger" onclick="courseApp.deleteCourse()">
+                        <i class="fas fa-trash"></i> Xóa khóa học
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="notification" class="notification">
+        <i class="fas fa-check-circle"></i>
+        <span id="notificationText">Thông báo</span>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3><i class="fas fa-robot"></i> WebAndoIoT</h3>
+                    <p>Nền tảng học tập AIoT toàn diện</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Liên kết</h4>
+                    <ul>
+                        <li><a href="#courses-section">Khóa học</a></li>
+                        <li><a href="#" onclick="courseApp.openUploadModal()">Thêm khóa học</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Hỗ trợ</h4>
+                    <ul>
+                        <li><a href="#">Hướng dẫn</a></li>
+                        <li><a href="#">Liên hệ</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 WebAndoIoT. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/video-player.js"></script>
+    <script src="js/slide-viewer.js"></script>
+    <script src="js/app.js"></script>
 </body>
 </html>
