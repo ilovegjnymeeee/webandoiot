@@ -1,188 +1,188 @@
 ﻿{
-  "courses": [
-    {
-      "id": 1001,
-      "title": "1186: Lập trình C 28tech",
-      "instructor": "28tech Academy",
-      "duration": "50 giờ",
-      "category": "Giai đoạn 1 - Trụ cột 1",
-      "thumbnail": "💻",
-      "students": 1500,
-      "description": "Khóa học lập trình C từ cơ bản đến nâng cao với 28tech",
-      "lessons": [
-        {
-          "id": 1,
-          "title": "Bài 1: Giới thiệu ngôn ngữ C",
-          "duration": "25:00",
-          "videoUrl": "videos/1186-lap-trinh-c-28tech/bai-1.mp4",
-          "completed": false
-        },
-        {
-          "id": 2,
-          "title": "Bài 2: Biến và kiểu dữ liệu",
-          "duration": "30:00",
-          "videoUrl": "videos/1186-lap-trinh-c-28tech/bai-2.mp4",
-          "completed": false
-        }
-      ]
-    },
-    {
-      "id": 1002,
-      "title": "Arduino cho người mới bắt đầu",
-      "instructor": "IoT Việt Nam",
-      "duration": "30 giờ",
-      "category": "Giai đoạn 1 - Trụ cột 2",
-      "thumbnail": "🤖",
-      "students": 890,
-      "description": "Học Arduino từ A-Z với các dự án thực tế về IoT và Embedded Systems.",
-      "lessons": [
-        {
-          "id": 1,
-          "title": "Bài 1: Giới thiệu Arduino",
-          "duration": "20:00",
-          "videoUrl": "videos/8585-arduino-co-ban/bai1.mp4",
-          "completed": false
-        },
-        {
-          "id": 2,
-          "title": "Bài 2: LED và Digital Output",
-          "duration": "25:00",
-          "videoUrl": "videos/8585-arduino-co-ban/bai2.mp4",
-          "completed": false
-        }
-      ]
-    },
-    {
-      "id": 1003,
-      "title": "Python cơ bản đến nâng cao",
-      "instructor": "CodeGym",
-      "duration": "40 giờ",
-      "category": "Giai đoạn 1 - Trụ cột 1",
-      "thumbnail": "",
-      "students": 2100,
-      "description": "Khóa học Python toàn diện từ cơ bản đến nâng cao, bao gồm OOP, File handling, và nhiều hơn nữa.",
-      "lessons": [
-        {
-          "id": 1,
-          "title": "Bài 1: Cài đặt và Hello World",
-          "duration": "15:00",
-          "videoUrl": "./videos/python-basic/bai1.mp4",
-          "completed": false
-        },
-        {
-          "id": 2,
-          "title": "Bài 2: Biến và kiểu dữ liệu",
-          "duration": "22:00",
-          "videoUrl": "./videos/python-basic/bai2.mp4",
-          "completed": false
-        },
-        {
-          "id": 3,
-          "title": "Bài 3: List và Tuple",
-          "duration": "28:00",
-          "videoUrl": "./videos/python-basic/bai3.mp4",
-          "completed": false
-        },
-        {
-          "id": 4,
-          "title": "Bài 4: Dictionary và Set",
-          "duration": "25:00",
-          "videoUrl": "./videos/python-basic/bai4.mp4",
-          "completed": false
-        }
-      ]
-    },
-    {
-      "id": 1004,
-      "title": "Raspberry Pi - IoT Projects",
-      "instructor": "Tech Academy",
-      "duration": "35 giờ",
-      "category": "Giai đoạn 1 - Trụ cột 3",
-      "thumbnail": "",
-      "students": 750,
-      "description": "Xây dựng các dự án IoT thực tế với Raspberry Pi, từ home automation đến AI.",
-      "lessons": [
-        {
-          "id": 1,
-          "title": "Bài 1: Giới thiệu Raspberry Pi",
-          "duration": "18:00",
-          "videoUrl": "./videos/raspberry-pi/bai1.mp4",
-          "completed": false
-        },
-        {
-          "id": 2,
-          "title": "Bài 2: Cài đặt OS",
-          "duration": "20:00",
-          "videoUrl": "./videos/raspberry-pi/bai2.mp4",
-          "completed": false
-        },
-        {
-          "id": 3,
-          "title": "Bài 3: GPIO và LED",
-          "duration": "30:00",
-          "videoUrl": "./videos/raspberry-pi/bai3.mp4",
-          "completed": false
-        }
-      ]
-    },
-    {
-      "id": 1005,
-      "title": "ESP32 WiFi & Bluetooth",
-      "instructor": "IoT Master",
-      "duration": "25 giờ",
-      "category": "Giai đoạn 2 - Trụ cột 4",
-      "thumbnail": "",
-      "students": 650,
-      "description": "Lập trình ESP32 với WiFi, Bluetooth, và tích hợp cloud services.",
-      "lessons": [
-        {
-          "id": 1,
-          "title": "Bài 1: Giới thiệu ESP32",
-          "duration": "15:00",
-          "videoUrl": "./videos/esp32/bai1.mp4",
-          "completed": false
-        },
-        {
-          "id": 2,
-          "title": "Bài 2: WiFi Connection",
-          "duration": "25:00",
-          "videoUrl": "./videos/esp32/bai2.mp4",
-          "completed": false
-        }
-      ]
-    },
-    {
-      "id": 1006,
-      "title": "Machine Learning cơ bản",
-      "instructor": "AI Vietnam",
-      "duration": "45 giờ",
-      "category": "Giai đoạn 2 - Trụ cột 4",
-      "thumbnail": "",
-      "students": 1200,
-      "description": "Khóa học Machine Learning với Python, Scikit-learn, và TensorFlow.",
-      "lessons": [
-        {
-          "id": 1,
-          "title": "Bài 1: Giới thiệu ML",
-          "duration": "30:00",
-          "videoUrl": "./videos/machine-learning/bai1.mp4",
-          "completed": false
-        },
-        {
-          "id": 2,
-          "title": "Bài 2: Linear Regression",
-          "duration": "35:00",
-          "videoUrl": "./videos/machine-learning/bai2.mp4",
-          "completed": false
-        },
-        {
-          "id": 3,
-          "title": "Bài 3: Classification",
-          "duration": "40:00",
-          "videoUrl": "./videos/machine-learning/bai3.mp4",
-          "completed": false
-        }
-      ]
-    }
-  ]
+    "courses":  [
+                    {
+                        "id":  1001,
+                        "title":  "1186: Lập trình C 28tech",
+                        "instructor":  "28tech Academy",
+                        "duration":  "50 giờ",
+                        "category":  "Giai đoạn 1 - Trụ cột 1",
+                        "thumbnail":  "💻",
+                        "students":  1500,
+                        "description":  "Khóa học lập trình C từ cơ bản đến nâng cao với 28tech",
+                        "lessons":  [
+                                        {
+                                            "id":  1,
+                                            "title":  "Bài 1: Giới thiệu ngôn ngữ C",
+                                            "duration":  "25:00",
+                                            "videoUrl":  "videos/1186-lap-trinh-c-28tech/bai-1.mp4",
+                                            "completed":  false
+                                        },
+                                        {
+                                            "id":  2,
+                                            "title":  "Bài 2: Biến và kiểu dữ liệu",
+                                            "duration":  "30:00",
+                                            "videoUrl":  "videos/1186-lap-trinh-c-28tech/bai-2.mp4",
+                                            "completed":  false
+                                        }
+                                    ]
+                    },
+                    {
+                        "id":  1002,
+                        "title":  "Arduino cho người mới bắt đầu",
+                        "instructor":  "IoT Việt Nam",
+                        "duration":  "30 giờ",
+                        "category":  "Giai đoạn 1 - Trụ cột 2",
+                        "thumbnail":  "🤖",
+                        "students":  890,
+                        "description":  "Học Arduino từ A-Z với các dự án thực tế về IoT và Embedded Systems.",
+                        "lessons":  [
+                                        {
+                                            "id":  1,
+                                            "title":  "Bài 1: Giới thiệu Arduino",
+                                            "duration":  "20:00",
+                                            "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 4. XÂU KÝ TỰ VÀ TOÁN TỬ  BIT/bai102-pppq.mp4",
+                                            "completed":  false
+                                        },
+                                        {
+                                            "id":  2,
+                                            "title":  "Bài 2: LED và Digital Output",
+                                            "duration":  "25:00",
+                                            "videoUrl":  "videos/8585-arduino-co-ban/bai2.mp4",
+                                            "completed":  false
+                                        }
+                                    ]
+                    },
+                    {
+                        "id":  1003,
+                        "title":  "Python cơ bản đến nâng cao",
+                        "instructor":  "CodeGym",
+                        "duration":  "40 giờ",
+                        "category":  "Giai đoạn 1 - Trụ cột 1",
+                        "thumbnail":  "",
+                        "students":  2100,
+                        "description":  "Khóa học Python toàn diện từ cơ bản đến nâng cao, bao gồm OOP, File handling, và nhiều hơn nữa.",
+                        "lessons":  [
+                                        {
+                                            "id":  1,
+                                            "title":  "Bài 1: Cài đặt và Hello World",
+                                            "duration":  "15:00",
+                                            "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 4. XÂU KÝ TỰ VÀ TOÁN TỬ  BIT/bai102-pppq.mp4",
+                                            "completed":  false
+                                        },
+                                        {
+                                            "id":  2,
+                                            "title":  "Bài 2: Biến và kiểu dữ liệu",
+                                            "duration":  "22:00",
+                                            "videoUrl":  "./videos/python-basic/bai2.mp4",
+                                            "completed":  false
+                                        },
+                                        {
+                                            "id":  3,
+                                            "title":  "Bài 3: List và Tuple",
+                                            "duration":  "28:00",
+                                            "videoUrl":  "./videos/python-basic/bai3.mp4",
+                                            "completed":  false
+                                        },
+                                        {
+                                            "id":  4,
+                                            "title":  "Bài 4: Dictionary và Set",
+                                            "duration":  "25:00",
+                                            "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 2. KỸ THUẬT ĐỆ QUY/bai47-tad.mp4",
+                                            "completed":  false
+                                        }
+                                    ]
+                    },
+                    {
+                        "id":  1004,
+                        "title":  "Raspberry Pi - IoT Projects",
+                        "instructor":  "Tech Academy",
+                        "duration":  "35 giờ",
+                        "category":  "Giai đoạn 1 - Trụ cột 3",
+                        "thumbnail":  "",
+                        "students":  750,
+                        "description":  "Xây dựng các dự án IoT thực tế với Raspberry Pi, từ home automation đến AI.",
+                        "lessons":  [
+                                        {
+                                            "id":  1,
+                                            "title":  "Bài 1: Giới thiệu Raspberry Pi",
+                                            "duration":  "18:00",
+                                            "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 4. XÂU KÝ TỰ VÀ TOÁN TỬ  BIT/bai102-pppq.mp4",
+                                            "completed":  false
+                                        },
+                                        {
+                                            "id":  2,
+                                            "title":  "Bài 2: Cài đặt OS",
+                                            "duration":  "20:00",
+                                            "videoUrl":  "./videos/raspberry-pi/bai2.mp4",
+                                            "completed":  false
+                                        },
+                                        {
+                                            "id":  3,
+                                            "title":  "Bài 3: GPIO và LED",
+                                            "duration":  "30:00",
+                                            "videoUrl":  "./videos/raspberry-pi/bai3.mp4",
+                                            "completed":  false
+                                        }
+                                    ]
+                    },
+                    {
+                        "id":  1005,
+                        "title":  "ESP32 WiFi \u0026 Bluetooth",
+                        "instructor":  "IoT Master",
+                        "duration":  "25 giờ",
+                        "category":  "Giai đoạn 2 - Trụ cột 4",
+                        "thumbnail":  "",
+                        "students":  650,
+                        "description":  "Lập trình ESP32 với WiFi, Bluetooth, và tích hợp cloud services.",
+                        "lessons":  [
+                                        {
+                                            "id":  1,
+                                            "title":  "Bài 1: Giới thiệu ESP32",
+                                            "duration":  "15:00",
+                                            "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 4. XÂU KÝ TỰ VÀ TOÁN TỬ  BIT/bai102-pppq.mp4",
+                                            "completed":  false
+                                        },
+                                        {
+                                            "id":  2,
+                                            "title":  "Bài 2: WiFi Connection",
+                                            "duration":  "25:00",
+                                            "videoUrl":  "./videos/esp32/bai2.mp4",
+                                            "completed":  false
+                                        }
+                                    ]
+                    },
+                    {
+                        "id":  1006,
+                        "title":  "Machine Learning cơ bản",
+                        "instructor":  "AI Vietnam",
+                        "duration":  "45 giờ",
+                        "category":  "Giai đoạn 2 - Trụ cột 4",
+                        "thumbnail":  "",
+                        "students":  1200,
+                        "description":  "Khóa học Machine Learning với Python, Scikit-learn, và TensorFlow.",
+                        "lessons":  [
+                                        {
+                                            "id":  1,
+                                            "title":  "Bài 1: Giới thiệu ML",
+                                            "duration":  "30:00",
+                                            "videoUrl":  "videos/1186-lap-trinh-c-28tech/118.6 Lập trình C 28tech/PHẦN 4. XÂU KÝ TỰ VÀ TOÁN TỬ  BIT/bai102-pppq.mp4",
+                                            "completed":  false
+                                        },
+                                        {
+                                            "id":  2,
+                                            "title":  "Bài 2: Linear Regression",
+                                            "duration":  "35:00",
+                                            "videoUrl":  "./videos/machine-learning/bai2.mp4",
+                                            "completed":  false
+                                        },
+                                        {
+                                            "id":  3,
+                                            "title":  "Bài 3: Classification",
+                                            "duration":  "40:00",
+                                            "videoUrl":  "./videos/machine-learning/bai3.mp4",
+                                            "completed":  false
+                                        }
+                                    ]
+                    }
+                ]
 }
