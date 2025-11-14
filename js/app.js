@@ -726,9 +726,12 @@ class CourseApp {
                 setTimeout(() => {
                     this.closeAdminPasswordModal();
                     
-                    if (this.pendingAction === 'delete') {
+                    // ✅ FIX: Gọi đúng hàm theo pendingAction
+                    if (this.pendingAction === 'delete' && this.courseToDelete) {
+                        console.log('🗑️ Proceeding to delete:', this.courseToDelete.title);
                         this.proceedDeleteCourse();
                     } else if (this.pendingAction === 'upload') {
+                        console.log('📤 Proceeding to upload');
                         this.proceedOpenUploadModal();
                     }
                     
