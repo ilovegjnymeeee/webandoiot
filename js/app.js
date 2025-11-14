@@ -15,47 +15,40 @@ class CourseApp {
     }
 
     init() {
-        // ✅ THAY ĐỔI: Load courses từ localStorage trước
+        // ✅ CHỈ LOAD TỪ STORAGE, KHÔNG LOAD SAMPLE NỮA
         this.loadCoursesFromStorage();
         this.renderCourses();
         this.attachEventListeners();
-        this.loadProgress();
         console.log('🚀 CourseApp initialized!');
     }
 
-    // ✅ THÊM: Load courses từ localStorage
+    // ✅ SỬA LẠI: Load courses từ localStorage HOẶC tạo mới lần đầu
     loadCoursesFromStorage() {
-        const savedCourses = localStorage.getItem('courses');
+        const savedCourses = localStorage.getItem('appCourses');
         
         if (savedCourses) {
             try {
                 this.courses = JSON.parse(savedCourses);
-                console.log(`📂 Loaded ${this.courses.length} courses from storage`);
+                console.log(`📂 Loaded ${this.courses.length} courses from localStorage`);
+                
+                // Load progress riêng
+                this.loadProgress();
             } catch (e) {
-                console.error('Error loading courses:', e);
-                this.loadSampleCourses();
+                console.error('❌ Error loading courses:', e);
+                this.initializeSampleCourses();
             }
         } else {
-            // Lần đầu tiên, load sample courses
-            this.loadSampleCourses();
-            this.saveCoursesToStorage();
+            // Lần đầu tiên: tạo sample courses
+            console.log('🆕 First time, creating sample courses...');
+            this.initializeSampleCourses();
         }
     }
 
-    // ✅ THÊM: Lưu courses vào localStorage
-    saveCoursesToStorage() {
-        try {
-            localStorage.setItem('courses', JSON.stringify(this.courses));
-            console.log('💾 Courses saved to storage');
-        } catch (e) {
-            console.error('Error saving courses:', e);
-        }
-    }
-
-    loadSampleCourses() {
+    // ✅ RENAME: Tạo sample courses và lưu ngay
+    initializeSampleCourses() {
         this.courses = [
             {
-                id: 1,
+                id: Date.now() + 1,
                 title: 'Giải tích 2',
                 instructor: 'Toán & Vật lý ĐH',
                 progress: 0,
@@ -92,13 +85,13 @@ class CourseApp {
                 ]
             },
             {
-                id: 2,
+                id: Date.now() + 2,
                 title: 'Giải tích 3',
                 instructor: 'Toán cao cấp',
                 progress: 0,
                 thumbnail: '📐',
                 gradient: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
-                description: 'Tích phân bội, tích phân đường và tích phân mặt. Nắm vững các phương pháp tính toán tích phân đa biến.',
+                description: 'Tích phân bội, tích phân đường và tích phân mặt.',
                 category: 'Toán học',
                 duration: '14 tuần',
                 students: 980,
@@ -109,142 +102,116 @@ class CourseApp {
                         duration: '20:15', 
                         videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4',
                         description: 'Tích phân kép và tích phân bội ba'
-                    },
-                    { 
-                        title: 'Bài 2: Tích phân đường', 
-                        duration: '25:30', 
-                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4',
-                        description: 'Tích phân đường loại 1 và loại 2'
                     }
                 ],
-                resources: [
-                    { name: 'Công thức tổng hợp.pdf', size: '1.8 MB', type: 'pdf' }
-                ]
+                resources: []
             },
             {
-                id: 3,
+                id: Date.now() + 3,
                 title: 'Vật lý đại cương 2 - Điện từ',
                 instructor: 'Vật lý ĐH',
                 progress: 0,
                 thumbnail: '⚡',
                 gradient: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
-                description: 'Điện trường, từ trường và sóng điện từ. Nghiên cứu các hiện tượng điện từ và ứng dụng trong đời sống.',
+                description: 'Điện trường, từ trường và sóng điện từ.',
                 category: 'Vật lý',
                 duration: '16 tuần',
                 students: 1520,
                 rating: 4.9,
-                lessons: [
-                    { 
-                        title: 'Bài 1: Điện trường', 
-                        duration: '30:00', 
-                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4',
-                        description: 'Khái niệm điện trường, cường độ điện trường'
-                    },
-                    { 
-                        title: 'Bài 2: Từ trường', 
-                        duration: '28:15', 
-                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4',
-                        description: 'Lực từ, cảm ứng từ và định luật Ampere'
-                    }
-                ],
-                resources: [
-                    { name: 'Thí nghiệm điện từ.pdf', size: '3.2 MB', type: 'pdf' },
-                    { name: 'Video thí nghiệm.mp4', size: '45 MB', type: 'video' }
-                ]
+                lessons: [],
+                resources: []
             },
             {
-                id: 4,
+                id: Date.now() + 4,
                 title: 'Xác suất thống kê 2025',
                 instructor: 'Toán ứng dụng',
                 progress: 0,
                 thumbnail: '📊',
                 gradient: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
-                description: 'Biến cố ngẫu nhiên, phân phối xác suất và thống kê mô tả. Ứng dụng trong phân tích dữ liệu.',
+                description: 'Biến cố ngẫu nhiên, phân phối xác suất.',
                 category: 'Toán học',
                 duration: '10 tuần',
                 students: 2100,
                 rating: 4.6,
-                lessons: [
-                    { 
-                        title: 'Bài 1: Biến cố và xác suất', 
-                        duration: '22:00', 
-                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4',
-                        description: 'Không gian mẫu, biến cố và tính xác suất'
-                    },
-                    { 
-                        title: 'Bài 2: Phân phối xác suất', 
-                        duration: '26:30', 
-                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4',
-                        description: 'Các loại phân phối xác suất thường gặp'
-                    }
-                ],
-                resources: [
-                    { name: 'Bảng phân phối.pdf', size: '800 KB', type: 'pdf' }
-                ]
+                lessons: [],
+                resources: []
             },
             {
-                id: 5,
+                id: Date.now() + 5,
                 title: '[HUST] TIN HỌC ĐẠI CƯƠNG',
                 instructor: 'CNTT HUST',
-                progress: 8.95,
+                progress: 0,
                 thumbnail: '💻',
                 gradient: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
-                description: 'Lập trình C/C++ và cấu trúc dữ liệu cơ bản. Nền tảng lập trình cho sinh viên kỹ thuật.',
+                description: 'Lập trình C/C++ và cấu trúc dữ liệu cơ bản.',
                 category: 'Lập trình',
                 duration: '15 tuần',
                 students: 3200,
                 rating: 4.8,
-                lessons: [
-                    { 
-                        title: 'Bài 1: Giới thiệu lập trình', 
-                        duration: '18:45', 
-                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4',
-                        description: 'Cú pháp cơ bản của C/C++'
-                    },
-                    { 
-                        title: 'Bài 2: Cấu trúc dữ liệu', 
-                        duration: '32:15', 
-                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/VolkswagenGTIReview.mp4',
-                        description: 'Mảng, danh sách liên kết, stack, queue'
-                    }
-                ],
-                resources: [
-                    { name: 'Code mẫu.zip', size: '5 MB', type: 'zip' },
-                    { name: 'Đề thi giữa kỳ.pdf', size: '1.5 MB', type: 'pdf' }
-                ]
+                lessons: [],
+                resources: []
             },
             {
-                id: 6,
+                id: Date.now() + 6,
                 title: '[HUST] Giải tích 1 - MT11X',
                 instructor: 'Toán HUST',
-                progress: 4.12,
+                progress: 0,
                 thumbnail: '📈',
                 gradient: 'linear-gradient(135deg, #30cfd0 0%, #330867 100%)',
-                description: 'Giới hạn, liên tục và đạo hàm. Khóa học toán cao cấp 1 dành cho sinh viên kỹ thuật.',
+                description: 'Giới hạn, liên tục và đạo hàm.',
                 category: 'Toán học',
                 duration: '12 tuần',
                 students: 2800,
                 rating: 4.7,
-                lessons: [
-                    { 
-                        title: 'Bài 1: Giới hạn dãy số', 
-                        duration: '24:00', 
-                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4',
-                        description: 'Định nghĩa và tính chất giới hạn'
-                    },
-                    { 
-                        title: 'Bài 2: Đạo hàm', 
-                        duration: '28:30', 
-                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4',
-                        description: 'Quy tắc tính đạo hàm và ứng dụng'
-                    }
-                ],
-                resources: [
-                    { name: 'Bài giảng đầy đủ.pdf', size: '12 MB', type: 'pdf' },
-                    { name: 'Bài tập lớn.docx', size: '2 MB', type: 'doc' }
-                ]
+                lessons: [],
+                resources: []
             }
         ];
+
+        // ✅ LƯU NGAY SAU KHI TẠO
+        this.saveCoursesToStorage();
+        console.log('✅ Sample courses created and saved!');
+    }
+
+    // ✅ LƯU VÀO localStorage với key khác
+    saveCoursesToStorage() {
+        try {
+            localStorage.setItem('appCourses', JSON.stringify(this.courses));
+            console.log(`💾 ${this.courses.length} courses saved to localStorage`);
+        } catch (e) {
+            console.error('❌ Error saving courses:', e);
+        }
+    }
+
+    // ✅ LOAD PROGRESS (không làm gì với courses)
+    loadProgress() {
+        const saved = localStorage.getItem('courseProgress');
+        if (saved) {
+            try {
+                const progressData = JSON.parse(saved);
+                progressData.forEach(p => {
+                    const course = this.courses.find(c => c.id === p.id);
+                    if (course) {
+                        course.progress = p.progress || 0;
+                        course.currentLessonIndex = p.lastWatched || 0;
+                    }
+                });
+                console.log('📊 Progress loaded and applied');
+            } catch (e) {
+                console.error('❌ Error loading progress:', e);
+            }
+        }
+    }
+
+    // ✅ SAVE PROGRESS
+    saveProgress() {
+        const progressData = this.courses.map(c => ({ 
+            id: c.id, 
+            progress: c.progress || 0,
+            lastWatched: c.currentLessonIndex || 0
+        }));
+        localStorage.setItem('courseProgress', JSON.stringify(progressData));
+        console.log('💾 Progress saved');
     }
 
     renderCourses() {
@@ -267,7 +234,6 @@ class CourseApp {
 
         grid.innerHTML = coursesToShow.map(course => `
             <div class="course-card" onclick="app.openCourse(${course.id})">
-                <!-- ✅ THÊM NÚT XÓA -->
                 <button class="btn-delete-course" onclick="event.stopPropagation(); app.confirmDeleteCourse(${course.id})" title="Xóa khóa học">
                     <i class="fas fa-trash-alt"></i>
                 </button>
@@ -302,7 +268,6 @@ class CourseApp {
     getFilteredCourses() {
         let filtered = [...this.courses];
 
-        // Apply filter
         switch(this.currentFilter) {
             case 'learning':
                 filtered = filtered.filter(c => c.progress > 0 && c.progress < 100);
@@ -315,7 +280,6 @@ class CourseApp {
                 break;
         }
 
-        // Apply sort
         switch(this.currentSort) {
             case 'oldest':
                 filtered.reverse();
@@ -382,7 +346,6 @@ class CourseApp {
         const courseDescription = document.getElementById('courseDescription');
         const resourcesList = document.getElementById('resourcesList');
 
-        // Set course info
         videoTitle.textContent = this.currentCourse.title;
         courseDescription.innerHTML = `
             <div style="margin-bottom: 20px;">
@@ -411,8 +374,7 @@ class CourseApp {
             </div>
         `;
 
-        // Render lessons
-        if (this.currentCourse.lessons.length > 0) {
+        if (this.currentCourse.lessons && this.currentCourse.lessons.length > 0) {
             lessonList.innerHTML = this.currentCourse.lessons.map((lesson, index) => `
                 <div class="lesson-item" onclick="app.playLesson(${index})">
                     <div class="lesson-icon">
@@ -425,13 +387,11 @@ class CourseApp {
                 </div>
             `).join('');
 
-            // Auto play first lesson
             this.playLesson(0);
         } else {
             lessonList.innerHTML = '<p style="text-align:center;padding:40px;color:rgba(255,255,255,0.5);">Chưa có bài học nào</p>';
         }
 
-        // Render resources
         if (this.currentCourse.resources && this.currentCourse.resources.length > 0) {
             resourcesList.innerHTML = `
                 <div style="display: flex; flex-direction: column; gap: 15px;">
@@ -446,7 +406,7 @@ class CourseApp {
                                     <p style="color: rgba(255,255,255,0.6); font-size: 14px;">${resource.size}</p>
                                 </div>
                             </div>
-                            <button style="padding: 12px 25px; background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); border: none; border-radius: 10px; color: white; font-weight: 600; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                            <button style="padding: 12px 25px; background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); border: none; border-radius: 10px; color: white; font-weight: 600; cursor: pointer; transition: all 0.3s;">
                                 <i class="fas fa-download"></i> Tải xuống
                             </button>
                         </div>
@@ -457,18 +417,16 @@ class CourseApp {
             resourcesList.innerHTML = '<p style="text-align:center;padding:40px;color:rgba(255,255,255,0.5);">Chưa có tài nguyên nào</p>';
         }
 
-        // Show modal
         modal.classList.add('active');
         document.body.style.overflow = 'hidden';
 
-        // Initialize video player if not exists
         if (!this.videoPlayer) {
             this.videoPlayer = new VideoPlayer('mainVideo');
         }
     }
 
     playLesson(lessonIndex) {
-        if (!this.currentCourse) return;
+        if (!this.currentCourse || !this.currentCourse.lessons) return;
 
         const lesson = this.currentCourse.lessons[lessonIndex];
         const video = document.getElementById('mainVideo');
@@ -483,12 +441,10 @@ class CourseApp {
             });
             videoTitle.textContent = lesson.title;
 
-            // Highlight current lesson
             document.querySelectorAll('.lesson-item').forEach((item, idx) => {
                 item.classList.toggle('active', idx === lessonIndex);
             });
 
-            // Update progress
             this.currentCourse.currentLessonIndex = lessonIndex;
         } else {
             this.showNotification('⚠️ Video chưa có sẵn', 'warning');
@@ -501,21 +457,283 @@ class CourseApp {
         });
         document.body.style.overflow = 'auto';
 
-        // Stop video
         const video = document.getElementById('mainVideo');
         if (video) {
             video.pause();
             video.src = '';
         }
 
-        // Save progress
         this.saveProgress();
+        this.saveCoursesToStorage(); // ✅ LƯU CẢ COURSES
+    }
+
+    // ✅ XÁC THỰC ADMIN
+    confirmDeleteCourse(courseId) {
+        const course = this.courses.find(c => c.id === courseId);
+        if (!course) return;
+
+        this.courseToDelete = course;
+        this.pendingAction = 'delete';
+        this.showAdminPasswordModal('Xóa khóa học', 'Nhập mật khẩu admin để xóa khóa học này');
     }
 
     openUploadModal() {
-        const modal = document.getElementById('uploadModal');
-        modal.classList.add('active');
+        this.pendingAction = 'upload';
+        this.showAdminPasswordModal('Tạo khóa học mới', 'Nhập mật khẩu admin để tạo khóa học');
+    }
+
+    showAdminPasswordModal(title, subtitle) {
+        let passwordModal = document.getElementById('adminPasswordModal');
+        
+        if (!passwordModal) {
+            passwordModal = document.createElement('div');
+            passwordModal.id = 'adminPasswordModal';
+            passwordModal.className = 'admin-password-modal';
+            passwordModal.innerHTML = `
+                <div class="modal-overlay"></div>
+                <div class="modal-container">
+                    <div class="admin-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h2 class="admin-title" id="adminModalTitle">Xác thực Admin</h2>
+                    <p class="admin-subtitle" id="adminModalSubtitle">Nhập mật khẩu để tiếp tục</p>
+                    
+                    <div class="password-error" id="passwordError">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span>Mật khẩu không đúng! Vui lòng thử lại.</span>
+                    </div>
+                    
+                    <div class="password-success" id="passwordSuccess">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    
+                    <div class="password-input-group">
+                        <input 
+                            type="password" 
+                            id="adminPasswordInput" 
+                            placeholder="Nhập mật khẩu admin"
+                            maxlength="10"
+                            autocomplete="off"
+                        >
+                        <button class="toggle-password-btn" onclick="app.togglePasswordVisibility()">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="admin-actions">
+                        <button class="btn-admin-cancel" onclick="app.closeAdminPasswordModal()">
+                            <i class="fas fa-times"></i> Hủy
+                        </button>
+                        <button class="btn-admin-submit" onclick="app.verifyAdminPassword()">
+                            <i class="fas fa-unlock"></i> Xác nhận
+                        </button>
+                    </div>
+                    
+                    <div class="admin-hint">
+                        <i class="fas fa-info-circle"></i>
+                        Chỉ admin mới có thể tạo hoặc xóa khóa học
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(passwordModal);
+
+            const passwordInput = passwordModal.querySelector('#adminPasswordInput');
+            const overlay = passwordModal.querySelector('.modal-overlay');
+
+            passwordInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') this.verifyAdminPassword();
+            });
+
+            overlay.addEventListener('click', () => this.closeAdminPasswordModal());
+        }
+
+        document.getElementById('adminModalTitle').textContent = title;
+        document.getElementById('adminModalSubtitle').textContent = subtitle;
+        document.getElementById('adminPasswordInput').value = '';
+        document.getElementById('passwordError').classList.remove('active');
+        document.getElementById('passwordSuccess').classList.remove('active');
+
+        passwordModal.classList.add('active');
         document.body.style.overflow = 'hidden';
+
+        setTimeout(() => {
+            document.getElementById('adminPasswordInput').focus();
+        }, 100);
+    }
+
+    closeAdminPasswordModal() {
+        const passwordModal = document.getElementById('adminPasswordModal');
+        if (passwordModal) {
+            passwordModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        this.pendingAction = null;
+        this.courseToDelete = null;
+    }
+
+    togglePasswordVisibility() {
+        const input = document.getElementById('adminPasswordInput');
+        const icon = document.querySelector('.toggle-password-btn i');
+        
+        if (input.type === 'password') {
+            input.type = 'text';
+            icon.className = 'fas fa-eye-slash';
+        } else {
+            input.type = 'password';
+            icon.className = 'fas fa-eye';
+        }
+    }
+
+    verifyAdminPassword() {
+        const input = document.getElementById('adminPasswordInput');
+        const password = input.value.trim();
+        const errorDiv = document.getElementById('passwordError');
+        const successDiv = document.getElementById('passwordSuccess');
+        const submitBtn = document.querySelector('.btn-admin-submit');
+
+        if (!password) {
+            input.focus();
+            return;
+        }
+
+        submitBtn.classList.add('loading');
+        submitBtn.disabled = true;
+
+        setTimeout(() => {
+            if (password === this.adminPassword) {
+                errorDiv.classList.remove('active');
+                successDiv.classList.add('active');
+                
+                this.showNotification('✅ Xác thực thành công!', 'success');
+
+                setTimeout(() => {
+                    this.closeAdminPasswordModal();
+                    
+                    if (this.pendingAction === 'delete') {
+                        this.proceedDeleteCourse();
+                    } else if (this.pendingAction === 'upload') {
+                        this.proceedOpenUploadModal();
+                    }
+                    
+                    submitBtn.classList.remove('loading');
+                    submitBtn.disabled = false;
+                }, 800);
+            } else {
+                errorDiv.classList.add('active');
+                input.value = '';
+                input.focus();
+                
+                input.style.animation = 'none';
+                setTimeout(() => {
+                    input.style.animation = 'shake 0.5s ease';
+                }, 10);
+
+                this.showNotification('❌ Mật khẩu không đúng!', 'error');
+                
+                submitBtn.classList.remove('loading');
+                submitBtn.disabled = false;
+            }
+        }, 500);
+    }
+
+    proceedDeleteCourse() {
+        if (!this.courseToDelete) return;
+
+        let confirmModal = document.getElementById('confirmDeleteModal');
+        if (!confirmModal) {
+            confirmModal = document.createElement('div');
+            confirmModal.id = 'confirmDeleteModal';
+            confirmModal.className = 'confirm-modal';
+            confirmModal.innerHTML = `
+                <div class="modal-overlay"></div>
+                <div class="modal-container">
+                    <div class="confirm-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <h2 class="confirm-title">Xác nhận xóa khóa học?</h2>
+                    <p class="confirm-message">
+                        Hành động này không thể hoàn tác. Tất cả dữ liệu và tiến độ học tập sẽ bị xóa vĩnh viễn.
+                    </p>
+                    <div class="confirm-course-name" id="confirmCourseName"></div>
+                    <div class="confirm-actions">
+                        <button class="btn-cancel-delete" onclick="app.cancelDelete()">
+                            <i class="fas fa-times"></i> Hủy bỏ
+                        </button>
+                        <button class="btn-confirm-delete" onclick="app.deleteCourse()">
+                            <i class="fas fa-trash-alt"></i> Xóa khóa học
+                        </button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(confirmModal);
+
+            confirmModal.querySelector('.modal-overlay').addEventListener('click', () => {
+                this.cancelDelete();
+            });
+        }
+
+        document.getElementById('confirmCourseName').textContent = this.courseToDelete.title;
+        confirmModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    proceedOpenUploadModal() {
+        const modal = document.getElementById('uploadModal');
+        if (modal) {
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+    }
+
+    cancelDelete() {
+        const confirmModal = document.getElementById('confirmDeleteModal');
+        if (confirmModal) {
+            confirmModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        this.courseToDelete = null;
+    }
+
+    // ✅ XÓA KHÓA HỌC VÀ LƯU NGAY
+    deleteCourse() {
+        if (!this.courseToDelete) return;
+
+        const courseId = this.courseToDelete.id;
+        const courseName = this.courseToDelete.title;
+
+        const courseCards = document.querySelectorAll('.course-card');
+        let cardIndex = -1;
+        
+        const filteredCourses = this.getFilteredCourses();
+        const startIndex = (this.currentPage - 1) * this.coursesPerPage;
+        const endIndex = startIndex + this.coursesPerPage;
+        const coursesToShow = filteredCourses.slice(startIndex, endIndex);
+        
+        cardIndex = coursesToShow.findIndex(c => c.id === courseId);
+
+        if (cardIndex >= 0 && courseCards[cardIndex]) {
+            courseCards[cardIndex].classList.add('deleting');
+        }
+
+        setTimeout(() => {
+            // ✅ XÓA KHỎI ARRAY
+            const index = this.courses.findIndex(c => c.id === courseId);
+            if (index !== -1) {
+                this.courses.splice(index, 1);
+            }
+
+            this.cancelDelete();
+            
+            // ✅ LƯU NGAY VÀO LOCALSTORAGE
+            this.saveCoursesToStorage();
+            this.saveProgress();
+            
+            this.renderCourses();
+
+            this.showNotification(`🗑️ Đã xóa khóa học "${courseName}"`, 'success');
+            console.log(`🗑️ Deleted course: ${courseName} (ID: ${courseId})`);
+            console.log(`📊 Remaining courses: ${this.courses.length}`);
+        }, 500);
     }
 
     searchCourses() {
@@ -547,7 +765,6 @@ class CourseApp {
             return;
         }
 
-        // Temporarily update courses for rendering
         const temp = this.courses;
         this.courses = filtered;
         this.currentPage = 1;
@@ -586,132 +803,76 @@ class CourseApp {
         }, 3000);
     }
 
-    // ✅ THÊM: Hiển thị modal xác nhận xóa
-    confirmDeleteCourse(courseId) {
-        const course = this.courses.find(c => c.id === courseId);
-        if (!course) return;
+    attachEventListeners() {
+        document.querySelectorAll('.modal-close').forEach(btn => {
+            btn.addEventListener('click', () => this.closeModal());
+        });
 
-        this.courseToDelete = course;
+        document.querySelectorAll('.modal-overlay').forEach(overlay => {
+            overlay.addEventListener('click', () => this.closeModal());
+        });
 
-        // Tạo modal nếu chưa có
-        let confirmModal = document.getElementById('confirmDeleteModal');
-        if (!confirmModal) {
-            confirmModal = document.createElement('div');
-            confirmModal.id = 'confirmDeleteModal';
-            confirmModal.className = 'confirm-modal';
-            confirmModal.innerHTML = `
-                <div class="modal-overlay"></div>
-                <div class="modal-container">
-                    <div class="confirm-icon">
-                        <i class="fas fa-exclamation-triangle"></i>
-                    </div>
-                    <h2 class="confirm-title">Xác nhận xóa khóa học?</h2>
-                    <p class="confirm-message">
-                        Hành động này không thể hoàn tác. Tất cả dữ liệu và tiến độ học tập sẽ bị xóa vĩnh viễn.
-                    </p>
-                    <div class="confirm-course-name" id="confirmCourseName"></div>
-                    <div class="confirm-actions">
-                        <button class="btn-cancel-delete" onclick="app.cancelDelete()">
-                            <i class="fas fa-times"></i> Hủy bỏ
-                        </button>
-                        <button class="btn-confirm-delete" onclick="app.deleteCourse()">
-                            <i class="fas fa-trash-alt"></i> Xóa khóa học
-                        </button>
-                    </div>
-                </div>
-            `;
-            document.body.appendChild(confirmModal);
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') this.closeModal();
+        });
 
-            // Close on overlay click
-            confirmModal.querySelector('.modal-overlay').addEventListener('click', () => {
-                this.cancelDelete();
-            });
-
-            // Close on Escape key
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && confirmModal.classList.contains('active')) {
-                    this.cancelDelete();
-                }
+        const filterStatus = document.getElementById('filterStatus');
+        if (filterStatus) {
+            filterStatus.addEventListener('change', (e) => {
+                this.currentFilter = e.target.value;
+                this.currentPage = 1;
+                this.renderCourses();
             });
         }
 
-        // Update course name
-        document.getElementById('confirmCourseName').textContent = course.title;
-
-        // Show modal
-        confirmModal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
-
-    // ✅ THÊM: Hủy xóa
-    cancelDelete() {
-        const confirmModal = document.getElementById('confirmDeleteModal');
-        if (confirmModal) {
-            confirmModal.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-        this.courseToDelete = null;
-    }
-
-    // ✅ THÊM: Xóa khóa học
-    deleteCourse() {
-        if (!this.courseToDelete) return;
-
-        const courseId = this.courseToDelete.id;
-        const courseName = this.courseToDelete.title;
-
-        const courseCards = document.querySelectorAll('.course-card');
-        let cardIndex = -1;
-        
-        const filteredCourses = this.getFilteredCourses();
-        const startIndex = (this.currentPage - 1) * this.coursesPerPage;
-        const endIndex = startIndex + this.coursesPerPage;
-        const coursesToShow = filteredCourses.slice(startIndex, endIndex);
-        
-        cardIndex = coursesToShow.findIndex(c => c.id === courseId);
-
-        if (cardIndex >= 0 && courseCards[cardIndex]) {
-            courseCards[cardIndex].classList.add('deleting');
+        const filterSort = document.getElementById('filterSort');
+        if (filterSort) {
+            filterSort.addEventListener('change', (e) => {
+                this.currentSort = e.target.value;
+                this.currentPage = 1;
+                this.renderCourses();
+            });
         }
 
-        setTimeout(() => {
-            const index = this.courses.findIndex(c => c.id === courseId);
-            if (index !== -1) {
-                this.courses.splice(index, 1);
-            }
+        const searchInput = document.getElementById('searchInput');
+        if (searchInput) {
+            searchInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') this.searchCourses();
+            });
+        }
 
-            this.cancelDelete();
-            this.renderCourses();
-            
-            // ✅ THÊM: Lưu courses sau khi xóa
-            this.saveCoursesToStorage();
-            this.saveProgress();
+        document.querySelectorAll('.view-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+                e.currentTarget.classList.add('active');
+                
+                const view = e.currentTarget.dataset.view;
+                const grid = document.getElementById('courseGrid');
+                grid.className = view === 'list' ? 'course-list' : 'course-grid';
+            });
+        });
 
-            this.showNotification(`🗑️ Đã xóa khóa học "${courseName}"`, 'success');
-            console.log(`🗑️ Deleted course: ${courseName} (ID: ${courseId})`);
-        }, 500);
-    }
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
 
-    // ✅ CẬP NHẬT: Lưu cả courses và progress
-    saveProgress() {
-        const progressData = this.courses.map(c => ({ 
-            id: c.id, 
-            progress: c.progress,
-            lastWatched: c.currentLessonIndex || 0
-        }));
-        localStorage.setItem('courseProgress', JSON.stringify(progressData));
-        
-        // Lưu courses luôn
-        this.saveCoursesToStorage();
-        
-        console.log('💾 Progress saved!');
-    }
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
+                if (this.currentPage > 1) this.goToPage(this.currentPage - 1);
+            });
+        }
 
-    loadProgress() {
-        const saved = localStorage.getItem('courseProgress');
-        if (saved) {
-            try {
-                const progressData = JSON.parse(saved);
-                progressData.forEach(p => {
-                    const course = this.courses.find(c => c.id === p.id);
-                    if
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                const totalPages = Math.ceil(this.getFilteredCourses().length / this.coursesPerPage);
+                if (this.currentPage < totalPages) this.goToPage(this.currentPage + 1);
+            });
+        }
+
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const tabName = e.currentTarget.dataset.tab;
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                e.currentTarget.classList.add('active');
+                const content = document.getElementById(`tab-${tabName}`);
+                if
