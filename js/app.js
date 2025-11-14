@@ -53,7 +53,7 @@ class CourseApp {
             //    TRỤ CỘT 1: LẬP TRÌNH C & PHẦN CỨNG (PHẦN "IoT")
             // -------------------------------------------------------------------
             {
-                id: Date.now() + 1,
+                id: 1001,
                 title: '1186: Lập trình C 28tech',
                 instructor: '28tech Academy',
                 duration: '15 tuần',
@@ -61,12 +61,71 @@ class CourseApp {
                 progress: 0,
                 thumbnail: '💻',
                 color: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                category: 'Giai đoạn 1 - Trụ cột 1',
-                videoUrl: './videos/1186-lap-trinh-c-28tech/bai1.mp4',
+                category: 'Giai đoạn 1',
+                videoUrl: './videos/1186-lap-trinh-c-28tech/PHẦN 1. KIỂU DỮ LIỆU, BIẾN, VÒNG LẶP/bai1.mp4',
                 lessons: [
-                    { id: 1, title: 'Bài 1: Giới thiệu C', duration: '25:00', videoUrl: './videos/1186-lap-trinh-c-28tech/bai1.mp4', completed: false },
-                    { id: 2, title: 'Bài 2: Biến và kiểu dữ liệu', duration: '30:00', videoUrl: './videos/1186-lap-trinh-c-28tech/bai2.mp4', completed: false },
-                    { id: 3, title: 'Bài 3: Vòng lặp', duration: '28:00', videoUrl: './videos/1186-lap-trinh-c-28tech/bai3.mp4', completed: false }
+                    // PHẦN 1: KIỂU DỮ LIỆU, BIẾN, VÒNG LẶP
+                    { 
+                        id: 1, 
+                        title: '📘 PHẦN 1: Kiểu dữ liệu, biến, vòng lặp - Bài 1', 
+                        duration: '30:00',
+                        videoUrl: './videos/1186-lap-trinh-c-28tech/PHẦN 1. KIỂU DỮ LIỆU, BIẾN, VÒNG LẶP/bai1.mp4',
+                        completed: false 
+                    },
+                    
+                    // PHẦN 2: KỸ THUẬT ĐẾ QUY
+                    { 
+                        id: 2, 
+                        title: '🔄 PHẦN 2: Kỹ thuật đệ quy - Bài 1', 
+                        duration: '25:00',
+                        videoUrl: './videos/1186-lap-trinh-c-28tech/PHẦN 2. KỸ THUẬT ĐỆ QUY/bai1.mp4',
+                        completed: false 
+                    },
+                    
+                    // PHẦN 5: KIỂU CẤU TRÚC - STRUCT
+                    { 
+                        id: 5, 
+                        title: '🏗️ PHẦN 5: Kiểu cấu trúc - Struct - Bài 1', 
+                        duration: '28:00',
+                        videoUrl: './videos/1186-lap-trinh-c-28tech/PHẦN 5.KIỂU CẤU TRÚC - STRUCT/bai1.mp4',
+                        completed: false 
+                    },
+                    
+                    // PHẦN 6: ỨNG DỤNG CỦA CON TRỎ VÀ CẤU TRÚC
+                    { 
+                        id: 6, 
+                        title: '👉 PHẦN 6: Ứng dụng của con trỏ và cấu trúc - Bài 1', 
+                        duration: '32:00',
+                        videoUrl: './videos/1186-lap-trinh-c-28tech/PHẦN 6. ỨNG DỤNG CỦA CON TRỎ VÀ CẤU TRÚC/bai1.mp4',
+                        completed: false 
+                    },
+                    
+                    // PHẦN 7: XỬ LÝ FILE
+                    { 
+                        id: 7, 
+                        title: '📁 PHẦN 7: Xử lý File - Bài 1', 
+                        duration: '30:00',
+                        videoUrl: './videos/1186-lap-trinh-c-28tech/PHẦN 7. XỬ LÝ FILE/bai1.mp4',
+                        completed: false 
+                    },
+                    
+                    // PHẦN 8: BÀI TẬP TRẮC NGHIỆM
+                    { 
+                        id: 8, 
+                        title: '✅ PHẦN 8: Bài tập trắc nghiệm - Bài 1', 
+                        duration: '20:00',
+                        videoUrl: './videos/1186-lap-trinh-c-28tech/PHẦN 8. BÀI TẬP TRẮC NGHIỆM/bai1.mp4',
+                        completed: false 
+                    },
+                    
+                    // PHẦN 9: KIẾN THỨC BỔ SUNG
+                    { 
+                        id: 9, 
+                        title: '📚 PHẦN 9: Kiến thức bổ sung - Bài 1', 
+                        duration: '25:00',
+                        videoUrl: './videos/1186-lap-trinh-c-28tech/PHẦN 9. KIẾN THỨC BỔ SUNG/bai1.mp4',
+                        completed: false 
+                    }
                 ]
             },
             {
