@@ -423,53 +423,73 @@ class CourseApp {
     }
 
     openCourse(courseId) {
-        this.currentCourse = this.courses.find(c => c.id === courseId);
-        if (!this.currentCourse) return;
-
-        const modal = document.getElementById('videoModal');
-        const videoTitle = document.getElementById('videoTitle');
-        const lessonList = document.getElementById('lessonList');
-        const courseDescription = document.getElementById('courseDescription');
-        const resourcesList = document.getElementById('resourcesList');
-
-        if (!modal || !videoTitle || !lessonList) {
-            console.warn('⚠️ Modal elements not found');
+        const course = this.courses.find(c => c.id === courseId);
+        if (!course) {
+            console.error('❌ Course not found:', courseId);
             return;
         }
 
-        videoTitle.textContent = this.currentCourse.title;
+        this.currentCourse = course;
+        console.log('📚 Opening course:', course.title);
 
-        if (courseDescription) {
-            courseDescription.innerHTML = `
-                <div style="margin-bottom: 20px;">
-                    <h3 style="margin-bottom: 15px;">📚 ${this.currentCourse.title}</h3>
-                    <p style="color: rgba(255,255,255,0.7); line-height: 1.8; margin-bottom: 20px;">
-                        ${this.currentCourse.description}
-                    </p>
-                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-top: 20px;">
-                        <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px;">
-                            <i class="fas fa-user-graduate" style="color: #6366f1;"></i>
-                            <strong>Giảng viên:</strong> ${this.currentCourse.instructor}
-                        </div>
-                        <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px;">
-                            <i class="fas fa-clock" style="color: #10b981;"></i>
-                            <strong>Thời lượng:</strong> ${this.currentCourse.duration}
-                        </div>
-                        <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px;">
-                            <i class="fas fa-users" style="color: #3b82f6;"></i>
-                            <strong>Học viên:</strong> ${this.currentCourse.students.toLocaleString()}
-                        </div>
-                        <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px;">
-                            <i class="fas fa-star" style="color: #fbbf24;"></i>
-                            <strong>Đánh giá:</strong> ${this.currentCourse.rating}/5.0
-                        </div>
-                    </div>
-                </div>
-            `;
+        const modal = document.getElementById('courseModal');
+        if (!modal) {
+            console.error('❌ Course modal not found');
+            return;
         }
 
-        if (this.currentCourse.lessons && this.currentCourse.lessons.length > 0) {
-            lessonList.innerHTML = this.currentCourse.lessons.map((lesson, index) => `
+        // Update modal content
+        document.getElementById('modalCourseTitle').textContent = course.title;
+        document.getElementById('modalCourseInstructor').textContent = course.instructor;
+        document.getElementById('modalCourseDuration').textContent = course.duration;
+        document.getElementById('modalCourseStudents').textContent = course.students.toLocaleString();
+
+        // ✅ FIX: Handle video properly
+        const video = document.getElementById('mainVideo');
+        if (video) {
+            // Stop any playing video first
+            video.pause();
+            video.currentTime = 0;
+            
+            // Remove old source
+            video.removeAttribute('src');
+            while (video.firstChild) {
+                video.removeChild(video.firstChild);
+            }
+
+            // Add demo source (or real source if available)
+            if (course.videoUrl) {
+                video.src = course.videoUrl;
+            } else {
+                // Demo video - will trigger error but that's OK
+                video.src = '';
+            }
+
+            // Initialize video player
+            if (window.videoPlayer && !window.videoPlayer.isInitialized) {
+                window.videoPlayer.init(video);
+            }
+
+            // Load video
+            video.load();
+            
+            console.log('🎥 Video loaded');
+        }
+
+        // Show modal
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+
+        this.renderLessons(course);
+        this.updateCourseProgress();
+    }
+
+    renderLessons(course) {
+        const lessonList = document.getElementById('lessonList');
+        if (!lessonList) return;
+
+        if (course.lessons && course.lessons.length > 0) {
+            lessonList.innerHTML = course.lessons.map((lesson, index) => `
                 <div class="lesson-item" onclick="app.playLesson(${index})">
                     <div class="lesson-icon">
                         <i class="fas fa-play"></i>
@@ -485,39 +505,19 @@ class CourseApp {
         } else {
             lessonList.innerHTML = '<p style="text-align:center;padding:40px;color:rgba(255,255,255,0.5);">Chưa có bài học nào</p>';
         }
+    }
 
-        if (resourcesList) {
-            if (this.currentCourse.resources && this.currentCourse.resources.length > 0) {
-                resourcesList.innerHTML = `
-                    <div style="display: flex; flex-direction: column; gap: 15px;">
-                        ${this.currentCourse.resources.map(resource => `
-                            <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px; background: rgba(255,255,255,0.05); border-radius: 15px; border: 1px solid rgba(255,255,255,0.1);">
-                                <div style="display: flex; align-items: center; gap: 15px;">
-                                    <div style="width: 50px; height: 50px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
-                                        <i class="fas fa-file-${resource.type === 'pdf' ? 'pdf' : resource.type === 'doc' ? 'word' : resource.type === 'video' ? 'video' : 'archive'}" style="font-size: 24px;"></i>
-                                    </div>
-                                    <div>
-                                        <h4 style="margin-bottom: 5px;">${resource.name}</h4>
-                                        <p style="color: rgba(255,255,255,0.6); font-size: 14px;">${resource.size}</p>
-                                    </div>
-                                </div>
-                                <button style="padding: 12px 25px; background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); border: none; border-radius: 10px; color: white; font-weight: 600; cursor: pointer; transition: all 0.3s;">
-                                    <i class="fas fa-download"></i> Tải xuống
-                                </button>
-                            </div>
-                        `).join('')}
-                    </div>
-                `;
-            } else {
-                resourcesList.innerHTML = '<p style="text-align:center;padding:40px;color:rgba(255,255,255,0.5);">Chưa có tài nguyên nào</p>';
-            }
-        }
+    updateCourseProgress() {
+        const progressElement = document.getElementById('courseProgress');
+        if (!progressElement || !this.currentCourse) return;
 
-        modal.classList.add('active');
-        document.body.style.overflow = 'hidden';
+        const { progress } = this.currentCourse;
+        progressElement.style.width = `${progress}%`;
+        progressElement.setAttribute('aria-valuenow', progress);
 
-        if (!this.videoPlayer) {
-            this.videoPlayer = new VideoPlayer('mainVideo');
+        const progressText = document.getElementById('courseProgressText');
+        if (progressText) {
+            progressText.textContent = progress > 0 ? `${progress.toFixed(1)}%` : '⏸️ Chưa học';
         }
     }
 
@@ -1073,7 +1073,7 @@ class CourseApp {
                     e.currentTarget.classList.add('active');
                     
                     const content = document.getElementById(`tab-${tabName}`);
-                    if (content) content.classList.add('active');
+                    if content) content.classList.add('active');
                 });
             });
 
