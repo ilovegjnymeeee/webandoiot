@@ -891,9 +891,9 @@ class CourseApp {
         this.renderCourses();
         this.showNotification('🔄 Đã reset về khóa học mẫu', 'success');
     }
-} // ✅ THÊM DẤU ĐÓNG NÀY
+} // ← ✅ THÊM DẤU ĐÓNG NÀY
 
-// ✅ KHỞI TẠO APP
+// Khởi tạo app
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
         window.app = new CourseApp();
