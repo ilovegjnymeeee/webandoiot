@@ -638,8 +638,12 @@ class CourseApp {
                     </div>
                 </div>
             `;
+            
+            // ✅ THÊM VÀO BODY NGAY LẬP TỨC
             document.body.appendChild(passwordModal);
+            console.log('✅ Admin password modal created');
 
+            // Event listeners
             const passwordInput = passwordModal.querySelector('#adminPasswordInput');
             const overlay = passwordModal.querySelector('.modal-overlay');
 
@@ -666,22 +670,35 @@ class CourseApp {
         if (errorElement) errorElement.classList.remove('active');
         if (successElement) successElement.classList.remove('active');
 
+        // ✅ HIỆN MODAL VÀ LOCK BODY
         passwordModal.classList.add('active');
         document.body.style.overflow = 'hidden';
+        document.body.style.position = 'fixed';
+        document.body.style.width = '100%';
 
+        console.log('✅ Admin password modal shown');
+
+        // Focus vào input
         setTimeout(() => {
             if (inputElement) inputElement.focus();
-        }, 100);
+        }, 200);
     }
 
     closeAdminPasswordModal() {
         const passwordModal = document.getElementById('adminPasswordModal');
         if (passwordModal) {
             passwordModal.classList.remove('active');
-            document.body.style.overflow = 'auto';
         }
+        
+        // ✅ UNLOCK BODY
+        document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.width = '';
+        
         this.pendingAction = null;
         this.courseToDelete = null;
+        
+        console.log('✅ Admin password modal closed');
     }
 
     togglePasswordVisibility() {
