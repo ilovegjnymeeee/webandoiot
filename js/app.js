@@ -8,6 +8,7 @@ class CourseApp {
         this.currentSort = 'newest';
         this.videoPlayer = null;
         this.slideViewer = null;
+        this.courseToDelete = null; // ✅ THÊM
         this.init();
     }
 
@@ -234,6 +235,11 @@ class CourseApp {
 
         grid.innerHTML = coursesToShow.map(course => `
             <div class="course-card" onclick="app.openCourse(${course.id})">
+                <!-- ✅ THÊM NÚT XÓA -->
+                <button class="btn-delete-course" onclick="event.stopPropagation(); app.confirmDeleteCourse(${course.id})" title="Xóa khóa học">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+                
                 <div class="course-thumbnail" style="background: ${course.gradient}">
                     <div class="course-icon">${course.thumbnail}</div>
                 </div>
@@ -678,6 +684,20 @@ class CourseApp {
                 this.saveProgress();
             });
         }
+
+        // ✅ THÊM: Delete confirmation keyboard
+        document.addEventListener('keydown', (e) => {
+            const confirmModal = document.getElementById('confirmDeleteModal');
+            if (confirmModal && confirmModal.classList.contains('active')) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    this.deleteCourse();
+                } else if (e.key === 'Escape') {
+                    e.preventDefault();
+                    this.cancelDelete();
+                }
+            }
+        });
     }
 
     setupUploadForm() {
@@ -763,6 +783,120 @@ class CourseApp {
             document.getElementById('uploadForm').reset();
             document.querySelectorAll('.file-list').forEach(list => list.innerHTML = '');
         }, 2000);
+    }
+
+    // ✅ THÊM: Hiển thị modal xác nhận xóa
+    confirmDeleteCourse(courseId) {
+        const course = this.courses.find(c => c.id === courseId);
+        if (!course) return;
+
+        this.courseToDelete = course;
+
+        // Tạo modal nếu chưa có
+        let confirmModal = document.getElementById('confirmDeleteModal');
+        if (!confirmModal) {
+            confirmModal = document.createElement('div');
+            confirmModal.id = 'confirmDeleteModal';
+            confirmModal.className = 'confirm-modal';
+            confirmModal.innerHTML = `
+                <div class="modal-overlay"></div>
+                <div class="modal-container">
+                    <div class="confirm-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <h2 class="confirm-title">Xác nhận xóa khóa học?</h2>
+                    <p class="confirm-message">
+                        Hành động này không thể hoàn tác. Tất cả dữ liệu và tiến độ học tập sẽ bị xóa vĩnh viễn.
+                    </p>
+                    <div class="confirm-course-name" id="confirmCourseName"></div>
+                    <div class="confirm-actions">
+                        <button class="btn-cancel-delete" onclick="app.cancelDelete()">
+                            <i class="fas fa-times"></i> Hủy bỏ
+                        </button>
+                        <button class="btn-confirm-delete" onclick="app.deleteCourse()">
+                            <i class="fas fa-trash-alt"></i> Xóa khóa học
+                        </button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(confirmModal);
+
+            // Close on overlay click
+            confirmModal.querySelector('.modal-overlay').addEventListener('click', () => {
+                this.cancelDelete();
+            });
+
+            // Close on Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && confirmModal.classList.contains('active')) {
+                    this.cancelDelete();
+                }
+            });
+        }
+
+        // Update course name
+        document.getElementById('confirmCourseName').textContent = course.title;
+
+        // Show modal
+        confirmModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    // ✅ THÊM: Hủy xóa
+    cancelDelete() {
+        const confirmModal = document.getElementById('confirmDeleteModal');
+        if (confirmModal) {
+            confirmModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        this.courseToDelete = null;
+    }
+
+    // ✅ THÊM: Xóa khóa học
+    deleteCourse() {
+        if (!this.courseToDelete) return;
+
+        const courseId = this.courseToDelete.id;
+        const courseName = this.courseToDelete.title;
+
+        // Find course card element
+        const courseCards = document.querySelectorAll('.course-card');
+        let cardIndex = -1;
+        
+        const filteredCourses = this.getFilteredCourses();
+        const startIndex = (this.currentPage - 1) * this.coursesPerPage;
+        const endIndex = startIndex + this.coursesPerPage;
+        const coursesToShow = filteredCourses.slice(startIndex, endIndex);
+        
+        cardIndex = coursesToShow.findIndex(c => c.id === courseId);
+
+        // Animate deletion
+        if (cardIndex >= 0 && courseCards[cardIndex]) {
+            courseCards[cardIndex].classList.add('deleting');
+        }
+
+        // Wait for animation then delete
+        setTimeout(() => {
+            // Remove from courses array
+            const index = this.courses.findIndex(c => c.id === courseId);
+            if (index !== -1) {
+                this.courses.splice(index, 1);
+            }
+
+            // Close modal
+            this.cancelDelete();
+
+            // Re-render courses
+            this.renderCourses();
+
+            // Save to localStorage
+            this.saveProgress();
+
+            // Show notification
+            this.showNotification(`🗑️ Đã xóa khóa học "${courseName}"`, 'success');
+
+            console.log(`🗑️ Deleted course: ${courseName} (ID: ${courseId})`);
+        }, 500);
     }
 }
 
