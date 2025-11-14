@@ -1,18 +1,23 @@
 class SlideViewer {
     constructor(containerId) {
+        // ✅ Tự tạo container nếu chưa có
         this.container = document.getElementById(containerId);
+        
+        if (!this.container) {
+            this.container = document.createElement('div');
+            this.container.id = containerId;
+            document.body.appendChild(this.container);
+            console.log('✅ Created slide container');
+        }
+
         this.slides = [];
         this.currentSlide = 0;
         this.isFullscreen = false;
         this.autoPlayInterval = null;
         this.autoPlayDelay = 5000; // 5 seconds
         
-        if (this.container) {
-            this.init();
-            console.log('📊 SlideViewer initialized!');
-        } else {
-            console.error('❌ Slide container not found!');
-        }
+        this.init();
+        console.log('📊 SlideViewer initialized!');
     }
 
     init() {
