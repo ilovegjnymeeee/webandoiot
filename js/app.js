@@ -385,19 +385,171 @@ class CourseApp {
 
     // Modal methods (giữ nguyên code cũ)
     openCourse(courseId) {
-        // ... existing code ...
+        const course = this.courses.find(c => c.id === courseId);
+        if (!course) {
+            this.showNotification('Không tìm thấy khóa học!', 'error');
+            return;
+        }
+
+        this.currentCourse = course;
+        this.currentLesson = course.lessons && course.lessons.length > 0 ? course.lessons[0] : null;
+
+        // Update modal content
+        const modal = document.getElementById('courseModal');
+        if (!modal) return;
+
+        // Set course info
+        document.getElementById('modalCourseTitle').textContent = course.title;
+        document.getElementById('modalInstructor').textContent = course.instructor;
+        document.getElementById('modalDuration').textContent = course.duration;
+        document.getElementById('modalStudents').textContent = course.students || 0;
+        document.getElementById('courseDescription').textContent = course.description || 'Chưa có mô tả';
+
+        // ✅ FIX: Load video nếu có lessons
+        if (this.currentLesson) {
+            this.loadVideo(this.currentLesson);
+        } else {
+            const videoContainer = document.querySelector('.video-container');
+            if (videoContainer) {
+                videoContainer.innerHTML = `
+                    <div class="no-video">
+                        <i class="fas fa-video-slash"></i>
+                        <p>Chưa có video bài học</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Render lessons list
+        this.renderLessonsList(course);
+
+        // Show modal
+        modal.style.display = 'block';
+        
+        // Switch to lessons tab
+        this.switchTab('lessons');
+    }
+
+    loadVideo(lesson) {
+        const video = document.getElementById('courseVideo');
+        if (!video) return;
+
+        console.log('🎬 Loading video:', lesson.videoUrl);
+
+        // ✅ FIX: Clear previous source
+        video.pause();
+        video.src = '';
+        video.load();
+
+        // Set new source
+        video.src = lesson.videoUrl;
+        
+        // ✅ FIX: Handle video load errors
+        video.onerror = () => {
+            console.error('❌ Video load failed:', lesson.videoUrl);
+            
+            const videoContainer = document.querySelector('.video-container');
+            if (videoContainer) {
+                videoContainer.innerHTML = `
+                    <div class="video-error">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <h3>Không thể tải video</h3>
+                        <p>File: ${lesson.videoUrl}</p>
+                        <button class="btn-secondary" onclick="courseApp.retryVideo()">
+                            <i class="fas fa-redo"></i> Thử lại
+                        </button>
+                    </div>
+                `;
+            }
+        };
+
+        // ✅ FIX: Handle video loaded successfully
+        video.onloadedmetadata = () => {
+            console.log('✅ Video loaded:', lesson.title);
+            video.play().catch(err => {
+                console.warn('Auto-play blocked:', err);
+            });
+        };
+
+        // Update current lesson title
+        const lessonTitle = document.querySelector('.current-lesson-title');
+        if (lessonTitle) {
+            lessonTitle.textContent = lesson.title;
+        }
+    }
+
+    retryVideo() {
+        if (this.currentLesson) {
+            this.loadVideo(this.currentLesson);
+        }
+    }
+
+    renderLessonsList(course) {
+        const lessonsList = document.getElementById('lessonsList');
+        if (!lessonsList || !course.lessons || course.lessons.length === 0) {
+            if (lessonsList) {
+                lessonsList.innerHTML = `
+                    <div class="empty-lessons">
+                        <i class="fas fa-inbox"></i>
+                        <p>Chưa có bài học nào</p>
+                    </div>
+                `;
+            }
+            return;
+        }
+
+        lessonsList.innerHTML = `
+            <div class="current-lesson-info">
+                <h4 class="current-lesson-title">${this.currentLesson?.title || 'Chọn bài học'}</h4>
+            </div>
+            <div class="lessons-scroll">
+                ${course.lessons.map(lesson => `
+                    <div class="lesson-item ${lesson.id === this.currentLesson?.id ? 'active' : ''} ${lesson.completed ? 'completed' : ''}" 
+                         onclick="courseApp.selectLesson(${lesson.id})">
+                        <div class="lesson-icon">
+                            ${lesson.completed ? 
+                                '<i class="fas fa-check-circle"></i>' : 
+                                '<i class="fas fa-play-circle"></i>'
+                            }
+                        </div>
+                        <div class="lesson-info">
+                            <h5>${lesson.title}</h5>
+                            <span class="lesson-duration">
+                                <i class="fas fa-clock"></i> ${lesson.duration}
+                            </span>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+    }
+
+    selectLesson(lessonId) {
+        if (!this.currentCourse) return;
+        
+        const lesson = this.currentCourse.lessons.find(l => l.id === lessonId);
+        if (!lesson) return;
+
+        this.currentLesson = lesson;
+        this.loadVideo(lesson);
+        this.renderLessonsList(this.currentCourse);
     }
 
     closeModal() {
-        // ... existing code ...
-    }
+        const modal = document.getElementById('courseModal');
+        if (modal) {
+            modal.style.display = 'none';
+        }
 
-    openUploadModal() {
-        // ... existing code ...
-    }
+        // Stop video
+        const video = document.getElementById('courseVideo');
+        if (video) {
+            video.pause();
+            video.src = '';
+        }
 
-    closeUploadModal() {
-        // ... existing code ...
+        this.currentCourse = null;
+        this.currentLesson = null;
     }
 
     confirmDelete(courseId) {

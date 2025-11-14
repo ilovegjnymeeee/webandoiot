@@ -6,43 +6,22 @@
       "instructor": "28tech Academy",
       "duration": "50 giờ",
       "category": "Giai đoạn 1 - Trụ cột 1",
-      "thumbnail": "",
+      "thumbnail": "💻",
       "students": 1500,
-      "description": "Khóa học lập trình C từ cơ bản đến nâng cao, phù hợp cho người mới bắt đầu.",
+      "description": "Khóa học lập trình C từ cơ bản đến nâng cao",
       "lessons": [
         {
           "id": 1,
-          "title": "Bài 1: Giới thiệu về ngôn ngữ C",
+          "title": "Bài 1: Giới thiệu",
           "duration": "25:00",
-          "videoUrl": "./videos/1186-lap-trinh-c-28tech/bai1.mp4",
+          "videoUrl": "videos/1186-lap-trinh-c-28tech/bai-1.mp4",
           "completed": false
         },
         {
           "id": 2,
           "title": "Bài 2: Biến và kiểu dữ liệu",
           "duration": "30:00",
-          "videoUrl": "./videos/1186-lap-trinh-c-28tech/bai2.mp4",
-          "completed": false
-        },
-        {
-          "id": 3,
-          "title": "Bài 3: Toán tử và biểu thức",
-          "duration": "28:00",
-          "videoUrl": "./videos/1186-lap-trinh-c-28tech/bai3.mp4",
-          "completed": false
-        },
-        {
-          "id": 4,
-          "title": "Bài 4: Câu lệnh điều kiện",
-          "duration": "35:00",
-          "videoUrl": "./videos/1186-lap-trinh-c-28tech/bai4.mp4",
-          "completed": false
-        },
-        {
-          "id": 5,
-          "title": "Bài 5: Vòng lặp",
-          "duration": "40:00",
-          "videoUrl": "./videos/1186-lap-trinh-c-28tech/bai5.mp4",
+          "videoUrl": "videos/1186-lap-trinh-c-28tech/bai-2.mp4",
           "completed": false
         }
       ]
