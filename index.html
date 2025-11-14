@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WEB ẤN ĐỘ - Nền tảng học trực tuyến</title>
-    <link rel="stylesheet" href="src/css/styles.css">
+    
+    <!-- ✅ Đường dẫn đơn giản -->
+    <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -40,7 +42,7 @@
             <div class="header-actions">
                 <button class="btn btn-secondary" onclick="app.openUploadModal()">
                     <i class="fas fa-cloud-upload-alt"></i>
-                    <span>Tải lên khóa học</span>
+                    <span>Tải lên</span>
                 </button>
                 <button class="btn btn-primary">
                     <i class="fas fa-plus-circle"></i>
@@ -63,8 +65,8 @@
             <p>Nền tảng học trực tuyến hiện đại với hàng ngàn khóa học chất lượng cao</p>
             
             <div class="search-box">
-                <input type="text" placeholder="Tìm kiếm khóa học, giảng viên, chủ đề...">
-                <button>
+                <input type="text" id="searchInput" placeholder="Tìm kiếm khóa học, giảng viên, chủ đề...">
+                <button onclick="app.searchCourses()">
                     <i class="fas fa-search"></i> Tìm kiếm
                 </button>
             </div>
@@ -101,24 +103,24 @@
             
             <div class="filters">
                 <select id="filterStatus" class="filter-select">
-                    <option>📚 Tất cả</option>
-                    <option>📖 Đang học</option>
-                    <option>✅ Hoàn thành</option>
-                    <option>⏸️ Tạm dừng</option>
+                    <option value="all">📚 Tất cả</option>
+                    <option value="learning">📖 Đang học</option>
+                    <option value="completed">✅ Hoàn thành</option>
+                    <option value="notstarted">⏸️ Chưa học</option>
                 </select>
                 
                 <select id="filterSort" class="filter-select">
-                    <option>🔥 Mới nhất</option>
-                    <option>⏰ Cũ nhất</option>
-                    <option>🔤 Tên A-Z</option>
-                    <option>📈 Tiến độ cao</option>
+                    <option value="newest">🔥 Mới nhất</option>
+                    <option value="oldest">⏰ Cũ nhất</option>
+                    <option value="name">🔤 Tên A-Z</option>
+                    <option value="progress">📈 Tiến độ cao</option>
                 </select>
 
                 <div class="view-toggle">
-                    <button class="view-btn active">
+                    <button class="view-btn active" data-view="grid">
                         <i class="fas fa-th"></i>
                     </button>
-                    <button class="view-btn">
+                    <button class="view-btn" data-view="list">
                         <i class="fas fa-list"></i>
                     </button>
                 </div>
@@ -144,8 +146,8 @@
         </div>
     </main>
 
-    <!-- Course Detail Modal -->
-    <div class="modal" id="courseModal">
+    <!-- Video Modal -->
+    <div class="modal" id="videoModal">
         <div class="modal-overlay"></div>
         <div class="modal-container">
             <button class="modal-close">
@@ -153,12 +155,12 @@
             </button>
             
             <div class="modal-header">
-                <h2 id="modalTitle">Tên khóa học</h2>
+                <h2 id="videoTitle">Tên khóa học</h2>
             </div>
             
             <div class="modal-body">
                 <div class="video-wrapper">
-                    <video id="courseVideo" controls>
+                    <video id="mainVideo" controls>
                         <source src="" type="video/mp4">
                         Trình duyệt của bạn không hỗ trợ video.
                     </video>
@@ -183,11 +185,16 @@
                 </div>
 
                 <div class="tab-content" id="tab-about">
-                    <p>Thông tin về khóa học sẽ hiển thị ở đây...</p>
+                    <div class="course-description">
+                        <h3>Mô tả khóa học</h3>
+                        <p id="courseDescription">Thông tin về khóa học sẽ hiển thị ở đây...</p>
+                    </div>
                 </div>
 
                 <div class="tab-content" id="tab-resources">
-                    <p>Tài nguyên khóa học sẽ hiển thị ở đây...</p>
+                    <div class="resources-list" id="resourcesList">
+                        <p>Tài nguyên khóa học sẽ hiển thị ở đây...</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -220,7 +227,7 @@
                             <label>
                                 <i class="fas fa-tag"></i> Danh mục
                             </label>
-                            <input type="text" placeholder="VD: Lập trình, Toán học">
+                            <input type="text" id="courseCategory" placeholder="VD: Lập trình, Toán học">
                         </div>
                     </div>
 
@@ -228,7 +235,7 @@
                         <label>
                             <i class="fas fa-align-left"></i> Mô tả khóa học
                         </label>
-                        <textarea id="courseDescription" rows="4" placeholder="Mô tả chi tiết về khóa học của bạn..."></textarea>
+                        <textarea id="courseDescriptionInput" rows="4" placeholder="Mô tả chi tiết về khóa học của bạn..."></textarea>
                     </div>
 
                     <!-- Video Upload -->
@@ -322,9 +329,9 @@
         </div>
     </footer>
 
-    <!-- Scripts -->
-    <script src="src/js/app.js"></script>
-    <script src="src/js/video-player.js"></script>
-    <script src="src/js/slide-viewer.js"></script>
+    <!-- ✅ Đường dẫn đơn giản -->
+    <script src="js/app.js"></script>
+    <script src="js/video-player.js"></script>
+    <script src="js/slide-viewer.js"></script>
 </body>
 </html>
