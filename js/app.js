@@ -922,51 +922,55 @@ class CourseApp {
     }
 
     attachEventListeners() {
-        const modalCloseButtons = document.querySelectorAll('.modal-close');
-        if (modalCloseButtons.length > 0) {
+        // ✅ DELAY để đảm bảo DOM đã load xong
+        setTimeout(() => {
+            // Modal close buttons
+            const modalCloseButtons = document.querySelectorAll('.modal-close');
             modalCloseButtons.forEach(btn => {
                 btn.addEventListener('click', () => this.closeModal());
             });
-        }
 
-        const modalOverlays = document.querySelectorAll('.modal-overlay');
-        if (modalOverlays.length > 0) {
+            // Modal overlays  
+            const modalOverlays = document.querySelectorAll('.modal-overlay');
             modalOverlays.forEach(overlay => {
                 overlay.addEventListener('click', () => this.closeModal());
             });
-        }
 
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') this.closeModal();
-        });
-
-        const filterStatus = document.getElementById('filterStatus');
-        if (filterStatus) {
-            filterStatus.addEventListener('change', (e) => {
-                this.currentFilter = e.target.value;
-                this.currentPage = 1;
-                this.renderCourses();
+            // ESC key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') this.closeModal();
             });
-        }
 
-        const filterSort = document.getElementById('filterSort');
-        if (filterSort) {
-            filterSort.addEventListener('change', (e) => {
-                this.currentSort = e.target.value;
-                this.currentPage = 1;
-                this.renderCourses();
-            });
-        }
+            // Filter status
+            const filterStatus = document.getElementById('filterStatus');
+            if (filterStatus) {
+                filterStatus.addEventListener('change', (e) => {
+                    this.currentFilter = e.target.value;
+                    this.currentPage = 1;
+                    this.renderCourses();
+                });
+            }
 
-        const searchInput = document.getElementById('searchInput');
-        if (searchInput) {
-            searchInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') this.searchCourses();
-            });
-        }
+            // Filter sort
+            const filterSort = document.getElementById('filterSort');
+            if (filterSort) {
+                filterSort.addEventListener('change', (e) => {
+                    this.currentSort = e.target.value;
+                    this.currentPage = 1;
+                    this.renderCourses();
+                });
+            }
 
-        const viewButtons = document.querySelectorAll('.view-btn');
-        if (viewButtons.length > 0) {
+            // Search input
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput) {
+                searchInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') this.searchCourses();
+                });
+            }
+
+            // View buttons
+            const viewButtons = document.querySelectorAll('.view-btn');
             viewButtons.forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
@@ -979,25 +983,25 @@ class CourseApp {
                     }
                 });
             });
-        }
 
-        const prevBtn = document.getElementById('prevBtn');
-        if (prevBtn) {
-            prevBtn.addEventListener('click', () => {
-                if (this.currentPage > 1) this.goToPage(this.currentPage - 1);
-            });
-        }
+            // Pagination buttons
+            const prevBtn = document.getElementById('prevBtn');
+            if (prevBtn) {
+                prevBtn.addEventListener('click', () => {
+                    if (this.currentPage > 1) this.goToPage(this.currentPage - 1);
+                });
+            }
 
-        const nextBtn = document.getElementById('nextBtn');
-        if (nextBtn) {
-            nextBtn.addEventListener('click', () => {
-                const totalPages = Math.ceil(this.getFilteredCourses().length / this.coursesPerPage);
-                if (this.currentPage < totalPages) this.goToPage(this.currentPage + 1);
-            });
-        }
+            const nextBtn = document.getElementById('nextBtn');
+            if (nextBtn) {
+                nextBtn.addEventListener('click', () => {
+                    const totalPages = Math.ceil(this.getFilteredCourses().length / this.coursesPerPage);
+                    if (this.currentPage < totalPages) this.goToPage(this.currentPage + 1);
+                });
+            }
 
-        const tabButtons = document.querySelectorAll('.tab-btn');
-        if (tabButtons.length > 0) {
+            // Tab buttons
+            const tabButtons = document.querySelectorAll('.tab-btn');
             tabButtons.forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     const tabName = e.currentTarget.dataset.tab;
@@ -1011,27 +1015,29 @@ class CourseApp {
                     if (content) content.classList.add('active');
                 });
             });
-        }
 
-        this.setupUploadForm();
+            // Upload form
+            this.setupUploadForm();
 
-        const video = document.getElementById('mainVideo');
-        if (video) {
-            video.addEventListener('timeupdate', () => {
-                if (this.currentCourse && video.duration) {
-                    const progress = (video.currentTime / video.duration) * 100;
-                    this.currentCourse.progress = Math.min(Math.max(this.currentCourse.progress, progress), 100);
-                }
-            });
+            // Video progress tracking
+            const video = document.getElementById('mainVideo');
+            if (video) {
+                video.addEventListener('timeupdate', () => {
+                    if (this.currentCourse && video.duration) {
+                        const progress = (video.currentTime / video.duration) * 100;
+                        this.currentCourse.progress = Math.min(Math.max(this.currentCourse.progress, progress), 100);
+                    }
+                });
 
-            video.addEventListener('ended', () => {
-                this.showNotification('✅ Đã hoàn thành bài học!', 'success');
-                this.saveProgress();
-                this.saveCoursesToStorage();
-            });
-        }
+                video.addEventListener('ended', () => {
+                    this.showNotification('✅ Đã hoàn thành bài học!', 'success');
+                    this.saveProgress();
+                    this.saveCoursesToStorage();
+                });
+            }
 
-        console.log('✅ Event listeners attached');
+            console.log('✅ Event listeners attached');
+        }, 100); // ← DELAY 100ms
     }
 
     setupUploadForm() {
