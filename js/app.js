@@ -14,6 +14,7 @@ class CourseApp {
         this.filterSort = 'newest';
         this.courseToDelete = null;
         this.pendingAction = null;
+        this.filterStage = 'all'; // ✅ NEW
         
         this.init();
     }
@@ -44,93 +45,188 @@ class CourseApp {
 
     initializeSampleCourses() {
         this.courses = [
+            // ===================================================================
+            //    GIAI ĐOẠN 1: NỀN TẢNG SONG SONG (HỌC TRONG NĂM 1)
+            // ===================================================================
+            
+            // -------------------------------------------------------------------
+            //    TRỤ CỘT 1: LẬP TRÌNH C & PHẦN CỨNG (PHẦN "IoT")
+            // -------------------------------------------------------------------
             {
                 id: Date.now() + 1,
-                title: 'Giải tích 2',
-                instructor: 'Toán & Vật lý ĐH',
-                duration: '12 tuần',
-                students: 1250,
+                title: '1186: Lập trình C 28tech',
+                instructor: '28tech Academy',
+                duration: '15 tuần',
+                students: 12500,
                 progress: 0,
-                thumbnail: '📚',
+                thumbnail: '💻',
                 color: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                category: 'Giai đoạn 1 - Trụ cột 1',
+                videoUrl: './videos/1186-lap-trinh-c-28tech/bai1.mp4',
                 lessons: [
-                    { id: 1, title: 'Bài 1: Giới thiệu', duration: '15:00', completed: false },
-                    { id: 2, title: 'Bài 2: Đạo hàm', duration: '20:00', completed: false }
+                    { id: 1, title: 'Bài 1: Giới thiệu C', duration: '25:00', videoUrl: './videos/1186-lap-trinh-c-28tech/bai1.mp4', completed: false },
+                    { id: 2, title: 'Bài 2: Biến và kiểu dữ liệu', duration: '30:00', videoUrl: './videos/1186-lap-trinh-c-28tech/bai2.mp4', completed: false },
+                    { id: 3, title: 'Bài 3: Vòng lặp', duration: '28:00', videoUrl: './videos/1186-lap-trinh-c-28tech/bai3.mp4', completed: false }
                 ]
             },
             {
                 id: Date.now() + 2,
-                title: 'Giải tích 3',
-                instructor: 'Toán cao cấp',
-                duration: '14 tuần',
-                students: 980,
-                progress: 33,
-                thumbnail: '📐',
+                title: '9787: KHÓA HỌC ĐIỆN TỬ CƠ BẢN (PHẦN 1)',
+                instructor: 'Electronics Expert',
+                duration: '10 tuần',
+                students: 8200,
+                progress: 0,
+                thumbnail: '⚡',
                 color: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+                category: 'Giai đoạn 1 - Trụ cột 1',
+                videoUrl: './videos/9787-dien-tu-co-ban/bai1.mp4',
                 lessons: [
-                    { id: 1, title: 'Bài 1: Tích phân', duration: '25:00', completed: true },
-                    { id: 2, title: 'Bài 2: Chuỗi', duration: '30:00', completed: false }
+                    { id: 1, title: 'Bài 1: Điện áp và dòng điện', duration: '20:00', videoUrl: './videos/9787-dien-tu-co-ban/bai1.mp4', completed: false },
+                    { id: 2, title: 'Bài 2: Linh kiện điện tử', duration: '25:00', videoUrl: './videos/9787-dien-tu-co-ban/bai2.mp4', completed: false }
                 ]
             },
             {
                 id: Date.now() + 3,
-                title: 'Vật lý đại cương 2 - Điện từ',
-                instructor: 'Vật lý ĐH',
-                duration: '16 tuần',
-                students: 1500,
+                title: '8585: Khóa Học Arduino Cho Người Mới Bắt Đầu 2021',
+                instructor: 'Arduino Master',
+                duration: '12 tuần',
+                students: 15300,
                 progress: 0,
-                thumbnail: '⚡',
+                thumbnail: '🤖',
                 color: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+                category: 'Giai đoạn 1 - Trụ cột 1',
+                videoUrl: './videos/8585-arduino-co-ban/bai1.mp4',
                 lessons: [
-                    { id: 1, title: 'Bài 1: Điện trường', duration: '18:00', completed: false },
-                    { id: 2, title: 'Bài 2: Từ trường', duration: '22:00', completed: false }
+                    { id: 1, title: 'Bài 1: Giới thiệu Arduino', duration: '18:00', videoUrl: './videos/8585-arduino-co-ban/bai1.mp4', completed: false },
+                    { id: 2, title: 'Bài 2: LED và Digital Output', duration: '22:00', videoUrl: './videos/8585-arduino-co-ban/bai2.mp4', completed: false },
+                    { id: 3, title: 'Bài 3: Cảm biến và Input', duration: '25:00', videoUrl: './videos/8585-arduino-co-ban/bai3.mp4', completed: false }
                 ]
             },
+
+            // -------------------------------------------------------------------
+            //    TRỤ CỘT 2: LẬP TRÌNH PYTHON (PHẦN "AI")
+            // -------------------------------------------------------------------
             {
                 id: Date.now() + 4,
-                title: 'Xác suất thống kê 2025',
-                instructor: 'Toán ứng dụng',
-                duration: '10 tuần',
-                students: 2100,
+                title: '7596: Khóa Học Python, Raspberry Pi, Điện Tử Và IoT Bootcamp',
+                instructor: 'Python IoT Expert',
+                duration: '16 tuần',
+                students: 18500,
                 progress: 0,
-                thumbnail: '📊',
+                thumbnail: '🐍',
                 color: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
+                category: 'Giai đoạn 1 - Trụ cột 2',
+                videoUrl: './videos/7596-python-raspberry-iot/bai1.mp4',
                 lessons: [
-                    { id: 1, title: 'Bài 1: Xác suất', duration: '20:00', completed: false },
-                    { id: 2, title: 'Bài 2: Thống kê', duration: '25:00', completed: false }
+                    { id: 1, title: 'Bài 1: Python cơ bản', duration: '30:00', videoUrl: './videos/7596-python-raspberry-iot/bai1.mp4', completed: false },
+                    { id: 2, title: 'Bài 2: Raspberry Pi Setup', duration: '28:00', videoUrl: './videos/7596-python-raspberry-iot/bai2.mp4', completed: false },
+                    { id: 3, title: 'Bài 3: GPIO Programming', duration: '32:00', videoUrl: './videos/7596-python-raspberry-iot/bai3.mp4', completed: false },
+                    { id: 4, title: 'Bài 4: IoT Projects', duration: '35:00', videoUrl: './videos/7596-python-raspberry-iot/bai4.mp4', completed: false }
                 ]
             },
+
+            // -------------------------------------------------------------------
+            //    TRỤ CỘT 3: KẾT NỐI IOT (LÀM CHỦ "THINGS")
+            // -------------------------------------------------------------------
             {
                 id: Date.now() + 5,
-                title: '[HUST] TIN HỌC ĐẠI CƯƠNG',
-                instructor: 'CNTT HUST',
-                duration: '15 tuần',
-                students: 3200,
+                title: '8173: Khóa Học ESP32 Cho Các Arduino Maker',
+                instructor: 'ESP32 Specialist',
+                duration: '14 tuần',
+                students: 13200,
                 progress: 0,
-                thumbnail: '💻',
+                thumbnail: '📡',
                 color: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
+                category: 'Giai đoạn 1 - Trụ cột 3',
+                videoUrl: './videos/8173-esp32-arduino/bai1.mp4',
                 lessons: [
-                    { id: 1, title: 'Bài 1: Lập trình C', duration: '30:00', completed: false },
-                    { id: 2, title: 'Bài 2: Cấu trúc dữ liệu', duration: '35:00', completed: false }
+                    { id: 1, title: 'Bài 1: ESP32 Overview', duration: '24:00', videoUrl: './videos/8173-esp32-arduino/bai1.mp4', completed: false },
+                    { id: 2, title: 'Bài 2: WiFi & Bluetooth', duration: '28:00', videoUrl: './videos/8173-esp32-arduino/bai2.mp4', completed: false },
+                    { id: 3, title: 'Bài 3: Web Server', duration: '30:00', videoUrl: './videos/8173-esp32-arduino/bai3.mp4', completed: false }
                 ]
             },
             {
                 id: Date.now() + 6,
-                title: '[HUST] Giải tích 1 - MT11X',
-                instructor: 'Toán HUST',
-                duration: '12 tuần',
-                students: 2800,
+                title: '8233: Khóa Học ESP32 Bằng Cách Xây Dựng Các Dự Án Thực Tế',
+                instructor: 'IoT Project Master',
+                duration: '18 tuần',
+                students: 16800,
                 progress: 0,
-                thumbnail: '📈',
+                thumbnail: '🔧',
                 color: 'linear-gradient(135deg, #30cfd0 0%, #330867 100%)',
+                category: 'Giai đoạn 1 - Trụ cột 3',
+                videoUrl: './videos/8233-esp32-du-an/bai1.mp4',
                 lessons: [
-                    { id: 1, title: 'Bài 1: Hàm số', duration: '20:00', completed: false },
-                    { id: 2, title: 'Bài 2: Giới hạn', duration: '25:00', completed: false }
+                    { id: 1, title: 'Bài 1: Smart Home Project', duration: '35:00', videoUrl: './videos/8233-esp32-du-an/bai1.mp4', completed: false },
+                    { id: 2, title: 'Bài 2: Weather Station', duration: '32:00', videoUrl: './videos/8233-esp32-du-an/bai2.mp4', completed: false },
+                    { id: 3, title: 'Bài 3: MQTT & Cloud', duration: '38:00', videoUrl: './videos/8233-esp32-du-an/bai3.mp4', completed: false }
+                ]
+            },
+
+            // ===================================================================
+            //    GIAI ĐOẠN 2: TẬP TRUNG "AI" (HÈ NĂM 1 & ĐẦU NĂM 2)
+            // ===================================================================
+            
+            // -------------------------------------------------------------------
+            //    TRỤ CỘT 4: "BỘ NÃO" AIoT (EDGE COMPUTING & VISION)
+            // -------------------------------------------------------------------
+            {
+                id: Date.now() + 7,
+                title: '8574: Khóa Học Raspberry Pi [4] Cho Người Mới Bắt Đầu 2021',
+                instructor: 'Raspberry Pi Expert',
+                duration: '12 tuần',
+                students: 14500,
+                progress: 0,
+                thumbnail: '🍓',
+                color: 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)',
+                category: 'Giai đoạn 2 - Trụ cột 4',
+                videoUrl: './videos/8574-raspberry-pi-4/bai1.mp4',
+                lessons: [
+                    { id: 1, title: 'Bài 1: Raspberry Pi 4 Setup', duration: '22:00', videoUrl: './videos/8574-raspberry-pi-4/bai1.mp4', completed: false },
+                    { id: 2, title: 'Bài 2: Linux Commands', duration: '26:00', videoUrl: './videos/8574-raspberry-pi-4/bai2.mp4', completed: false },
+                    { id: 3, title: 'Bài 3: Python on Pi', duration: '30:00', videoUrl: './videos/8574-raspberry-pi-4/bai3.mp4', completed: false }
+                ]
+            },
+            {
+                id: Date.now() + 8,
+                title: '9836: ⭐ Khóa Học Toàn Tập Về OpenCV Và Thị Giác Máy Tính (QUAN TRỌNG NHẤT!)',
+                instructor: 'Computer Vision Master',
+                duration: '20 tuần',
+                students: 25600,
+                progress: 0,
+                thumbnail: '👁️',
+                color: 'linear-gradient(135deg, #ff6a00 0%, #ee0979 100%)',
+                category: 'Giai đoạn 2 - Trụ cột 4',
+                videoUrl: './videos/9836-opencv-thị-giac/bai1.mp4',
+                lessons: [
+                    { id: 1, title: 'Bài 1: OpenCV Basics', duration: '32:00', videoUrl: './videos/9836-opencv-thị-giac/bai1.mp4', completed: false },
+                    { id: 2, title: 'Bài 2: Image Processing', duration: '35:00', videoUrl: './videos/9836-opencv-thị-giac/bai2.mp4', completed: false },
+                    { id: 3, title: 'Bài 3: Object Detection', duration: '40:00', videoUrl: './videos/9836-opencv-thị-giac/bai3.mp4', completed: false },
+                    { id: 4, title: 'Bài 4: Face Recognition', duration: '38:00', videoUrl: './videos/9836-opencv-thị-giac/bai4.mp4', completed: false },
+                    { id: 5, title: 'Bài 5: Advanced CV', duration: '42:00', videoUrl: './videos/9836-opencv-thị-giac/bai5.mp4', completed: false }
+                ]
+            },
+            {
+                id: Date.now() + 9,
+                title: '8448: Khóa Học Embedded Electronic - Từ Cơ Bản Đến Deep Learning',
+                instructor: 'Deep Learning Engineer',
+                duration: '22 tuần',
+                students: 19200,
+                progress: 0,
+                thumbnail: '🧠',
+                color: 'linear-gradient(135deg, #134e5e 0%, #71b280 100%)',
+                category: 'Giai đoạn 2 - Trụ cột 4',
+                videoUrl: './videos/8448-embedded-deep-learning/bai1.mp4',
+                lessons: [
+                    { id: 1, title: 'Bài 1: Embedded Systems', duration: '28:00', videoUrl: './videos/8448-embedded-deep-learning/bai1.mp4', completed: false },
+                    { id: 2, title: 'Bài 2: Machine Learning Intro', duration: '30:00', videoUrl: './videos/8448-embedded-deep-learning/bai2.mp4', completed: false },
+                    { id: 3, title: 'Bài 3: Deep Learning Concepts', duration: '35:00', videoUrl: './videos/8448-embedded-deep-learning/bai3.mp4', completed: false },
+                    { id: 4, title: 'Bài 4: TensorFlow Lite', duration: '32:00', videoUrl: './videos/8448-embedded-deep-learning/bai4.mp4', completed: false }
                 ]
             }
         ];
         
-        console.log('✅ Sample courses initialized');
+        console.log('✅ AIoT Course System initialized - 9 courses loaded');
     }
 
     saveCoursesToStorage() {
@@ -234,6 +330,7 @@ class CourseApp {
     getFilteredCourses() {
         let filtered = [...this.courses];
 
+        // Search filter
         if (this.searchQuery) {
             filtered = filtered.filter(c => 
                 c.title.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
@@ -241,6 +338,7 @@ class CourseApp {
             );
         }
 
+        // Status filter
         if (this.filterStatus !== 'all') {
             filtered = filtered.filter(c => {
                 if (this.filterStatus === 'completed') return c.progress >= 100;
@@ -250,6 +348,20 @@ class CourseApp {
             });
         }
 
+        // ✅ NEW: Stage filter
+        if (this.filterStage !== 'all') {
+            filtered = filtered.filter(c => {
+                if (this.filterStage === 'giai-doan-1') {
+                    return c.category && c.category.includes('Giai đoạn 1');
+                }
+                if (this.filterStage === 'giai-doan-2') {
+                    return c.category && c.category.includes('Giai đoạn 2');
+                }
+                return true;
+            });
+        }
+
+        // Sort
         filtered.sort((a, b) => {
             switch (this.filterSort) {
                 case 'newest': return b.id - a.id;
@@ -715,6 +827,16 @@ class CourseApp {
         if (filterSort) {
             filterSort.addEventListener('change', (e) => {
                 this.filterSort = e.target.value;
+                this.currentPage = 1;
+                this.renderCourses();
+            });
+        }
+
+        // ✅ NEW: Filter by stage
+        const filterStage = document.getElementById('filterStage');
+        if (filterStage) {
+            filterStage.addEventListener('change', (e) => {
+                this.filterStage = e.target.value;
                 this.currentPage = 1;
                 this.renderCourses();
             });
