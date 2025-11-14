@@ -1234,9 +1234,9 @@ class CourseApp {
         if (completedEl) completedEl.textContent = completed;
         if (inProgressEl) inProgressEl.textContent = inProgress;
         if (notStartedEl) notStartedEl.textContent = notStarted;
-    } // ✅ ĐẢM BẢO CÓ DẤU } Ở ĐÂY
+    } // ✅ PHẢI CÓ DẤU NÀY
 
-} // ✅ Class closing brace
+} // ✅ Class CourseApp closing brace
 
 // ===================================
 //    INITIALIZE APP
@@ -1245,7 +1245,9 @@ class CourseApp {
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
         window.app = new CourseApp();
+        console.log('✅ App initialized on DOMContentLoaded');
     });
 } else {
     window.app = new CourseApp();
+    console.log('✅ App initialized immediately');
 }
