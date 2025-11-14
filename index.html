@@ -29,11 +29,11 @@
             </div>
             
             <div class="hero-actions">
-                <button class="btn-hero btn-add-course" onclick="app.openUploadModal()">
+                <button class="btn-hero btn-add-course" id="btnAddCourse">
                     <i class="fas fa-plus-circle"></i>
                     <span>Thêm khóa học</span>
                 </button>
-                <button class="btn-hero btn-reset" onclick="app.resetToSampleCourses()">
+                <button class="btn-hero btn-reset" id="btnReset">
                     <i class="fas fa-sync-alt"></i>
                     <span>Làm mới</span>
                 </button>
@@ -127,7 +127,7 @@
                             placeholder="🔍 Tìm kiếm khóa học..."
                             autocomplete="off"
                         >
-                        <button class="search-btn" onclick="app.searchCourses()">
+                        <button class="search-btn" id="btnSearch">
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
@@ -202,7 +202,7 @@
     <div id="courseModal" class="modal">
         <div class="modal-overlay"></div>
         <div class="modal-content modal-large">
-            <button class="modal-close" title="Đóng">
+            <button class="modal-close" id="btnCloseModal" title="Đóng">
                 <i class="fas fa-times"></i>
             </button>
             
@@ -274,7 +274,7 @@
     <div id="uploadModal" class="modal">
         <div class="modal-overlay"></div>
         <div class="modal-content">
-            <button class="modal-close" title="Đóng">
+            <button class="modal-close" id="btnCloseUploadModal" title="Đóng">
                 <i class="fas fa-times"></i>
             </button>
             
@@ -327,7 +327,7 @@
                 </div>
                 
                 <div class="form-actions">
-                    <button type="button" class="btn-form btn-cancel" onclick="app.closeModal()">
+                    <button type="button" class="btn-form btn-cancel" id="btnCancelUpload">
                         <i class="fas fa-times"></i> Hủy
                     </button>
                     <button type="submit" class="btn-form btn-submit">
@@ -342,5 +342,58 @@
     <script src="js/app.js"></script>
     <script src="js/slide-viewer.js"></script>
     <script src="js/video-player.js"></script>
+    
+    <!-- ✅ Initialize event listeners after DOM loaded -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Hero buttons
+            const btnAddCourse = document.getElementById('btnAddCourse');
+            const btnReset = document.getElementById('btnReset');
+            const btnSearch = document.getElementById('btnSearch');
+            
+            if (btnAddCourse) {
+                btnAddCourse.addEventListener('click', () => {
+                    if (window.app) window.app.openUploadModal();
+                });
+            }
+            
+            if (btnReset) {
+                btnReset.addEventListener('click', () => {
+                    if (window.app) window.app.resetToSampleCourses();
+                });
+            }
+            
+            if (btnSearch) {
+                btnSearch.addEventListener('click', () => {
+                    if (window.app) window.app.searchCourses();
+                });
+            }
+            
+            // Modal close buttons
+            const btnCloseModal = document.getElementById('btnCloseModal');
+            const btnCloseUploadModal = document.getElementById('btnCloseUploadModal');
+            const btnCancelUpload = document.getElementById('btnCancelUpload');
+            
+            if (btnCloseModal) {
+                btnCloseModal.addEventListener('click', () => {
+                    if (window.app) window.app.closeModal();
+                });
+            }
+            
+            if (btnCloseUploadModal) {
+                btnCloseUploadModal.addEventListener('click', () => {
+                    if (window.app) window.app.closeModal();
+                });
+            }
+            
+            if (btnCancelUpload) {
+                btnCancelUpload.addEventListener('click', () => {
+                    if (window.app) window.app.closeModal();
+                });
+            }
+            
+            console.log('✅ Hero button event listeners attached');
+        });
+    </script>
 </body>
 </html>

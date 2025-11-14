@@ -1234,8 +1234,13 @@ class CourseApp {
         if (completedEl) completedEl.textContent = completed;
         if (inProgressEl) inProgressEl.textContent = inProgress;
         if (notStartedEl) notStartedEl.textContent = notStarted;
-    }
-}
+    } // ✅ ĐẢM BẢO CÓ DẤU } Ở ĐÂY
+
+} // ✅ Class closing brace
+
+// ===================================
+//    INITIALIZE APP
+// ===================================
 
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
