@@ -1218,6 +1218,23 @@ class CourseApp {
         this.renderCourses();
         this.showNotification('🔄 Đã reset về khóa học mẫu', 'success');
     }
+
+    updateStats() {
+        const total = this.courses.length;
+        const completed = this.courses.filter(c => c.progress >= 100).length;
+        const inProgress = this.courses.filter(c => c.progress > 0 && c.progress < 100).length;
+        const notStarted = this.courses.filter(c => c.progress === 0).length;
+
+        const totalEl = document.getElementById('totalCourses');
+        const completedEl = document.getElementById('completedCourses');
+        const inProgressEl = document.getElementById('inProgressCourses');
+        const notStartedEl = document.getElementById('notStartedCourses');
+
+        if (totalEl) totalEl.textContent = total;
+        if (completedEl) completedEl.textContent = completed;
+        if (inProgressEl) inProgressEl.textContent = inProgress;
+        if (notStartedEl) notStartedEl.textContent = notStarted;
+    }
 }
 
 if (document.readyState === 'loading') {
