@@ -43,7 +43,7 @@ class CourseApp {
             this.renderCourses();
             this.updateStats();
             this.renderPagination();
-            this.attachEventListeners(); // ✅ NEW
+            this.attachEventListeners();
             
         } catch (error) {
             console.error('❌ Error loading courses:', error);
@@ -52,7 +52,6 @@ class CourseApp {
         }
     }
 
-    // ✅ NEW: Attach all event listeners
     attachEventListeners() {
         // Close modals on overlay click
         document.querySelectorAll('.modal').forEach(modal => {
@@ -60,7 +59,6 @@ class CourseApp {
             if (overlay) {
                 overlay.addEventListener('click', () => {
                     modal.style.display = 'none';
-                    // Stop video if course modal
                     if (modal.id === 'courseModal') {
                         const video = document.getElementById('courseVideo');
                         if (video) {
@@ -89,68 +87,7 @@ class CourseApp {
             });
         });
 
-        // Upload form submit
-        const uploadForm = document.getElementById('uploadForm');
-        if (uploadForm) {
-            uploadForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                this.handleUploadSubmit();
-            });
-        }
-
-        // Tab buttons
-        document.querySelectorAll('.tab-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const tabName = btn.textContent.trim().toLowerCase();
-                if (tabName.includes('bài học')) {
-                    this.switchTab('lessons');
-                } else if (tabName.includes('thông tin')) {
-                    this.switchTab('info');
-                } else if (tabName.includes('slides')) {
-                    this.switchTab('slides');
-                }
-            });
-        });
-
         console.log('✅ Event listeners attached');
-    }
-
-    // ✅ FIX: Handle upload form submission
-    handleUploadSubmit() {
-        const title = document.getElementById('courseTitle').value.trim();
-        const instructor = document.getElementById('courseInstructor').value.trim();
-        const duration = document.getElementById('courseDuration').value.trim();
-        const students = parseInt(document.getElementById('courseStudents').value) || 0;
-        const category = document.getElementById('courseCategory').value;
-        const thumbnail = document.getElementById('courseThumbnail').value.trim();
-
-        if (!title || !instructor || !duration || !category || !thumbnail) {
-            this.showNotification('Vui lòng điền đầy đủ thông tin!', 'warning');
-            return;
-        }
-
-        const newCourse = {
-            id: Date.now(),
-            title: title,
-            instructor: instructor,
-            duration: duration,
-            students: students,
-            category: category,
-            thumbnail: thumbnail,
-            description: `Khóa học ${title}`,
-            lessons: []
-        };
-
-        this.courses.unshift(newCourse);
-        this.filteredCourses = [...this.courses];
-        this.saveCourses();
-        this.renderCourses();
-        this.updateStats();
-        this.renderPagination();
-        this.closeUploadModal();
-        this.showNotification('✅ Đã thêm khóa học thành công!', 'success');
-        
-        document.getElementById('uploadForm').reset();
     }
 
     saveCourses() {
@@ -205,7 +142,6 @@ class CourseApp {
             courseCount.textContent = `Hiển thị ${startIndex + 1}-${Math.min(endIndex, this.filteredCourses.length)} / ${this.filteredCourses.length} khóa học`;
         }
 
-        // ✅ FIX: Use correct class name
         coursesGrid.className = this.viewMode === 'grid' ? 'courses-grid' : 'courses-list';
 
         coursesGrid.innerHTML = paginatedCourses.map(course => {
@@ -335,7 +271,7 @@ class CourseApp {
         }
 
         this.renderLessonsList(course);
-        modal.style.display = 'flex'; // ✅ Changed to flex
+        modal.style.display = 'flex';
         this.switchTab('lessons');
     }
 
@@ -347,10 +283,8 @@ class CourseApp {
             return;
         }
 
-        // ✅ FIX: Normalize path - remove leading './' and ensure no double slashes
         let videoPath = lesson.videoUrl.replace(/^\.\//, '').replace(/\/+/g, '/');
         
-        // ✅ Ensure path starts with /
         if (!videoPath.startsWith('/')) {
             videoPath = '/' + videoPath;
         }
@@ -386,8 +320,6 @@ class CourseApp {
 
         video.addEventListener('error', (e) => {
             console.error('❌ Video error:', videoPath);
-            console.error('Error code:', video.error?.code);
-            console.error('Error message:', video.error?.message);
             
             videoContainer.innerHTML = `
                 <div class="video-error">
@@ -398,18 +330,11 @@ class CourseApp {
                         <strong>Nguyên nhân có thể:</strong><br>
                         • Video chưa được upload vào folder <code>videos/</code><br>
                         • File đang được quản lý bởi Git LFS (chạy: <code>git lfs pull</code>)<br>
-                        • Đường dẫn không đúng trong <code>courses.json</code><br><br>
-                        <strong>Giải pháp:</strong><br>
-                        1. Kiểm tra file tồn tại: <code>${videoPath}</code><br>
-                        2. Chạy: <code>git lfs pull</code> để tải video<br>
-                        3. Verify LFS: <code>git lfs ls-files</code>
+                        • Đường dẫn không đúng trong <code>courses.json</code>
                     </p>
-                    <div style="margin-top: 20px; display: flex; gap: 10px; justify-content: center;">
+                    <div style="margin-top: 20px;">
                         <button class="btn-secondary" onclick="courseApp.retryVideo()">
                             <i class="fas fa-redo"></i> Thử lại
-                        </button>
-                        <button class="btn-primary" onclick="courseApp.openUploadModal()">
-                            <i class="fas fa-upload"></i> Upload video
                         </button>
                     </div>
                 </div>
@@ -425,9 +350,6 @@ class CourseApp {
                     <i class="fas fa-video-slash"></i>
                     <h3>Chưa có video</h3>
                     <p>Khóa học này chưa có bài giảng video</p>
-                    <button class="btn-primary" onclick="courseApp.openUploadModal()" style="margin-top: 20px;">
-                        <i class="fas fa-upload"></i> Upload video
-                    </button>
                 </div>
             `;
         }
@@ -448,9 +370,6 @@ class CourseApp {
                 <div class="empty-lessons">
                     <i class="fas fa-inbox"></i>
                     <p>Chưa có bài học nào</p>
-                    <button class="btn-primary" onclick="courseApp.openUploadModal()" style="margin-top: 15px;">
-                        <i class="fas fa-plus"></i> Thêm bài học
-                    </button>
                 </div>
             `;
             return;
@@ -494,9 +413,7 @@ class CourseApp {
         this.renderLessonsList(this.currentCourse);
     }
 
-    // ✅ FIX: Proper tab switching
     switchTab(tabName) {
-        // Remove active from all tabs
         document.querySelectorAll('.tab-btn').forEach(btn => {
             btn.classList.remove('active');
         });
@@ -504,7 +421,6 @@ class CourseApp {
             pane.classList.remove('active');
         });
         
-        // Add active to selected tab
         const tabButtons = document.querySelectorAll('.tab-btn');
         tabButtons.forEach(btn => {
             const btnText = btn.textContent.toLowerCase();
@@ -516,4 +432,274 @@ class CourseApp {
         });
         
         const selectedPane = document.getElementById(`tab-${tabName}`);
-        if
+        if (selectedPane) {
+            selectedPane.classList.add('active');
+        }
+    }
+
+    closeModal() {
+        const modal = document.getElementById('courseModal');
+        if (modal) {
+            modal.style.display = 'none';
+        }
+
+        const video = document.getElementById('courseVideo');
+        if (video) {
+            video.pause();
+            video.currentTime = 0;
+        }
+
+        this.currentCourse = null;
+        this.currentLesson = null;
+    }
+
+    handleSearch(query) {
+        const searchTerm = query.toLowerCase().trim();
+        
+        if (!searchTerm) {
+            this.filteredCourses = [...this.courses];
+        } else {
+            this.filteredCourses = this.courses.filter(course => 
+                course.title.toLowerCase().includes(searchTerm) ||
+                course.instructor.toLowerCase().includes(searchTerm) ||
+                course.category.toLowerCase().includes(searchTerm)
+            );
+        }
+        
+        this.currentPage = 1;
+        this.renderCourses();
+        this.renderPagination();
+    }
+
+    handleFilterStatus(status) {
+        if (status === 'all') {
+            this.filteredCourses = [...this.courses];
+        } else {
+            this.filteredCourses = this.courses.filter(course => {
+                const progress = this.calculateProgress(course);
+                const courseStatus = this.getStatusClass(progress);
+                return courseStatus === status;
+            });
+        }
+        
+        this.currentPage = 1;
+        this.renderCourses();
+        this.renderPagination();
+    }
+
+    handleFilterStage(stage) {
+        if (stage === 'all') {
+            this.filteredCourses = [...this.courses];
+        } else {
+            this.filteredCourses = this.courses.filter(course => 
+                course.category.includes(stage)
+            );
+        }
+        
+        this.currentPage = 1;
+        this.renderCourses();
+        this.renderPagination();
+    }
+
+    handleSort(sortBy) {
+        switch(sortBy) {
+            case 'newest':
+                this.filteredCourses.sort((a, b) => b.id - a.id);
+                break;
+            case 'oldest':
+                this.filteredCourses.sort((a, b) => a.id - b.id);
+                break;
+            case 'name-asc':
+                this.filteredCourses.sort((a, b) => a.title.localeCompare(b.title));
+                break;
+            case 'name-desc':
+                this.filteredCourses.sort((a, b) => b.title.localeCompare(a.title));
+                break;
+            case 'progress':
+                this.filteredCourses.sort((a, b) => 
+                    this.calculateProgress(b) - this.calculateProgress(a)
+                );
+                break;
+        }
+        
+        this.renderCourses();
+    }
+
+    resetFilters() {
+        document.getElementById('searchInput').value = '';
+        document.getElementById('filterStatus').value = 'all';
+        document.getElementById('filterStage').value = 'all';
+        document.getElementById('sortSelect').value = 'newest';
+        
+        this.filteredCourses = [...this.courses];
+        this.currentPage = 1;
+        this.renderCourses();
+        this.renderPagination();
+    }
+
+    toggleView(mode) {
+        this.viewMode = mode;
+        
+        document.querySelectorAll('.view-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.view === mode);
+        });
+        
+        this.renderCourses();
+    }
+
+    renderPagination() {
+        const paginationContainer = document.getElementById('pagination');
+        if (!paginationContainer) return;
+
+        const totalPages = Math.ceil(this.filteredCourses.length / this.itemsPerPage);
+        
+        if (totalPages <= 1) {
+            paginationContainer.innerHTML = '';
+            return;
+        }
+
+        let paginationHTML = `
+            <button class="pagination-btn" ${this.currentPage === 1 ? 'disabled' : ''} 
+                    onclick="courseApp.goToPage(${this.currentPage - 1})">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+        `;
+
+        for (let i = 1; i <= totalPages; i++) {
+            if (
+                i === 1 || 
+                i === totalPages || 
+                (i >= this.currentPage - 1 && i <= this.currentPage + 1)
+            ) {
+                paginationHTML += `
+                    <button class="pagination-btn ${i === this.currentPage ? 'active' : ''}" 
+                            onclick="courseApp.goToPage(${i})">
+                        ${i}
+                    </button>
+                `;
+            } else if (i === this.currentPage - 2 || i === this.currentPage + 2) {
+                paginationHTML += `<span class="pagination-dots">...</span>`;
+            }
+        }
+
+        paginationHTML += `
+            <button class="pagination-btn" ${this.currentPage === totalPages ? 'disabled' : ''} 
+                    onclick="courseApp.goToPage(${this.currentPage + 1})">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        `;
+
+        paginationContainer.innerHTML = paginationHTML;
+    }
+
+    goToPage(page) {
+        this.currentPage = page;
+        this.renderCourses();
+        this.renderPagination();
+        document.getElementById('courses-section').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    confirmDelete(courseId) {
+        this.deleteTargetId = courseId;
+        const course = this.courses.find(c => c.id === courseId);
+        
+        if (!course) return;
+        
+        const modal = document.getElementById('confirmDeleteModal');
+        if (modal) {
+            const modalBody = modal.querySelector('.modal-body');
+            modalBody.innerHTML = `
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <div style="font-size: 60px; margin-bottom: 15px;">${course.thumbnail}</div>
+                    <h3 style="margin: 0 0 10px 0; color: #fff;">${course.title}</h3>
+                    <p style="color: rgba(255, 255, 255, 0.7); margin: 0;">
+                        <i class="fas fa-user"></i> ${course.instructor} • 
+                        <i class="fas fa-video"></i> ${course.lessons?.length || 0} bài học
+                    </p>
+                </div>
+                <p style="text-align: center; color: rgba(255, 255, 255, 0.9); margin-bottom: 10px;">
+                    Bạn có chắc chắn muốn xóa khóa học này?
+                </p>
+                <p class="text-warning" style="text-align: center; color: #ff3b30; font-weight: 600;">
+                    <i class="fas fa-exclamation-triangle"></i> Hành động này không thể hoàn tác!
+                </p>
+                
+                <div class="form-actions" style="margin-top: 30px;">
+                    <button class="btn-secondary" onclick="courseApp.closeConfirmDeleteModal()">
+                        <i class="fas fa-times"></i> Hủy
+                    </button>
+                    <button class="btn-danger" onclick="courseApp.deleteCourse()">
+                        <i class="fas fa-trash-alt"></i> Xóa khóa học
+                    </button>
+                </div>
+            `;
+            
+            modal.style.display = 'flex';
+        }
+    }
+
+    deleteCourse() {
+        if (!this.deleteTargetId) return;
+        
+        this.courses = this.courses.filter(c => c.id !== this.deleteTargetId);
+        this.filteredCourses = this.filteredCourses.filter(c => c.id !== this.deleteTargetId);
+        
+        this.saveCourses();
+        this.renderCourses();
+        this.updateStats();
+        this.renderPagination();
+        this.closeConfirmDeleteModal();
+        this.showNotification('✅ Đã xóa khóa học thành công!', 'success');
+        
+        this.deleteTargetId = null;
+    }
+
+    closeConfirmDeleteModal() {
+        const modal = document.getElementById('confirmDeleteModal');
+        if (modal) {
+            modal.style.display = 'none';
+        }
+        this.deleteTargetId = null;
+    }
+
+    openUploadModal() {
+        const modal = document.getElementById('uploadModal');
+        if (modal) {
+            modal.style.display = 'flex';
+        }
+    }
+
+    closeUploadModal() {
+        const modal = document.getElementById('uploadModal');
+        if (modal) {
+            modal.style.display = 'none';
+        }
+    }
+
+    showNotification(message, type = 'success') {
+        const notification = document.getElementById('notification');
+        const notificationText = document.getElementById('notificationText');
+        
+        if (notification && notificationText) {
+            notificationText.textContent = message;
+            notification.className = `notification ${type} show`;
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+    }
+
+    async refreshCourses() {
+        this.showNotification('🔄 Đang làm mới...', 'info');
+        await this.init();
+        this.showNotification('✅ Đã cập nhật!', 'success');
+    }
+}
+
+// Initialize app
+let courseApp;
+document.addEventListener('DOMContentLoaded', () => {
+    courseApp = new CourseApp();
+    console.log('✅ CourseApp initialized');
+});
