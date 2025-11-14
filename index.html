@@ -1,406 +1,425 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
+/* ===================================
+   GLOBAL RESET & BASE STYLES
+   =================================== */
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduPlatform - Nền tảng học tập trực tuyến</title>
+* { <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    margin: 0;Platform - Nền tảng học tập trực tuyến</title>
+    padding: 0;
+    box-sizing: border-box;
+}   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
     
-    <!-- Favicon -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
-    
-    <!-- FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
-    <!-- CSS -->
-    <link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
-    <!-- ===================================
-         HERO HEADER WITH GRADIENT
-         =================================== -->
-    <header class="hero-header">
+:root {- FontAwesome -->
+    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);nt-awesome/6.5.1/css/all.min.css">
+    --bg-dark: #0f0f1e;
+    --bg-card: #1a1a2e;
+    --text-primary: #ffffff;ref="css/styles.css">
+    --text-secondary: rgba(255, 255, 255, 0.7);
+    --border-color: rgba(255, 255, 255, 0.1);
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.5);
+}   <header class="hero-header">
         <div class="hero-content">
-            <div class="hero-text">
-                <h1 class="hero-title">
-                    <i class="fas fa-graduation-cap"></i>
-                    EduPlatform
-                </h1>
-                <p class="hero-subtitle">Học tập thông minh, Phát triển không giới hạn</p>
-            </div>
-            
+body {      <div class="hero-text">
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+    background: var(--bg-dark);as fa-graduation-cap"></i>
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;s="hero-subtitle">Học tập thông minh, Phát triển không giới hạn</p>
+    min-height: 100vh;
+}           
             <div class="hero-actions">
-                <button class="btn-hero btn-add-course" id="btnAddCourse">
-                    <i class="fas fa-plus-circle"></i>
-                    <span>Thêm khóa học</span>
+/* ===================================o btn-add-course" id="btnAddCourse">
+   HEADER & NAVIGATION class="fas fa-plus-circle"></i>
+   =================================== */span>
                 </button>
-                <button class="btn-hero btn-reset" id="btnReset">
-                    <i class="fas fa-sync-alt"></i>
-                    <span>Làm mới</span>
-                </button>
-            </div>
-        </div>
-        
-        <!-- Animated Background -->
-        <div class="hero-background">
+.header {       <button class="btn-hero btn-reset" id="btnReset">
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    padding: 20px 0;<span>Làm mới</span>
+    box-shadow: var(--shadow-md);
+    position: sticky;
+    top: 0;iv>
+    z-index: 1000;
+    border-bottom: 1px solid var(--border-color);
+}       <div class="hero-background">
             <div class="hero-shape shape-1"></div>
-            <div class="hero-shape shape-2"></div>
-            <div class="hero-shape shape-3"></div>
-        </div>
-    </header>
-
-    <!-- ===================================
-         MAIN CONTAINER
-         =================================== -->
+.header-content {class="hero-shape shape-2"></div>
+    max-width: 1400px;="hero-shape shape-3"></div>
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    justify-content: space-between;=========
+    align-items: center;
+}        =================================== -->
     <main class="main-container">
-        <div class="container">
-            
-            <!-- ===================================
-                 STATS CARDS
-                 =================================== -->
-            <div class="stats-section">
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-book-open"></i>
-                    </div>
-                    <div class="stat-content">
+.logo { <div class="container">
+    font-size: 28px;
+    font-weight: 800;===============================
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;================== -->
+    -webkit-text-fill-color: transparent;
+    background-clip: text;="stat-card">
+    display: flex;  <div class="stat-icon">
+    align-items: center;<i class="fas fa-book-open"></i>
+    gap: 12px;      </div>
+}                   <div class="stat-content">
                         <h3 class="stat-number" id="totalCourses">0</h3>
-                        <p class="stat-label">Khóa học</p>
-                    </div>
-                </div>
-                
-                <div class="stat-card">
-                    <div class="stat-icon stat-icon-green">
+.logo i {               <p class="stat-label">Khóa học</p>
+    font-size: 32px;</div>
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}                   <div class="stat-icon stat-icon-green">
                         <i class="fas fa-check-circle"></i>
-                    </div>
-                    <div class="stat-content">
-                        <h3 class="stat-number" id="completedCourses">0</h3>
-                        <p class="stat-label">Đã hoàn thành</p>
-                    </div>
+.header-actions {   </div>
+    display: flex;  <div class="stat-content">
+    gap: 16px;          <h3 class="stat-number" id="completedCourses">0</h3>
+    align-items: center;<p class="stat-label">Đã hoàn thành</p>
+}                   </div>
                 </div>
-                
-                <div class="stat-card">
-                    <div class="stat-icon stat-icon-orange">
-                        <i class="fas fa-spinner"></i>
-                    </div>
-                    <div class="stat-content">
-                        <h3 class="stat-number" id="inProgressCourses">0</h3>
-                        <p class="stat-label">Đang học</p>
-                    </div>
-                </div>
-                
-                <div class="stat-card">
+.btn-header {   
+    padding: 12px 24px;ass="stat-card">
+    border: none;   <div class="stat-icon stat-icon-orange">
+    border-radius: 12px;<i class="fas fa-spinner"></i>
+    font-weight: 600;/div>
+    font-size: 14px;<div class="stat-content">
+    cursor: pointer;    <h3 class="stat-number" id="inProgressCourses">0</h3>
+    transition: all 0.3s ease;ss="stat-label">Đang học</p>
+    display: flex;  </div>
+    align-items: center;
+    gap: 8px;   
+}               <div class="stat-card">
                     <div class="stat-icon stat-icon-blue">
-                        <i class="fas fa-clock"></i>
+.btn-add-course {       <i class="fas fa-clock"></i>
+    background: var(--primary-gradient);
+    color: white;   <div class="stat-content">
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);notStartedCourses">0</h3>
+}                       <p class="stat-label">Chưa học</p>
                     </div>
-                    <div class="stat-content">
-                        <h3 class="stat-number" id="notStartedCourses">0</h3>
-                        <p class="stat-label">Chưa học</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ===================================
+.btn-add-course:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+}           <!-- ===================================
                  CONTROLS SECTION
-                 =================================== -->
-            <section class="controls-section">
-                <div class="controls-header">
-                    <div class="section-title">
-                        <i class="fas fa-filter"></i>
+.btn-reset {     =================================== -->
+    background: rgba(239, 68, 68, 0.15);tion">
+    color: #ef4444;v class="controls-header">
+    border: 2px solid rgba(239, 68, 68, 0.3);">
+}                       <i class="fas fa-filter"></i>
                         <h2>Khám phá khóa học</h2>
-                    </div
-                    
-                    <div class="view-controls">
-                        <button class="view-btn active" data-view="grid" title="Dạng lưới">
-                            <i class="fas fa-th-large"></i>
+.btn-reset:hover {  </div
+    background: rgba(239, 68, 68, 0.25);
+    border-color: rgba(239, 68, 68, 0.5);rols">
+    transform: translateY(-2px);class="view-btn active" data-view="grid" title="Dạng lưới">
+}                           <i class="fas fa-th-large"></i>
                         </button>
-                        <button class="view-btn" data-view="list" title="Dạng danh sách">
-                            <i class="fas fa-list"></i>
-                        </button>
+/* ==================================="view-btn" data-view="list" title="Dạng danh sách">
+   MAIN CONTAINER           <i class="fas fa-list"></i>
+   =================================== */
                     </div>
-                </div>
-                
-                <div class="search-filter-container">
-                    <div class="search-box">
-                        <input 
+.container {    </div>
+    max-width: 1400px;
+    margin: 0 auto;v class="search-filter-container">
+    padding: 40px 24px;v class="search-box">
+}                       <input 
                             type="text" 
-                            id="searchInput" 
-                            placeholder="🔍 Tìm kiếm khóa học..."
-                            autocomplete="off"
+/* ===================================Input" 
+   CONTROLS SECTION         placeholder="🔍 Tìm kiếm khóa học..."
+   =================================== */"off"
                         >
-                        <button class="search-btn" id="btnSearch">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                    
-                    <div class="filter-group">
-                        <select id="filterStatus" class="filter-select">
-                            <option value="all">📚 Tất cả trạng thái</option>
+.controls-section {     <button class="search-btn" id="btnSearch">
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    padding: 32px;      </button>
+    border-radius: 20px;v>
+    margin-bottom: 40px;
+    box-shadow: var(--shadow-md);ilter-group">
+    border: 1px solid var(--border-color);Status" class="filter-select">
+}                           <option value="all">📚 Tất cả trạng thái</option>
                             <option value="completed">✅ Đã hoàn thành</option>
-                            <option value="in-progress">⏳ Đang học</option>
-                            <option value="not-started">⏸️ Chưa học</option>
-                        </select>
-                        
-                        <!-- ✅ NEW: Filter by Stage -->
-                        <select id="filterStage" class="filter-select">
-                            <option value="all">🎯 Tất cả giai đoạn</option>
-                            <option value="giai-doan-1">📘 Giai đoạn 1: Nền tảng Song song</option>
+.controls-header {          <option value="in-progress">⏳ Đang học</option>
+    display: flex;          <option value="not-started">⏸️ Chưa học</option>
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 28px;<!-- ✅ NEW: Filter by Stage -->
+    flex-wrap: wrap;    <select id="filterStage" class="filter-select">
+    gap: 20px;              <option value="all">🎯 Tất cả giai đoạn</option>
+}                           <option value="giai-doan-1">📘 Giai đoạn 1: Nền tảng Song song</option>
                             <option value="giai-doan-2">📕 Giai đoạn 2: Tập trung AI</option>
-                        </select>
-                        
-                        <select id="filterSort" class="filter-select">
-                            <option value="newest">🆕 Mới nhất</option>
-                            <option value="oldest">📅 Cũ nhất</option>
+.course-count {         </select>
+    font-size: 24px;    
+    font-weight: 700;   <select id="filterSort" class="filter-select">
+    color: white;           <option value="newest">🆕 Mới nhất</option>
+}                           <option value="oldest">📅 Cũ nhất</option>
                             <option value="name-asc">🔤 A → Z</option>
-                            <option value="name-desc">🔤 Z → A</option>
-                            <option value="progress-high">📈 Tiến độ cao</option>
-                            <option value="progress-low">📉 Tiến độ thấp</option>
-                        </select>
-                    </div>
-                </div>
+.course-count span {        <option value="name-desc">🔤 Z → A</option>
+    background: var(--primary-gradient);e="progress-high">📈 Tiến độ cao</option>
+    -webkit-background-clip: text;n value="progress-low">📉 Tiến độ thấp</option>
+    -webkit-text-fill-color: transparent;
+    font-size: 32px;</div>
+}               </div>
             </section>
-
-            <!-- ===================================
-                 COURSES GRID
-                 =================================== -->
-            <section class="courses-section">
-                <div class="course-grid" id="courseGrid">
-                    <!-- Courses will be rendered here by JavaScript -->
+.view-controls {
+    display: flex;==================================
+    gap: 8px;    COURSES GRID
+    background: rgba(255, 255, 255, 0.05);========== -->
+    padding: 6px;ion class="courses-section">
+    border-radius: 12px;ss="course-grid" id="courseGrid">
+}                   <!-- Courses will be rendered here by JavaScript -->
                 </div>
-            </section>
-
-            <!-- ===================================
-                 PAGINATION
-                 =================================== -->
-            <div class="pagination" id="pagination">
-                <button class="page-btn" id="prevBtn">
-                    <i class="fas fa-chevron-left"></i>
-                    <span>Trước</span>
-                </button>
+.view-btn { </section>
+    padding: 10px 18px;
+    background: transparent;========================
+    border: none;PAGINATION
+    color: var(--text-secondary);=================== -->
+    cursor: pointer;ss="pagination" id="pagination">
+    border-radius: 8px; class="page-btn" id="prevBtn">
+    transition: all 0.3s ease;fas fa-chevron-left"></i>
+    font-size: 18px;<span>Trước</span>
+}               </button>
                 
-                <div class="page-info" id="pageInfo">
-                    <span id="currentPage">1</span> / <span id="totalPages">1</span>
-                </div>
-                
-                <button class="page-btn" id="nextBtn">
+.view-btn.active {iv class="page-info" id="pageInfo">
+    background: var(--primary-gradient);e">1</span> / <span id="totalPages">1</span>
+    color: white;/div>
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}               <button class="page-btn" id="nextBtn">
                     <span>Sau</span>
-                    <i class="fas fa-chevron-right"></i>
-                </button>
-            </div>
-
+.view-btn:hover:not(.active) {fas fa-chevron-right"></i>
+    background: rgba(255, 255, 255, 0.1);
+    color: white;>
+}
         </div>
-    </main>
-
-    <!-- ===================================
-         FOOTER
-         =================================== -->
+.search-filter-container {
+    display: flex;
+    gap: 16px;==============================
+    flex-wrap: wrap;
+}        =================================== -->
     <footer class="footer">
-        <div class="footer-content">
-            <p>
-                <i class="fas fa-heart" style="color: #ef4444;"></i>
-                Made with passion by EduPlatform Team
-            </p>
+.search-box {class="footer-content">
+    position: relative;
+    flex: 1;    <i class="fas fa-heart" style="color: #ef4444;"></i>
+    min-width: 280px;with passion by EduPlatform Team
+}           </p>
             <p class="footer-copyright">© 2025 EduPlatform. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <!-- ===================================
-         COURSE DETAIL MODAL
-         =================================== -->
-    <div id="courseModal" class="modal">
-        <div class="modal-overlay"></div>
-        <div class="modal-content modal-large">
-            <button class="modal-close" id="btnCloseModal" title="Đóng">
-                <i class="fas fa-times"></i>
-            </button>
-            
-            <div class="modal-body">
-                <!-- Video Section -->
-                <div class="video-section">
-                    <video id="mainVideo" class="main-video" controls>
-                        <source src="" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-                
-                <!-- Course Info -->
-                <div class="course-info-section">
-                    <h2 class="modal-course-title" id="modalCourseTitle"></h2>
-                    
-                    <div class="modal-meta">
-                        <span><i class="fas fa-user-graduate"></i> <span id="modalCourseInstructor"></span></span>
-                        <span><i class="fas fa-clock"></i> <span id="modalCourseDuration"></span></span>
-                        <span><i class="fas fa-users"></i> <span id="modalCourseStudents"></span> học viên</span>
-                    </div>
-                    
-                    <div class="modal-progress">
-                        <div class="progress-bar-bg">
-                            <div class="progress-bar-fill" id="modalProgressBar"></div>
-                        </div>
-                        <p class="progress-text" id="modalProgressText">0%</p>
-                    </div>
-                </div>
-                
-                <!-- Tabs -->
-                <div class="tabs-section">
-                    <div class="tabs-header">
-                        <button class="tab-btn active" data-tab="lessons">
-                            <i class="fas fa-play-circle"></i> Bài học
-                        </button>
-                        <button class="tab-btn" data-tab="description">
-                            <i class="fas fa-info-circle"></i> Mô tả
-                        </button>
-                        <button class="tab-btn" data-tab="slides">
-                            <i class="fas fa-file-powerpoint"></i> Slides
-                        </button>
-                    </div>
-                    
-                    <div class="tabs-content">
-                        <div class="tab-content active" id="tab-lessons">
-                            <div class="lessons-list" id="lessonsList"></div>
-                        </div>
-                        
-                        <div class="tab-content" id="tab-description">
-                            <div class="description-content">
-                                <h3>📝 Giới thiệu khóa học</h3>
-                                <p>Nội dung chi tiết về khóa học sẽ được hiển thị tại đây...</p>
-                            </div>
-                        </div>
-                        
-                        <div class="tab-content" id="tab-slides">
-                            <div id="slideContainer" class="slide-container"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ===================================
-         UPLOAD MODAL
-         =================================== -->
-    <div id="uploadModal" class="modal">
-        <div class="modal-overlay"></div>
-        <div class="modal-content">
-            <button class="modal-close" id="btnCloseUploadModal" title="Đóng">
-                <i class="fas fa-times"></i>
-            </button>
-            
+.search-box input {
+    width: 100%;
+    padding: 14px 48px 14px 20px;
+    background: rgba(255, 255, 255, 0.08);==
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;==================== -->
+    color: white;seModal" class="modal">
+    font-size: 15px;modal-overlay" onclick="app.closeModal()"></div>
+    transition: all 0.3s ease;ainer">
+}           <!-- Modal Header -->
             <div class="modal-header">
-                <i class="fas fa-cloud-upload-alt"></i>
-                <h2>Thêm khóa học mới</h2>
-            </div>
-            
-            <form id="uploadForm" class="upload-form">
-                <div class="form-group">
-                    <label><i class="fas fa-book"></i> Tên khóa học</label>
-                    <input type="text" id="courseName" placeholder="VD: Lập trình Python" required>
-                </div>
-                
-                <div class="form-group">
-                    <label><i class="fas fa-user"></i> Giảng viên</label>
-                    <input type="text" id="instructorName" placeholder="VD: Nguyễn Văn A" required>
-                </div>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <label><i class="fas fa-clock"></i> Thời lượng</label>
-                        <input type="text" id="courseDuration" placeholder="VD: 8 tuần" required>
+.search-box input:focus {s="modal-title-section">
+    outline: none;  <h2 id="modalCourseTitle">Course Title</h2>
+    border-color: #667eea;lass="modal-meta">
+    background: rgba(102, 126, 234, 0.1);as fa-user-graduate"></i> <span id="modalCourseInstructor">Instructor</span></span>
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);k"></i> <span id="modalCourseDuration">Duration</span></span>
+}                       <span><i class="fas fa-users"></i> <span id="modalCourseStudents">Students</span></span>
                     </div>
-                    
-                    <div class="form-group">
-                        <label><i class="fas fa-users"></i> Số học viên</label>
-                        <input type="number" id="studentCount" placeholder="VD: 1500" required>
-                    </div>
+.search-box input::placeholder {
+    color: rgba(255, 255, 255, 0.4);lose-modal" onclick="app.closeModal()">
+}                   <i class="fas fa-times"></i>
+                </button>
+.search-btn {/div>
+    position: absolute;
+    right: 8px;- Modal Content -->
+    top: 50%;div class="modal-content">
+    transform: translateY(-50%);on -->
+    background: var(--primary-gradient);n">
+    border: none;   <div class="video-wrapper">
+    padding: 10px 16px; <video id="mainVideo" class="main-video" controls>
+    border-radius: 8px;     <source src="" type="video/mp4">
+    color: white;           Your browser does not support the video tag.
+    cursor: pointer;    </video>
+    transition: all 0.3s ease;
+}
+                    <div class="video-controls">
+.search-btn:hover {     <div class="progress-section">
+    transform: translateY(-50%) scale(1.05);ress-header">
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.5);</h4>
+}                               <span class="progress-text" id="modalProgressText">0% hoàn thành</span>
+                            </div>
+.filter-group {             <div class="progress-bar-bg">
+    display: flex;              <div class="progress-bar-fill" id="modalProgressBar" style="width: 0%"></div>
+    gap: 12px;              </div>
+    flex-wrap: wrap;    </div>
+}
+                        <!-- Tabs -->
+.filter-select {        <div class="tabs-container">
+    padding: 14px 20px;     <button class="tab-btn active" data-tab="lessons">
+    background: rgba(255, 255, 255, 0.08);fas fa-list"></i> Bài học
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;    <button class="tab-btn" data-tab="info">
+    color: white;               <i class="fas fa-info-circle"></i> Thông tin
+    font-size: 14px;        </button>
+    font-weight: 500;       <button class="tab-btn" data-tab="slides">
+    cursor: pointer;            <i class="fas fa-file-powerpoint"></i> Slides
+    transition: all 0.3s ease;button>
+    min-width: 180px;   </div>
+}                   </div>
                 </div>
-                
-                <div class="form-group">
-                    <label><i class="fas fa-file-video"></i> Video (tùy chọn)</label>
-                    <div class="file-upload-area" id="videoUpload">
-                        <i class="fas fa-cloud-upload-alt"></i>
-                        <p>Kéo thả hoặc click để chọn video</p>
-                        <input type="file" id="videoFile" accept="video/*" hidden>
-                    </div>
-                    <div id="videoFileList" class="file-list"></div>
-                </div>
-                
-                <div class="form-group">
-                    <label><i class="fas fa-file-powerpoint"></i> Slides (tùy chọn)</label>
-                    <div class="file-upload-area" id="slideUpload">
-                        <i class="fas fa-cloud-upload-alt"></i>
-                        <p>Kéo thả hoặc click để chọn slides</p>
-                        <input type="file" id="slideFiles" accept=".pdf,.ppt,.pptx" multiple hidden>
-                    </div>
-                    <div id="slideFileList" class="file-list"></div>
-                </div>
-                
-                <div class="form-actions">
-                    <button type="button" class="btn-form btn-cancel" id="btnCancelUpload">
-                        <i class="fas fa-times"></i> Hủy
-                    </button>
-                    <button type="submit" class="btn-form btn-submit">
-                        <i class="fas fa-check"></i> Thêm khóa học
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
+.filter-select:focus {
+    outline: none;-- Sidebar Section -->
+    border-color: #667eea;="sidebar-section">
+    background: rgba(102, 126, 234, 0.1);
+}                   <div id="tab-lessons" class="tab-content active">
+                        <div class="lessons-header">
+.filter-select option {     <h3>Danh sách bài học</h3>
+    background: #1a1a2e;    <span class="lessons-count">24 bài học</span>
+    color: white;       </div>
+}                       <div id="lessonsList" class="lessons-list">
+                            <!-- Lessons will be rendered here -->
+/* ===================================
+   COURSE GRID      </div>
+   =================================== */
+                    <!-- Tab: Info -->
+.course-grid {      <div id="tab-info" class="tab-content">
+    display: grid;      <div class="course-description">
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 32px;              <p>Nội dung chi tiết về khóa học sẽ được hiển thị tại đây...</p>
+    margin-bottom: 40px;</div>
+}                   </div>
 
-    <!-- Scripts -->
-    <script src="js/app.js"></script>
-    <script src="js/slide-viewer.js"></script>
-    <script src="js/video-player.js"></script>
-    
-    <!-- ✅ Initialize event listeners after DOM loaded -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Hero buttons
+.course-list {      <!-- Tab: Slides -->
+    display: flex;  <div id="tab-slides" class="tab-content">
+    flex-direction: column;v class="course-description">
+    gap: 24px;              <h3>📊 Tài liệu Slides</h3>
+}                           <p>Slides bài giảng sẽ được hiển thị tại đây...</p>
+                        </div>
+/* ===================================
+   COURSE CARD  </div>
+   =================================== */
+        </div>
+.course-card {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    border-radius: 20px;====================
+    overflow: hidden;
+    box-shadow: var(--shadow-md);=========== -->
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;modal-overlay"></div>
+    border: 1px solid var(--border-color);
+    position: relative;ss="modal-close" id="btnCloseUploadModal" title="Đóng">
+    animation: fadeInUp 0.6s ease both;></i>
+}           </button>
+            
+@keyframes fadeInUp {s="modal-header">
+    from {      <i class="fas fa-cloud-upload-alt"></i>
+        opacity: 0;>Thêm khóa học mới</h2>
+        transform: translateY(30px);
+    }       
+    to {    <form id="uploadForm" class="upload-form">
+        opacity: 1;v class="form-group">
+        transform: translateY(0);ss="fas fa-book"></i> Tên khóa học</label>
+    }               <input type="text" id="courseName" placeholder="VD: Lập trình Python" required>
+}               </div>
+                
+.course-card:hover { class="form-group">
+    transform: translateY(-8px) scale(1.02);user"></i> Giảng viên</label>
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);ructorName" placeholder="VD: Nguyễn Văn A" required>
+    border-color: rgba(102, 126, 234, 0.5);
+}               
+                <div class="form-row">
+.course-card.deleting {v class="form-group">
+    animation: deleteSlide 0.5s ease forwards;a-clock"></i> Thời lượng</label>
+}                       <input type="text" id="courseDuration" placeholder="VD: 8 tuần" required>
+                    </div>
+@keyframes deleteSlide {
+    to {            <div class="form-group">
+        opacity: 0;     <label><i class="fas fa-users"></i> Số học viên</label>
+        transform: translateX(-100%) scale(0.8);"studentCount" placeholder="VD: 1500" required>
+    }               </div>
+}               </div>
+                
+/* Delete Button */v class="form-group">
+.btn-delete-course {<label><i class="fas fa-file-video"></i> Video (tùy chọn)</label>
+    position: absolute;v class="file-upload-area" id="videoUpload">
+    top: 16px;          <i class="fas fa-cloud-upload-alt"></i>
+    right: 16px;        <p>Kéo thả hoặc click để chọn video</p>
+    width: 40px;        <input type="file" id="videoFile" accept="video/*" hidden>
+    height: 40px;   </div>
+    background: rgba(239, 68, 68, 0.2);ist" class="file-list"></div>
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(239, 68, 68, 0.3);
+    border-radius: 50%;ass="form-group">
+    color: #ef4444; <label><i class="fas fa-file-powerpoint"></i> Slides (tùy chọn)</label>
+    cursor: pointer;<div class="file-upload-area" id="slideUpload">
+    transition: all 0.3s ease;ss="fas fa-cloud-upload-alt"></i>
+    display: flex;      <p>Kéo thả hoặc click để chọn slides</p>
+    align-items: center;<input type="file" id="slideFiles" accept=".pdf,.ppt,.pptx" multiple hidden>
+    justify-content: center;
+    z-index: 10;    <div id="slideFileList" class="file-list"></div>
+    opacity: 0; </div>
+}               
+                <div class="form-actions">
+.course-card:hover .btn-delete-course {n" class="btn-form btn-cancel" id="btnCancelUpload">
+    opacity: 1;         <i class="fas fa-times"></i> Hủy
+}                   </button>
+                    <button type="submit" class="btn-form btn-submit">
+.btn-delete-course:hover { class="fas fa-check"></i> Thêm khóa học
+    background: rgba(239, 68, 68, 0.4);
+    border-color: rgba(239, 68, 68, 0.6);
+    transform: rotate(90deg) scale(1.1);
+    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+}   </div>
+
+/* Thumbnail */s -->
+.course-thumbnail {/app.js"></script>
+    height: 200px;s/slide-viewer.js"></script>
+    display: flex;s/video-player.js"></script>
+    align-items: center;
+    justify-content: center;listeners after DOM loaded -->
+    position: relative;
+    overflow: hidden;ventListener('DOMContentLoaded', () => {
+}           // Hero buttons
             const btnAddCourse = document.getElementById('btnAddCourse');
-            const btnReset = document.getElementById('btnReset');
-            const btnSearch = document.getElementById('btnSearch');
-            
-            if (btnAddCourse) {
-                btnAddCourse.addEventListener('click', () => {
-                    if (window.app) window.app.openUploadModal();
+.course-icon {nst btnReset = document.getElementById('btnReset');
+    font-size: 80px;nSearch = document.getElementById('btnSearch');
+    z-index: 1;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+    transition: transform 0.4s ease;tListener('click', () => {
+}                   if (window.app) window.app.openUploadModal();
                 });
-            }
-            
-            if (btnReset) {
+.course-card:hover .course-icon {
+    transform: scale(1.1) rotate(5deg);
+}           if (btnReset) {
                 btnReset.addEventListener('click', () => {
-                    if (window.app) window.app.resetToSampleCourses();
-                });
-            }
-            
+/* Course Body */   if (window.app) window.app.resetToSampleCourses();
+.course-body {  });
+    padding: 25px;
+}           
             if (btnSearch) {
-                btnSearch.addEventListener('click', () => {
-                    if (window.app) window.app.searchCourses();
+.course-title { btnSearch.addEventListener('click', () => {
+    font-size: 20px;if (window.app) window.app.searchCourses();
+    font-weight: 700;
+    color: white;
+    margin-bottom: 12px;
+    line-height: 1.4;close buttons
+    display: -webkit-box;eModal = document.getElementById('btnCloseModal');
+    -webkit-line-clamp: 2;UploadModal = document.getElementById('btnCloseUploadModal');
+    -webkit-box-orient: vertical; = document.getElementById('btnCancelUpload');
+    overflow: hidden;
+    text-overflow: ellipsis;l) {
+    min-height: 56px;oseModal.addEventListener('click', () => {
+}                   if (window.app) window.app.closeModal();
                 });
-            }
-            
-            // Modal close buttons
-            const btnCloseModal = document.getElementById('btnCloseModal');
-            const btnCloseUploadModal = document.getElementById('btnCloseUploadModal');
-            const btnCancelUpload = document.getElementById('btnCancelUpload');
-            
-            if (btnCloseModal) {
-                btnCloseModal.addEventListener('click', () => {
-                    if (window.app) window.app.closeModal();
-                });
-            }
-            
-            if (btnCloseUploadModal) {
-                btnCloseUploadModal.addEventListener('click', () => {
-                    if (window.app) window.app.closeModal();
-                });
-            }
-            
+.course-instructor {
+    color: var(--text-secondary);
+    font-size: 14px;loseUploadModal) {
+    margin-bottom: 15px;UploadModal.addEventListener('click', () => {
+    display: flex;  if (window.app) window.app.closeModal();
+    align-items: center;
+    gap: 8px;
+}           
             if (btnCancelUpload) {
-                btnCancelUpload.addEventListener('click', () => {
-                    if (window.app) window.app.closeModal();
-                });
-            }
+.course-instructor i {celUpload.addEventListener('click', () => {
+    color: #667eea; if (window.app) window.app.closeModal();
+    font-size: 16px;
+}           }
             
-            console.log('✅ Hero button event listeners attached');
-        });
-    </script>
-</body>
-</html>
+.course-meta {nsole.log('✅ Hero button event listeners attached');
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+    padding-bottom: 15px;    border-bottom: 1px solid rgba(255, 255, 255, 0.1);}.course-meta span {    display: flex;    align-items: center;    gap: 6px;    font-size: 13px;    color: rgba(255, 255, 255, 0.6);}.course-meta i {    color: #667eea;    font-size: 14px;}/* Progress Section */.progress-section {    margin-bottom: 20px;}.progress-bar-bg {    width: 100%;    height: 8px;    background: rgba(255, 255, 255, 0.1);    border-radius: 20px;    overflow: hidden;    margin-bottom: 10px;}.progress-bar-fill {    height: 100%;    background: var(--primary-gradient);    border-radius: 20px;    transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);    box-shadow: 0 0 10px rgba(102, 126, 234, 0.5);}.progress-text {    font-size: 13px;    color: rgba(255, 255, 255, 0.6);    text-align: right;    font-weight: 600;}/* Course Actions */.course-actions {    display: flex;    gap: 12px;    margin-top: 20px;    padding-top: 20px;    border-top: 1px solid rgba(255, 255, 255, 0.08);}.btn-action {    flex: 1;    padding: 13px 18px;    border: none;    border-radius: 10px;    font-weight: 600;    font-size: 14px;    cursor: pointer;    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);    display: flex;    align-items: center;    justify-content: center;    gap: 8px;    position: relative;    overflow: hidden;}.btn-action svg {    transition: transform 0.3s ease;}.btn-primary {    background: var(--primary-gradient);    color: white;    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);}.btn-primary::before {    content: '';    position: absolute;    inset: 0;    background: linear-gradient(135deg, #7c8ff0 0%, #8b5ab5 100%);    opacity: 0;    transition: opacity 0.3s ease;}.btn-primary:hover {    transform: translateY(-2px);    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);}.btn-primary:hover::before {    opacity: 1;}.btn-primary:hover svg {    transform: translateX(3px);}.btn-secondary {    background: rgba(255, 255, 255, 0.08);    color: white;    border: 1.5px solid rgba(255, 255, 255, 0.2);}.btn-secondary:hover {    background: rgba(255, 255, 255, 0.15);    border-color: rgba(255, 255, 255, 0.35);    transform: translateY(-2px);}.btn-secondary:hover svg {    transform: scale(1.1);}/* ===================================   PAGINATION   =================================== */.pagination {    display: flex;    justify-content: center;    align-items: center;    gap: 16px;    margin-top: 40px;    padding: 32px;    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);    border-radius: 20px;    box-shadow: var(--shadow-md);}.page-btn {    padding: 12px 24px;    background: rgba(255, 255, 255, 0.08);    border: 2px solid rgba(255, 255, 255, 0.15);    border-radius: 12px;    color: white;    cursor: pointer;    transition: all 0.3s ease;    font-weight: 600;    display: flex;    align-items: center;    gap: 8px;}.page-btn:hover:not(:disabled) {    background: rgba(255, 255, 255, 0.15);    border-color: rgba(255, 255, 255, 0.3);    transform: translateY(-2px);}.page-btn:disabled {    opacity: 0.3;    cursor: not-allowed;}.page-info {    padding: 12px 24px;    background: var(--primary-gradient);    border-radius: 12px;    font-weight: 600;    min-width: 120px;    text-align: center;}/* ===================================   MODAL BASE   =================================== */.modal {    display: none;    position: fixed;    top: 0;    left: 0;    width: 100%;    height: 100%;    z-index: 10000;    animation: fadeIn 0.3s ease;}.modal.active {    display: flex;    align-items: center;    justify-content: center;}.modal-overlay {    position: absolute;    top: 0;    left: 0;    width: 100%;    height: 100%;    background: rgba(0, 0, 0, 0.85);    backdrop-filter: blur(10px);}.modal-container {    position: relative;    width: 95%;    max-width: 1400px;    height: 90vh;    background: linear-gradient(145deg, #1a1f3a 0%, #0f1419 100%);    border-radius: 24px;    box-shadow: 0 25px 100px rgba(0, 0, 0, 0.5);    overflow: hidden;    display: flex;    flex-direction: column;    animation: slideUp 0.4s ease;    border: 1px solid rgba(255, 255, 255, 0.1);}.modal-header {    padding: 24px 32px;    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);    border-bottom: 1px solid rgba(255, 255, 255, 0.1);    display: flex;    justify-content: space-between;    align-items: center;}.modal-title-section h2 {    font-size: 28px;    font-weight: 700;    color: #fff;    margin-bottom: 8px;}.modal-meta {    display: flex;    gap: 24px;    font-size: 14px;    color: rgba(255, 255, 255, 0.7);}.modal-meta span {    display: flex;    align-items: center;    gap: 6px;}.btn-close-modal {    width: 44px;    height: 44px;    border-radius: 12px;    background: rgba(255, 255, 255, 0.1);    border: none;    color: #fff;    font-size: 24px;    cursor: pointer;    transition: all 0.3s ease;    display: flex;    align-items: center;    justify-content: center;}.btn-close-modal:hover {    background: rgba(255, 59, 48, 0.2);    transform: scale(1.1);}/* ===================================   MODAL CONTENT LAYOUT=================================== */.modal-content {    display: grid;    grid-template-columns: 1fr 420px;    gap: 24px;    padding: 24px 32px;    flex: 1;    overflow: hidden;}/* ===================================   VIDEO SECTION - LARGER=================================== */.video-section {    display: flex;    flex-direction: column;    gap: 20px;    overflow: hidden;}.video-wrapper {    background: #000;    border-radius: 16px;    overflow: hidden;    position: relative;    aspect-ratio: 16 / 9;    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);}.main-video {    width: 100%;    height: 100%;    object-fit: contain;    background: #000;}.video-controls {    background: rgba(15, 20, 25, 0.95);    padding: 20px;    border-radius: 16px;    border: 1px solid rgba(255, 255, 255, 0.1);}.progress-section {    margin-bottom: 16px;}.progress-header {    display: flex;    justify-content: space-between;    align-items: center;    margin-bottom: 12px;}.progress-header h4 {    font-size: 14px;    font-weight: 600;    color: rgba(255, 255, 255, 0.7);    text-transform: uppercase;    letter-spacing: 1px;}.progress-text {    font-size: 16px;    font-weight: 600;    color: #4facfe;}.progress-bar-bg {    height: 8px;    background: rgba(255, 255, 255, 0.1);    border-radius: 10px;    overflow: hidden;}.progress-bar-fill {    height: 100%;    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);    border-radius: 10px;    transition: width 0.5s ease;}/* ===================================   TABS SECTION=================================== */.tabs-container {    display: flex;    gap: 12px;    margin-top: 16px;}.tab-btn {    flex: 1;    padding: 12px 20px;    background: rgba(255, 255, 255, 0.05);    border: 1px solid rgba(255, 255, 255, 0.1);    border-radius: 12px;    color: rgba(255, 255, 255, 0.7);    font-size: 14px;    font-weight: 600;    cursor: pointer;    transition: all 0.3s ease;    display: flex;    align-items: center;    justify-content: center;    gap: 8px;}.tab-btn:hover {    background: rgba(255, 255, 255, 0.1);    border-color: rgba(255, 255, 255, 0.2);}.tab-btn.active {    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);    border-color: transparent;    color: #fff;}/* ===================================   SIDEBAR SECTION=================================== */.sidebar-section {    display: flex;    flex-direction: column;    gap: 20px;    overflow-y: auto;    padding-right: 8px;}.sidebar-section::-webkit-scrollbar {    width: 6px;}.sidebar-section::-webkit-scrollbar-track {    background: rgba(255, 255, 255, 0.05);    border-radius: 10px;}.sidebar-section::-webkit-scrollbar-thumb {    background: rgba(255, 255, 255, 0.2);    border-radius: 10px;}.tab-content {    display: none;    animation: fadeIn 0.3s ease;}.tab-content.active {    display: block;}/* ===================================   LESSONS LIST=================================== */.lessons-header {    display: flex;    justify-content: space-between;    align-items: center;    margin-bottom: 16px;}.lessons-header h3 {    font-size: 18px;    font-weight: 700;    color: #fff;}.lessons-count {    font-size: 14px;    color: rgba(255, 255, 255, 0.6);}.lessons-list {    display: flex;    flex-direction: column;    gap: 12px;}.lesson-item {    background: rgba(255, 255, 255, 0.05);    border: 1px solid rgba(255, 255, 255, 0.1);    border-radius: 12px;    padding: 16px;    cursor: pointer;    transition: all 0.3s ease;    display: flex;    gap: 16px;    align-items: center;}.lesson-item:hover {    background: rgba(255, 255, 255, 0.08);    border-color: rgba(102, 126, 234, 0.5);    transform: translateX(4px);}.lesson-item.completed {    background: rgba(67, 233, 123, 0.1);    border-color: rgba(67, 233, 123, 0.3);}.lesson-number {    width: 40px;    height: 40px;    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);    border-radius: 10px;    display: flex;    align-items: center;    justify-content: center;    font-size: 16px;    font-weight: 700;    color: #fff;    flex-shrink: 0;}.lesson-item.completed .lesson-number {    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);}.lesson-info {    flex: 1;}.lesson-info h4 {    font-size: 15px;    font-weight: 600;    color: #fff;    margin-bottom: 4px;}.lesson-info span {    font-size: 13px;    color: rgba(255, 255, 255, 0.6);}.lesson-status {    font-size: 20px;    color: rgba(255, 255, 255, 0.4);}.lesson-item.completed .lesson-status {    color: #43e97b;}/* ===================================   COURSE INFO TAB=================================== */.course-description {    background: rgba(255, 255, 255, 0.05);    border: 1px solid rgba(255, 255, 255, 0.1);    border-radius: 12px;    padding: 20px;}.course-description h3 {    font-size: 18px;    font-weight: 700;    color: #fff;    margin-bottom: 12px;}.course-description p {    font-size: 14px;    line-height: 1.6;    color: rgba(255, 255, 255, 0.7);}/* ===================================   RESPONSIVE=================================== */@media (max-width: 1200px) {    .modal-content {        grid-template-columns: 1fr;        gap: 20px;    }        .sidebar-section {        max-height: 400px;    }}@media (max-width: 768px) {    .modal-container {        width: 100%;        height: 100vh;        border-radius: 0;    }        .modal-header {        padding: 16px 20px;    }        .modal-title-section h2 {        font-size: 20px;    }        .modal-content {        padding: 16px 20px;    }}/* ===================================   ANIMATIONS=================================== */@keyframes slideUp {    from {        opacity: 0;        transform: translateY(50px);    }    to {        opacity: 1;        transform: translateY(0);    }}@keyframes fadeIn {    from {        opacity: 0;    }    to {        opacity: 1;    }}

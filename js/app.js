@@ -462,14 +462,21 @@ class CourseApp {
 
     renderLessons(course) {
         const lessonsList = document.getElementById('lessonsList');
+        const lessonsCount = document.querySelector('.lessons-count');
+        
         if (!lessonsList || !course.lessons) return;
+
+        // Update count
+        if (lessonsCount) {
+            lessonsCount.textContent = `${course.lessons.length} bài học`;
+        }
 
         lessonsList.innerHTML = course.lessons.map((lesson, index) => `
             <div class="lesson-item ${lesson.completed ? 'completed' : ''}" onclick="app.playLesson(${lesson.id})">
                 <div class="lesson-number">${index + 1}</div>
                 <div class="lesson-info">
                     <h4>${lesson.title}</h4>
-                    <span>${lesson.duration}</span>
+                    <span><i class="fas fa-clock"></i> ${lesson.duration}</span>
                 </div>
                 <div class="lesson-status">
                     ${lesson.completed ? '<i class="fas fa-check-circle"></i>' : '<i class="fas fa-play-circle"></i>'}
