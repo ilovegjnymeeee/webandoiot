@@ -875,4 +875,29 @@ class CourseApp {
                 document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
                 e.currentTarget.classList.add('active');
                 const content = document.getElementById(`tab-${tabName}`);
-                if
+                if (content) content.classList.add('active');
+            });
+        });
+
+        // ✅ THÊM: Reset về mẫu (chỉ để test)
+        document.getElementById('resetBtn').addEventListener('click', () => {
+            this.resetToSampleCourses();
+        });
+    }
+
+    // ✅ THÊM: Reset về mẫu (chỉ để test)
+    resetToSampleCourses() {
+        this.initializeSampleCourses();
+        this.renderCourses();
+        this.showNotification('🔄 Đã reset về khóa học mẫu', 'success');
+    }
+} // ✅ THÊM DẤU ĐÓNG NÀY
+
+// ✅ KHỞI TẠO APP
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        window.app = new CourseApp();
+    });
+} else {
+    window.app = new CourseApp();
+}
