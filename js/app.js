@@ -8,16 +8,48 @@ class CourseApp {
         this.currentSort = 'newest';
         this.videoPlayer = null;
         this.slideViewer = null;
-        this.courseToDelete = null; // ✅ THÊM
+        this.courseToDelete = null;
+        this.adminPassword = '1000';
+        this.pendingAction = null;
         this.init();
     }
 
     init() {
-        this.loadSampleCourses();
+        // ✅ THAY ĐỔI: Load courses từ localStorage trước
+        this.loadCoursesFromStorage();
         this.renderCourses();
         this.attachEventListeners();
         this.loadProgress();
         console.log('🚀 CourseApp initialized!');
+    }
+
+    // ✅ THÊM: Load courses từ localStorage
+    loadCoursesFromStorage() {
+        const savedCourses = localStorage.getItem('courses');
+        
+        if (savedCourses) {
+            try {
+                this.courses = JSON.parse(savedCourses);
+                console.log(`📂 Loaded ${this.courses.length} courses from storage`);
+            } catch (e) {
+                console.error('Error loading courses:', e);
+                this.loadSampleCourses();
+            }
+        } else {
+            // Lần đầu tiên, load sample courses
+            this.loadSampleCourses();
+            this.saveCoursesToStorage();
+        }
+    }
+
+    // ✅ THÊM: Lưu courses vào localStorage
+    saveCoursesToStorage() {
+        try {
+            localStorage.setItem('courses', JSON.stringify(this.courses));
+            console.log('💾 Courses saved to storage');
+        } catch (e) {
+            console.error('Error saving courses:', e);
+        }
     }
 
     loadSampleCourses() {
@@ -554,237 +586,6 @@ class CourseApp {
         }, 3000);
     }
 
-    saveProgress() {
-        const progressData = this.courses.map(c => ({ 
-            id: c.id, 
-            progress: c.progress,
-            lastWatched: c.currentLessonIndex || 0
-        }));
-        localStorage.setItem('courseProgress', JSON.stringify(progressData));
-        console.log('💾 Progress saved!');
-    }
-
-    loadProgress() {
-        const saved = localStorage.getItem('courseProgress');
-        if (saved) {
-            try {
-                const progressData = JSON.parse(saved);
-                progressData.forEach(p => {
-                    const course = this.courses.find(c => c.id === p.id);
-                    if (course) {
-                        course.progress = p.progress || 0;
-                        course.currentLessonIndex = p.lastWatched || 0;
-                    }
-                });
-                console.log('📂 Progress loaded!');
-            } catch (e) {
-                console.error('Error loading progress:', e);
-            }
-        }
-    }
-
-    attachEventListeners() {
-        // Modal close buttons
-        document.querySelectorAll('.modal-close').forEach(btn => {
-            btn.addEventListener('click', () => this.closeModal());
-        });
-
-        document.querySelectorAll('.modal-overlay').forEach(overlay => {
-            overlay.addEventListener('click', () => this.closeModal());
-        });
-
-        // Escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') this.closeModal();
-        });
-
-        // Filter & Sort
-        const filterStatus = document.getElementById('filterStatus');
-        if (filterStatus) {
-            filterStatus.addEventListener('change', (e) => {
-                this.currentFilter = e.target.value;
-                this.currentPage = 1;
-                this.renderCourses();
-            });
-        }
-
-        const filterSort = document.getElementById('filterSort');
-        if (filterSort) {
-            filterSort.addEventListener('change', (e) => {
-                this.currentSort = e.target.value;
-                this.currentPage = 1;
-                this.renderCourses();
-            });
-        }
-
-        // Search
-        const searchInput = document.getElementById('searchInput');
-        if (searchInput) {
-            searchInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') this.searchCourses();
-            });
-        }
-
-        // View toggle
-        document.querySelectorAll('.view-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
-                e.currentTarget.classList.add('active');
-                
-                const view = e.currentTarget.dataset.view;
-                const grid = document.getElementById('courseGrid');
-                grid.className = view === 'list' ? 'course-list' : 'course-grid';
-            });
-        });
-
-        // Pagination
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-
-        if (prevBtn) {
-            prevBtn.addEventListener('click', () => {
-                if (this.currentPage > 1) this.goToPage(this.currentPage - 1);
-            });
-        }
-
-        if (nextBtn) {
-            nextBtn.addEventListener('click', () => {
-                const totalPages = Math.ceil(this.getFilteredCourses().length / this.coursesPerPage);
-                if (this.currentPage < totalPages) this.goToPage(this.currentPage + 1);
-            });
-        }
-
-        // Tab switching
-        document.querySelectorAll('.tab-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const tabName = e.currentTarget.dataset.tab;
-                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-                e.currentTarget.classList.add('active');
-                const content = document.getElementById(`tab-${tabName}`);
-                if (content) content.classList.add('active');
-            });
-        });
-
-        // Upload form
-        this.setupUploadForm();
-
-        // Video progress tracking
-        const video = document.getElementById('mainVideo');
-        if (video) {
-            video.addEventListener('timeupdate', () => {
-                if (this.currentCourse && video.duration) {
-                    const progress = (video.currentTime / video.duration) * 100;
-                    this.currentCourse.progress = Math.min(Math.max(this.currentCourse.progress, progress), 100);
-                }
-            });
-
-            video.addEventListener('ended', () => {
-                this.showNotification('✅ Đã hoàn thành bài học!', 'success');
-                this.saveProgress();
-            });
-        }
-
-        // ✅ THÊM: Delete confirmation keyboard
-        document.addEventListener('keydown', (e) => {
-            const confirmModal = document.getElementById('confirmDeleteModal');
-            if (confirmModal && confirmModal.classList.contains('active')) {
-                if (e.key === 'Enter') {
-                    e.preventDefault();
-                    this.deleteCourse();
-                } else if (e.key === 'Escape') {
-                    e.preventDefault();
-                    this.cancelDelete();
-                }
-            }
-        });
-    }
-
-    setupUploadForm() {
-        const uploadForm = document.getElementById('uploadForm');
-        if (uploadForm) {
-            uploadForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                this.handleUpload();
-            });
-        }
-
-        this.setupFileUpload('videoFile', 'videoUploadArea', 'videoFileList');
-        this.setupFileUpload('slideFile', 'slideUploadArea', 'slideFileList');
-    }
-
-    setupFileUpload(inputId, areaId, listId) {
-        const input = document.getElementById(inputId);
-        const area = document.getElementById(areaId);
-        const list = document.getElementById(listId);
-
-        if (!input || !area) return;
-
-        area.addEventListener('click', () => input.click());
-
-        area.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            area.style.borderColor = '#6366f1';
-            area.style.background = 'rgba(99, 102, 241, 0.1)';
-        });
-
-        area.addEventListener('dragleave', () => {
-            area.style.borderColor = 'rgba(255, 255, 255, 0.2)';
-            area.style.background = 'rgba(255, 255, 255, 0.03)';
-        });
-
-        area.addEventListener('drop', (e) => {
-            e.preventDefault();
-            area.style.borderColor = 'rgba(255, 255, 255, 0.2)';
-            area.style.background = 'rgba(255, 255, 255, 0.03)';
-            this.displayFiles(e.dataTransfer.files, list);
-        });
-
-        input.addEventListener('change', (e) => {
-            this.displayFiles(e.target.files, list);
-        });
-    }
-
-    displayFiles(files, listElement) {
-        const fileArray = Array.from(files);
-        const html = fileArray.map((file) => `
-            <div class="file-item">
-                <span><i class="fas fa-file"></i> ${file.name} (${this.formatFileSize(file.size)})</span>
-                <button type="button" onclick="this.closest('.file-item').remove()">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-        `).join('');
-        listElement.innerHTML = html;
-    }
-
-    formatFileSize(bytes) {
-        if (bytes === 0) return '0 Bytes';
-        const k = 1024;
-        const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-        const i = Math.floor(Math.log(bytes) / Math.log(k));
-        return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
-    }
-
-    handleUpload() {
-        const courseName = document.getElementById('courseName').value;
-        const courseDescription = document.getElementById('courseDescriptionInput').value;
-
-        if (!courseName) {
-            this.showNotification('⚠️ Nhập tên khóa học', 'warning');
-            return;
-        }
-
-        this.showNotification('🚀 Đang tải lên...', 'info');
-
-        setTimeout(() => {
-            this.showNotification('✅ Tải lên thành công!', 'success');
-            this.closeModal();
-            document.getElementById('uploadForm').reset();
-            document.querySelectorAll('.file-list').forEach(list => list.innerHTML = '');
-        }, 2000);
-    }
-
     // ✅ THÊM: Hiển thị modal xác nhận xóa
     confirmDeleteCourse(courseId) {
         const course = this.courses.find(c => c.id === courseId);
@@ -859,7 +660,6 @@ class CourseApp {
         const courseId = this.courseToDelete.id;
         const courseName = this.courseToDelete.title;
 
-        // Find course card element
         const courseCards = document.querySelectorAll('.course-card');
         let cardIndex = -1;
         
@@ -870,41 +670,48 @@ class CourseApp {
         
         cardIndex = coursesToShow.findIndex(c => c.id === courseId);
 
-        // Animate deletion
         if (cardIndex >= 0 && courseCards[cardIndex]) {
             courseCards[cardIndex].classList.add('deleting');
         }
 
-        // Wait for animation then delete
         setTimeout(() => {
-            // Remove from courses array
             const index = this.courses.findIndex(c => c.id === courseId);
             if (index !== -1) {
                 this.courses.splice(index, 1);
             }
 
-            // Close modal
             this.cancelDelete();
-
-            // Re-render courses
             this.renderCourses();
-
-            // Save to localStorage
+            
+            // ✅ THÊM: Lưu courses sau khi xóa
+            this.saveCoursesToStorage();
             this.saveProgress();
 
-            // Show notification
             this.showNotification(`🗑️ Đã xóa khóa học "${courseName}"`, 'success');
-
             console.log(`🗑️ Deleted course: ${courseName} (ID: ${courseId})`);
         }, 500);
     }
-}
 
-// Initialize app when DOM is ready
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-        window.app = new CourseApp();
-    });
-} else {
-    window.app = new CourseApp();
-}
+    // ✅ CẬP NHẬT: Lưu cả courses và progress
+    saveProgress() {
+        const progressData = this.courses.map(c => ({ 
+            id: c.id, 
+            progress: c.progress,
+            lastWatched: c.currentLessonIndex || 0
+        }));
+        localStorage.setItem('courseProgress', JSON.stringify(progressData));
+        
+        // Lưu courses luôn
+        this.saveCoursesToStorage();
+        
+        console.log('💾 Progress saved!');
+    }
+
+    loadProgress() {
+        const saved = localStorage.getItem('courseProgress');
+        if (saved) {
+            try {
+                const progressData = JSON.parse(saved);
+                progressData.forEach(p => {
+                    const course = this.courses.find(c => c.id === p.id);
+                    if
