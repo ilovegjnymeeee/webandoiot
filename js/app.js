@@ -111,14 +111,17 @@ class CourseApp {
             const progress = this.calculateProgress(course);
             const statusClass = this.getStatusClass(progress);
             const statusText = this.getStatusText(progress);
+            const statusIcon = statusClass === 'completed' ? 'fa-check-circle' : 
+                              statusClass === 'in-progress' ? 'fa-play-circle' : 'fa-clock';
 
             return `
                 <div class="course-card ${statusClass}" data-course-id="${course.id}">
                     <div class="course-thumbnail">
-                        <div class="course-icon">${course.thumbnail || '🎓'}</div>
+                        <div class="course-icon">${course.thumbnail}</div>
                         <div class="course-overlay">
                             <button class="btn-play" onclick="courseApp.openCourse(${course.id})">
-                                <i class="fas fa-play"></i> Học ngay
+                                <i class="fas fa-play"></i>
+                                Học ngay
                             </button>
                         </div>
                     </div>
@@ -127,25 +130,31 @@ class CourseApp {
                         <div class="course-header">
                             <h3 class="course-title">${course.title}</h3>
                             <div class="course-actions">
-                                <button class="btn-icon btn-delete" onclick="courseApp.confirmDelete(${course.id})" title="Xóa">
-                                    <i class="fas fa-trash"></i>
+                                <button class="btn-icon btn-delete" onclick="courseApp.confirmDelete(${course.id})" title="Xóa khóa học">
+                                    <i class="fas fa-trash-alt"></i>
                                 </button>
                             </div>
                         </div>
                         
                         <div class="course-meta">
-                            <span><i class="fas fa-user"></i> ${course.instructor}</span>
-                            <span><i class="fas fa-clock"></i> ${course.duration}</span>
+                            <span>
+                                <i class="fas fa-user-tie"></i>
+                                ${course.instructor}
+                            </span>
+                            <span>
+                                <i class="fas fa-clock"></i>
+                                ${course.duration}
+                            </span>
                         </div>
 
                         <div class="course-stats">
                             <div class="stat-item">
                                 <i class="fas fa-video"></i>
-                                <span>${course.lessons?.length || 0} bài</span>
+                                <span>${course.lessons?.length || 0} bài học</span>
                             </div>
                             <div class="stat-item">
                                 <i class="fas fa-users"></i>
-                                <span>${course.students || 0}</span>
+                                <span>${course.students || 0} học viên</span>
                             </div>
                         </div>
 
@@ -157,7 +166,7 @@ class CourseApp {
                         </div>
 
                         <div class="course-status ${statusClass}">
-                            <i class="fas ${statusClass === 'completed' ? 'fa-check-circle' : statusClass === 'in-progress' ? 'fa-play-circle' : 'fa-clock'}"></i>
+                            <i class="fas ${statusIcon}"></i>
                             ${statusText}
                         </div>
                     </div>
@@ -389,6 +398,78 @@ class CourseApp {
 
     closeUploadModal() {
         // ... existing code ...
+    }
+
+    confirmDelete(courseId) {
+        this.deleteTargetId = courseId;
+        const course = this.courses.find(c => c.id === courseId);
+        
+        if (!course) return;
+        
+        const modal = document.getElementById('confirmDeleteModal');
+        if (modal) {
+            // Update modal content
+            const modalBody = modal.querySelector('.modal-body');
+            modalBody.innerHTML = `
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <div style="font-size: 60px; margin-bottom: 15px;">${course.thumbnail}</div>
+                    <h3 style="margin: 0 0 10px 0; color: #fff;">${course.title}</h3>
+                    <p style="color: rgba(255, 255, 255, 0.7); margin: 0;">
+                        <i class="fas fa-user"></i> ${course.instructor} • 
+                        <i class="fas fa-video"></i> ${course.lessons?.length || 0} bài học
+                    </p>
+                </div>
+                <p style="text-align: center; color: rgba(255, 255, 255, 0.9); margin-bottom: 10px;">
+                    Bạn có chắc chắn muốn xóa khóa học này?
+                </p>
+                <p class="text-warning" style="text-align: center; color: #ff3b30; font-weight: 600;">
+                    <i class="fas fa-exclamation-triangle"></i> Hành động này không thể hoàn tác!
+                </p>
+                
+                <div class="form-actions" style="margin-top: 30px;">
+                    <button class="btn-secondary" onclick="courseApp.closeConfirmDeleteModal()">
+                        <i class="fas fa-times"></i> Hủy
+                    </button>
+                    <button class="btn-danger" onclick="courseApp.deleteCourse()">
+                        <i class="fas fa-trash-alt"></i> Xóa khóa học
+                    </button>
+                </div>
+            `;
+            
+            modal.style.display = 'block';
+        }
+    }
+
+    deleteCourse() {
+        if (!this.deleteTargetId) return;
+        
+        // Remove from courses array
+        this.courses = this.courses.filter(c => c.id !== this.deleteTargetId);
+        this.filteredCourses = this.filteredCourses.filter(c => c.id !== this.deleteTargetId);
+        
+        // Save to localStorage
+        this.saveCourses();
+        
+        // Re-render
+        this.renderCourses();
+        this.updateStats();
+        this.renderPagination();
+        
+        // Close modal
+        this.closeConfirmDeleteModal();
+        
+        // Show notification
+        this.showNotification('Đã xóa khóa học thành công!', 'success');
+        
+        this.deleteTargetId = null;
+    }
+
+    closeConfirmDeleteModal() {
+        const modal = document.getElementById('confirmDeleteModal');
+        if (modal) {
+            modal.style.display = 'none';
+        }
+        this.deleteTargetId = null;
     }
 }
 
