@@ -15,14 +15,12 @@ class CourseApp {
     }
 
     init() {
-        // ✅ CHỈ LOAD TỪ STORAGE, KHÔNG LOAD SAMPLE NỮA
         this.loadCoursesFromStorage();
         this.renderCourses();
         this.attachEventListeners();
         console.log('🚀 CourseApp initialized!');
     }
 
-    // ✅ SỬA LẠI: Load courses từ localStorage HOẶC tạo mới lần đầu
     loadCoursesFromStorage() {
         const savedCourses = localStorage.getItem('appCourses');
         
@@ -30,21 +28,17 @@ class CourseApp {
             try {
                 this.courses = JSON.parse(savedCourses);
                 console.log(`📂 Loaded ${this.courses.length} courses from localStorage`);
-                
-                // Load progress riêng
                 this.loadProgress();
             } catch (e) {
                 console.error('❌ Error loading courses:', e);
                 this.initializeSampleCourses();
             }
         } else {
-            // Lần đầu tiên: tạo sample courses
             console.log('🆕 First time, creating sample courses...');
             this.initializeSampleCourses();
         }
     }
 
-    // ✅ RENAME: Tạo sample courses và lưu ngay
     initializeSampleCourses() {
         this.courses = [
             {
@@ -91,7 +85,7 @@ class CourseApp {
                 progress: 0,
                 thumbnail: '📐',
                 gradient: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
-                description: 'Tích phân bội, tích phân đường và tích phân mặt.',
+                description: 'Tích phân bội, tích phân đường và tích phân mặt. Nắm vững các phương pháp tính toán tích phân đa biến.',
                 category: 'Toán học',
                 duration: '14 tuần',
                 students: 980,
@@ -102,9 +96,17 @@ class CourseApp {
                         duration: '20:15', 
                         videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4',
                         description: 'Tích phân kép và tích phân bội ba'
+                    },
+                    { 
+                        title: 'Bài 2: Tích phân đường', 
+                        duration: '25:30', 
+                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4',
+                        description: 'Tích phân đường loại 1 và loại 2'
                     }
                 ],
-                resources: []
+                resources: [
+                    { name: 'Công thức tổng hợp.pdf', size: '1.8 MB', type: 'pdf' }
+                ]
             },
             {
                 id: Date.now() + 3,
@@ -113,13 +115,29 @@ class CourseApp {
                 progress: 0,
                 thumbnail: '⚡',
                 gradient: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
-                description: 'Điện trường, từ trường và sóng điện từ.',
+                description: 'Điện trường, từ trường và sóng điện từ. Nghiên cứu các hiện tượng điện từ và ứng dụng trong đời sống.',
                 category: 'Vật lý',
                 duration: '16 tuần',
                 students: 1520,
                 rating: 4.9,
-                lessons: [],
-                resources: []
+                lessons: [
+                    { 
+                        title: 'Bài 1: Điện trường', 
+                        duration: '30:00', 
+                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4',
+                        description: 'Khái niệm điện trường, cường độ điện trường'
+                    },
+                    { 
+                        title: 'Bài 2: Từ trường', 
+                        duration: '28:15', 
+                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4',
+                        description: 'Lực từ, cảm ứng từ và định luật Ampere'
+                    }
+                ],
+                resources: [
+                    { name: 'Thí nghiệm điện từ.pdf', size: '3.2 MB', type: 'pdf' },
+                    { name: 'Video thí nghiệm.mp4', size: '45 MB', type: 'video' }
+                ]
             },
             {
                 id: Date.now() + 4,
@@ -128,13 +146,28 @@ class CourseApp {
                 progress: 0,
                 thumbnail: '📊',
                 gradient: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
-                description: 'Biến cố ngẫu nhiên, phân phối xác suất.',
+                description: 'Biến cố ngẫu nhiên, phân phối xác suất và thống kê mô tả. Ứng dụng trong phân tích dữ liệu.',
                 category: 'Toán học',
                 duration: '10 tuần',
                 students: 2100,
                 rating: 4.6,
-                lessons: [],
-                resources: []
+                lessons: [
+                    { 
+                        title: 'Bài 1: Biến cố và xác suất', 
+                        duration: '22:00', 
+                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4',
+                        description: 'Không gian mẫu, biến cố và tính xác suất'
+                    },
+                    { 
+                        title: 'Bài 2: Phân phối xác suất', 
+                        duration: '26:30', 
+                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4',
+                        description: 'Các loại phân phối xác suất thường gặp'
+                    }
+                ],
+                resources: [
+                    { name: 'Bảng phân phối.pdf', size: '800 KB', type: 'pdf' }
+                ]
             },
             {
                 id: Date.now() + 5,
@@ -143,13 +176,29 @@ class CourseApp {
                 progress: 0,
                 thumbnail: '💻',
                 gradient: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
-                description: 'Lập trình C/C++ và cấu trúc dữ liệu cơ bản.',
+                description: 'Lập trình C/C++ và cấu trúc dữ liệu cơ bản. Nền tảng lập trình cho sinh viên kỹ thuật.',
                 category: 'Lập trình',
                 duration: '15 tuần',
                 students: 3200,
                 rating: 4.8,
-                lessons: [],
-                resources: []
+                lessons: [
+                    { 
+                        title: 'Bài 1: Giới thiệu lập trình', 
+                        duration: '18:45', 
+                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4',
+                        description: 'Cú pháp cơ bản của C/C++'
+                    },
+                    { 
+                        title: 'Bài 2: Cấu trúc dữ liệu', 
+                        duration: '32:15', 
+                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/VolkswagenGTIReview.mp4',
+                        description: 'Mảng, danh sách liên kết, stack, queue'
+                    }
+                ],
+                resources: [
+                    { name: 'Code mẫu.zip', size: '5 MB', type: 'zip' },
+                    { name: 'Đề thi giữa kỳ.pdf', size: '1.5 MB', type: 'pdf' }
+                ]
             },
             {
                 id: Date.now() + 6,
@@ -158,22 +207,36 @@ class CourseApp {
                 progress: 0,
                 thumbnail: '📈',
                 gradient: 'linear-gradient(135deg, #30cfd0 0%, #330867 100%)',
-                description: 'Giới hạn, liên tục và đạo hàm.',
+                description: 'Giới hạn, liên tục và đạo hàm. Khóa học toán cao cấp 1 dành cho sinh viên kỹ thuật.',
                 category: 'Toán học',
                 duration: '12 tuần',
                 students: 2800,
                 rating: 4.7,
-                lessons: [],
-                resources: []
+                lessons: [
+                    { 
+                        title: 'Bài 1: Giới hạn dãy số', 
+                        duration: '24:00', 
+                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4',
+                        description: 'Định nghĩa và tính chất giới hạn'
+                    },
+                    { 
+                        title: 'Bài 2: Đạo hàm', 
+                        duration: '28:30', 
+                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4',
+                        description: 'Quy tắc tính đạo hàm và ứng dụng'
+                    }
+                ],
+                resources: [
+                    { name: 'Bài giảng đầy đủ.pdf', size: '12 MB', type: 'pdf' },
+                    { name: 'Bài tập lớn.docx', size: '2 MB', type: 'doc' }
+                ]
             }
         ];
 
-        // ✅ LƯU NGAY SAU KHI TẠO
         this.saveCoursesToStorage();
         console.log('✅ Sample courses created and saved!');
     }
 
-    // ✅ LƯU VÀO localStorage với key khác
     saveCoursesToStorage() {
         try {
             localStorage.setItem('appCourses', JSON.stringify(this.courses));
@@ -183,7 +246,6 @@ class CourseApp {
         }
     }
 
-    // ✅ LOAD PROGRESS (không làm gì với courses)
     loadProgress() {
         const saved = localStorage.getItem('courseProgress');
         if (saved) {
@@ -203,7 +265,6 @@ class CourseApp {
         }
     }
 
-    // ✅ SAVE PROGRESS
     saveProgress() {
         const progressData = this.courses.map(c => ({ 
             id: c.id, 
@@ -216,6 +277,11 @@ class CourseApp {
 
     renderCourses() {
         const grid = document.getElementById('courseGrid');
+        if (!grid) {
+            console.warn('⚠️ courseGrid not found');
+            return;
+        }
+
         const filteredCourses = this.getFilteredCourses();
         const startIndex = (this.currentPage - 1) * this.coursesPerPage;
         const endIndex = startIndex + this.coursesPerPage;
@@ -241,13 +307,25 @@ class CourseApp {
                 <div class="course-thumbnail" style="background: ${course.gradient}">
                     <div class="course-icon">${course.thumbnail}</div>
                 </div>
+                
                 <div class="course-body">
+                    <h3 class="course-title">${course.title}</h3>
+                    <p class="course-instructor">
+                        <i class="fas fa-user-graduate"></i> ${course.instructor}
+                    </p>
+                    
+                    <div class="course-meta">
+                        <span><i class="fas fa-clock"></i> ${course.duration}</span>
+                        <span><i class="fas fa-users"></i> ${course.students.toLocaleString()}</span>
+                    </div>
+                    
                     <div class="progress-section">
                         <div class="progress-bar-bg">
                             <div class="progress-bar-fill" style="width: 0%" data-width="${course.progress}%"></div>
                         </div>
                         <p class="progress-text">${course.progress > 0 ? '📈 ' + course.progress.toFixed(1) + '%' : '⏸️ Chưa học'}</p>
                     </div>
+                    
                     <div class="course-actions">
                         <button class="btn-action btn-join" onclick="event.stopPropagation(); app.openCourse(${course.id})">
                             <i class="fas fa-play-circle"></i> Vào học
@@ -308,13 +386,13 @@ class CourseApp {
         const prevBtn = document.getElementById('prevBtn');
         const nextBtn = document.getElementById('nextBtn');
 
-        if (!paginationNumbers) return;
-
-        let pagesHTML = '';
-        for (let i = 1; i <= totalPages; i++) {
-            pagesHTML += `<span class="page-number ${i === this.currentPage ? 'active' : ''}" onclick="app.goToPage(${i})">${i}</span>`;
+        if (paginationNumbers) {
+            let pagesHTML = '';
+            for (let i = 1; i <= totalPages; i++) {
+                pagesHTML += `<span class="page-number ${i === this.currentPage ? 'active' : ''}" onclick="app.goToPage(${i})">${i}</span>`;
+            }
+            paginationNumbers.innerHTML = pagesHTML;
         }
-        paginationNumbers.innerHTML = pagesHTML;
 
         if (prevBtn) prevBtn.disabled = this.currentPage === 1;
         if (nextBtn) nextBtn.disabled = this.currentPage === totalPages || totalPages === 0;
@@ -346,33 +424,41 @@ class CourseApp {
         const courseDescription = document.getElementById('courseDescription');
         const resourcesList = document.getElementById('resourcesList');
 
+        if (!modal || !videoTitle || !lessonList) {
+            console.warn('⚠️ Modal elements not found');
+            return;
+        }
+
         videoTitle.textContent = this.currentCourse.title;
-        courseDescription.innerHTML = `
-            <div style="margin-bottom: 20px;">
-                <h3 style="margin-bottom: 15px;">📚 ${this.currentCourse.title}</h3>
-                <p style="color: rgba(255,255,255,0.7); line-height: 1.8; margin-bottom: 20px;">
-                    ${this.currentCourse.description}
-                </p>
-                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-top: 20px;">
-                    <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px;">
-                        <i class="fas fa-user-graduate" style="color: #6366f1;"></i>
-                        <strong>Giảng viên:</strong> ${this.currentCourse.instructor}
-                    </div>
-                    <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px;">
-                        <i class="fas fa-clock" style="color: #10b981;"></i>
-                        <strong>Thời lượng:</strong> ${this.currentCourse.duration}
-                    </div>
-                    <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px;">
-                        <i class="fas fa-users" style="color: #3b82f6;"></i>
-                        <strong>Học viên:</strong> ${this.currentCourse.students.toLocaleString()}
-                    </div>
-                    <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px;">
-                        <i class="fas fa-star" style="color: #fbbf24;"></i>
-                        <strong>Đánh giá:</strong> ${this.currentCourse.rating}/5.0
+
+        if (courseDescription) {
+            courseDescription.innerHTML = `
+                <div style="margin-bottom: 20px;">
+                    <h3 style="margin-bottom: 15px;">📚 ${this.currentCourse.title}</h3>
+                    <p style="color: rgba(255,255,255,0.7); line-height: 1.8; margin-bottom: 20px;">
+                        ${this.currentCourse.description}
+                    </p>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-top: 20px;">
+                        <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px;">
+                            <i class="fas fa-user-graduate" style="color: #6366f1;"></i>
+                            <strong>Giảng viên:</strong> ${this.currentCourse.instructor}
+                        </div>
+                        <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px;">
+                            <i class="fas fa-clock" style="color: #10b981;"></i>
+                            <strong>Thời lượng:</strong> ${this.currentCourse.duration}
+                        </div>
+                        <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px;">
+                            <i class="fas fa-users" style="color: #3b82f6;"></i>
+                            <strong>Học viên:</strong> ${this.currentCourse.students.toLocaleString()}
+                        </div>
+                        <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px;">
+                            <i class="fas fa-star" style="color: #fbbf24;"></i>
+                            <strong>Đánh giá:</strong> ${this.currentCourse.rating}/5.0
+                        </div>
                     </div>
                 </div>
-            </div>
-        `;
+            `;
+        }
 
         if (this.currentCourse.lessons && this.currentCourse.lessons.length > 0) {
             lessonList.innerHTML = this.currentCourse.lessons.map((lesson, index) => `
@@ -392,29 +478,31 @@ class CourseApp {
             lessonList.innerHTML = '<p style="text-align:center;padding:40px;color:rgba(255,255,255,0.5);">Chưa có bài học nào</p>';
         }
 
-        if (this.currentCourse.resources && this.currentCourse.resources.length > 0) {
-            resourcesList.innerHTML = `
-                <div style="display: flex; flex-direction: column; gap: 15px;">
-                    ${this.currentCourse.resources.map(resource => `
-                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px; background: rgba(255,255,255,0.05); border-radius: 15px; border: 1px solid rgba(255,255,255,0.1);">
-                            <div style="display: flex; align-items: center; gap: 15px;">
-                                <div style="width: 50px; height: 50px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
-                                    <i class="fas fa-file-${resource.type === 'pdf' ? 'pdf' : resource.type === 'doc' ? 'word' : resource.type === 'video' ? 'video' : 'archive'}" style="font-size: 24px;"></i>
+        if (resourcesList) {
+            if (this.currentCourse.resources && this.currentCourse.resources.length > 0) {
+                resourcesList.innerHTML = `
+                    <div style="display: flex; flex-direction: column; gap: 15px;">
+                        ${this.currentCourse.resources.map(resource => `
+                            <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px; background: rgba(255,255,255,0.05); border-radius: 15px; border: 1px solid rgba(255,255,255,0.1);">
+                                <div style="display: flex; align-items: center; gap: 15px;">
+                                    <div style="width: 50px; height: 50px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                                        <i class="fas fa-file-${resource.type === 'pdf' ? 'pdf' : resource.type === 'doc' ? 'word' : resource.type === 'video' ? 'video' : 'archive'}" style="font-size: 24px;"></i>
+                                    </div>
+                                    <div>
+                                        <h4 style="margin-bottom: 5px;">${resource.name}</h4>
+                                        <p style="color: rgba(255,255,255,0.6); font-size: 14px;">${resource.size}</p>
+                                    </div>
                                 </div>
-                                <div>
-                                    <h4 style="margin-bottom: 5px;">${resource.name}</h4>
-                                    <p style="color: rgba(255,255,255,0.6); font-size: 14px;">${resource.size}</p>
-                                </div>
+                                <button style="padding: 12px 25px; background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); border: none; border-radius: 10px; color: white; font-weight: 600; cursor: pointer; transition: all 0.3s;">
+                                    <i class="fas fa-download"></i> Tải xuống
+                                </button>
                             </div>
-                            <button style="padding: 12px 25px; background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); border: none; border-radius: 10px; color: white; font-weight: 600; cursor: pointer; transition: all 0.3s;">
-                                <i class="fas fa-download"></i> Tải xuống
-                            </button>
-                        </div>
-                    `).join('')}
-                </div>
-            `;
-        } else {
-            resourcesList.innerHTML = '<p style="text-align:center;padding:40px;color:rgba(255,255,255,0.5);">Chưa có tài nguyên nào</p>';
+                        `).join('')}
+                    </div>
+                `;
+            } else {
+                resourcesList.innerHTML = '<p style="text-align:center;padding:40px;color:rgba(255,255,255,0.5);">Chưa có tài nguyên nào</p>';
+            }
         }
 
         modal.classList.add('active');
@@ -432,6 +520,11 @@ class CourseApp {
         const video = document.getElementById('mainVideo');
         const videoTitle = document.getElementById('videoTitle');
 
+        if (!video) {
+            console.warn('⚠️ Video element not found');
+            return;
+        }
+
         if (lesson && lesson.videoUrl) {
             video.src = lesson.videoUrl;
             video.load();
@@ -439,7 +532,10 @@ class CourseApp {
                 console.error('Video play error:', err);
                 this.showNotification('⚠️ Không thể phát video', 'warning');
             });
-            videoTitle.textContent = lesson.title;
+            
+            if (videoTitle) {
+                videoTitle.textContent = lesson.title;
+            }
 
             document.querySelectorAll('.lesson-item').forEach((item, idx) => {
                 item.classList.toggle('active', idx === lessonIndex);
@@ -464,10 +560,9 @@ class CourseApp {
         }
 
         this.saveProgress();
-        this.saveCoursesToStorage(); // ✅ LƯU CẢ COURSES
+        this.saveCoursesToStorage();
     }
 
-    // ✅ XÁC THỰC ADMIN
     confirmDeleteCourse(courseId) {
         const course = this.courses.find(c => c.id === courseId);
         if (!course) return;
@@ -540,24 +635,34 @@ class CourseApp {
             const passwordInput = passwordModal.querySelector('#adminPasswordInput');
             const overlay = passwordModal.querySelector('.modal-overlay');
 
-            passwordInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') this.verifyAdminPassword();
-            });
+            if (passwordInput) {
+                passwordInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') this.verifyAdminPassword();
+                });
+            }
 
-            overlay.addEventListener('click', () => this.closeAdminPasswordModal());
+            if (overlay) {
+                overlay.addEventListener('click', () => this.closeAdminPasswordModal());
+            }
         }
 
-        document.getElementById('adminModalTitle').textContent = title;
-        document.getElementById('adminModalSubtitle').textContent = subtitle;
-        document.getElementById('adminPasswordInput').value = '';
-        document.getElementById('passwordError').classList.remove('active');
-        document.getElementById('passwordSuccess').classList.remove('active');
+        const titleElement = document.getElementById('adminModalTitle');
+        const subtitleElement = document.getElementById('adminModalSubtitle');
+        const inputElement = document.getElementById('adminPasswordInput');
+        const errorElement = document.getElementById('passwordError');
+        const successElement = document.getElementById('passwordSuccess');
+
+        if (titleElement) titleElement.textContent = title;
+        if (subtitleElement) subtitleElement.textContent = subtitle;
+        if (inputElement) inputElement.value = '';
+        if (errorElement) errorElement.classList.remove('active');
+        if (successElement) successElement.classList.remove('active');
 
         passwordModal.classList.add('active');
         document.body.style.overflow = 'hidden';
 
         setTimeout(() => {
-            document.getElementById('adminPasswordInput').focus();
+            if (inputElement) inputElement.focus();
         }, 100);
     }
 
@@ -575,34 +680,38 @@ class CourseApp {
         const input = document.getElementById('adminPasswordInput');
         const icon = document.querySelector('.toggle-password-btn i');
         
-        if (input.type === 'password') {
-            input.type = 'text';
-            icon.className = 'fas fa-eye-slash';
-        } else {
-            input.type = 'password';
-            icon.className = 'fas fa-eye';
+        if (input && icon) {
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.className = 'fas fa-eye-slash';
+            } else {
+                input.type = 'password';
+                icon.className = 'fas fa-eye';
+            }
         }
     }
 
     verifyAdminPassword() {
         const input = document.getElementById('adminPasswordInput');
-        const password = input.value.trim();
+        const password = input ? input.value.trim() : '';
         const errorDiv = document.getElementById('passwordError');
         const successDiv = document.getElementById('passwordSuccess');
         const submitBtn = document.querySelector('.btn-admin-submit');
 
         if (!password) {
-            input.focus();
+            if (input) input.focus();
             return;
         }
 
-        submitBtn.classList.add('loading');
-        submitBtn.disabled = true;
+        if (submitBtn) {
+            submitBtn.classList.add('loading');
+            submitBtn.disabled = true;
+        }
 
         setTimeout(() => {
             if (password === this.adminPassword) {
-                errorDiv.classList.remove('active');
-                successDiv.classList.add('active');
+                if (errorDiv) errorDiv.classList.remove('active');
+                if (successDiv) successDiv.classList.add('active');
                 
                 this.showNotification('✅ Xác thực thành công!', 'success');
 
@@ -615,23 +724,28 @@ class CourseApp {
                         this.proceedOpenUploadModal();
                     }
                     
-                    submitBtn.classList.remove('loading');
-                    submitBtn.disabled = false;
+                    if (submitBtn) {
+                        submitBtn.classList.remove('loading');
+                        submitBtn.disabled = false;
+                    }
                 }, 800);
             } else {
-                errorDiv.classList.add('active');
-                input.value = '';
-                input.focus();
-                
-                input.style.animation = 'none';
-                setTimeout(() => {
-                    input.style.animation = 'shake 0.5s ease';
-                }, 10);
+                if (errorDiv) errorDiv.classList.add('active');
+                if (input) {
+                    input.value = '';
+                    input.focus();
+                    input.style.animation = 'none';
+                    setTimeout(() => {
+                        input.style.animation = 'shake 0.5s ease';
+                    }, 10);
+                }
 
                 this.showNotification('❌ Mật khẩu không đúng!', 'error');
                 
-                submitBtn.classList.remove('loading');
-                submitBtn.disabled = false;
+                if (submitBtn) {
+                    submitBtn.classList.remove('loading');
+                    submitBtn.disabled = false;
+                }
             }
         }, 500);
     }
@@ -667,12 +781,17 @@ class CourseApp {
             `;
             document.body.appendChild(confirmModal);
 
-            confirmModal.querySelector('.modal-overlay').addEventListener('click', () => {
-                this.cancelDelete();
-            });
+            const overlay = confirmModal.querySelector('.modal-overlay');
+            if (overlay) {
+                overlay.addEventListener('click', () => this.cancelDelete());
+            }
         }
 
-        document.getElementById('confirmCourseName').textContent = this.courseToDelete.title;
+        const courseNameElement = document.getElementById('confirmCourseName');
+        if (courseNameElement) {
+            courseNameElement.textContent = this.courseToDelete.title;
+        }
+
         confirmModal.classList.add('active');
         document.body.style.overflow = 'hidden';
     }
@@ -694,7 +813,6 @@ class CourseApp {
         this.courseToDelete = null;
     }
 
-    // ✅ XÓA KHÓA HỌC VÀ LƯU NGAY
     deleteCourse() {
         if (!this.courseToDelete) return;
 
@@ -716,18 +834,14 @@ class CourseApp {
         }
 
         setTimeout(() => {
-            // ✅ XÓA KHỎI ARRAY
             const index = this.courses.findIndex(c => c.id === courseId);
             if (index !== -1) {
                 this.courses.splice(index, 1);
             }
 
             this.cancelDelete();
-            
-            // ✅ LƯU NGAY VÀO LOCALSTORAGE
             this.saveCoursesToStorage();
             this.saveProgress();
-            
             this.renderCourses();
 
             this.showNotification(`🗑️ Đã xóa khóa học "${courseName}"`, 'success');
@@ -738,6 +852,8 @@ class CourseApp {
 
     searchCourses() {
         const searchInput = document.getElementById('searchInput');
+        if (!searchInput) return;
+
         const query = searchInput.value.toLowerCase().trim();
 
         if (!query) {
@@ -755,13 +871,15 @@ class CourseApp {
 
         if (filtered.length === 0) {
             const grid = document.getElementById('courseGrid');
-            grid.innerHTML = `
-                <div style="grid-column: 1/-1; text-align: center; padding: 60px; color: rgba(255,255,255,0.5);">
-                    <i class="fas fa-search" style="font-size: 80px; margin-bottom: 20px; display: block;"></i>
-                    <h3>Không tìm thấy "${query}"</h3>
-                    <p>Thử từ khóa khác hoặc xóa bộ lọc</p>
-                </div>
-            `;
+            if (grid) {
+                grid.innerHTML = `
+                    <div style="grid-column: 1/-1; text-align: center; padding: 60px; color: rgba(255,255,255,0.5);">
+                        <i class="fas fa-search" style="font-size: 80px; margin-bottom: 20px; display: block;"></i>
+                        <h3>Không tìm thấy "${query}"</h3>
+                        <p>Thử từ khóa khác hoặc xóa bộ lọc</p>
+                    </div>
+                `;
+            }
             return;
         }
 
@@ -804,13 +922,19 @@ class CourseApp {
     }
 
     attachEventListeners() {
-        document.querySelectorAll('.modal-close').forEach(btn => {
-            btn.addEventListener('click', () => this.closeModal());
-        });
+        const modalCloseButtons = document.querySelectorAll('.modal-close');
+        if (modalCloseButtons.length > 0) {
+            modalCloseButtons.forEach(btn => {
+                btn.addEventListener('click', () => this.closeModal());
+            });
+        }
 
-        document.querySelectorAll('.modal-overlay').forEach(overlay => {
-            overlay.addEventListener('click', () => this.closeModal());
-        });
+        const modalOverlays = document.querySelectorAll('.modal-overlay');
+        if (modalOverlays.length > 0) {
+            modalOverlays.forEach(overlay => {
+                overlay.addEventListener('click', () => this.closeModal());
+            });
+        }
 
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') this.closeModal();
@@ -841,26 +965,30 @@ class CourseApp {
             });
         }
 
-        document.querySelectorAll('.view-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
-                e.currentTarget.classList.add('active');
-                
-                const view = e.currentTarget.dataset.view;
-                const grid = document.getElementById('courseGrid');
-                grid.className = view === 'list' ? 'course-list' : 'course-grid';
+        const viewButtons = document.querySelectorAll('.view-btn');
+        if (viewButtons.length > 0) {
+            viewButtons.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+                    e.currentTarget.classList.add('active');
+                    
+                    const view = e.currentTarget.dataset.view;
+                    const grid = document.getElementById('courseGrid');
+                    if (grid) {
+                        grid.className = view === 'list' ? 'course-list' : 'course-grid';
+                    }
+                });
             });
-        });
+        }
 
         const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-
         if (prevBtn) {
             prevBtn.addEventListener('click', () => {
                 if (this.currentPage > 1) this.goToPage(this.currentPage - 1);
             });
         }
 
+        const nextBtn = document.getElementById('nextBtn');
         if (nextBtn) {
             nextBtn.addEventListener('click', () => {
                 const totalPages = Math.ceil(this.getFilteredCourses().length / this.coursesPerPage);
@@ -868,32 +996,163 @@ class CourseApp {
             });
         }
 
-        document.querySelectorAll('.tab-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const tabName = e.currentTarget.dataset.tab;
-                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-                e.currentTarget.classList.add('active');
-                const content = document.getElementById(`tab-${tabName}`);
-                if (content) content.classList.add('active');
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        if (tabButtons.length > 0) {
+            tabButtons.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const tabName = e.currentTarget.dataset.tab;
+                    
+                    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                    
+                    e.currentTarget.classList.add('active');
+                    
+                    const content = document.getElementById(`tab-${tabName}`);
+                    if (content) content.classList.add('active');
+                });
             });
+        }
+
+        this.setupUploadForm();
+
+        const video = document.getElementById('mainVideo');
+        if (video) {
+            video.addEventListener('timeupdate', () => {
+                if (this.currentCourse && video.duration) {
+                    const progress = (video.currentTime / video.duration) * 100;
+                    this.currentCourse.progress = Math.min(Math.max(this.currentCourse.progress, progress), 100);
+                }
+            });
+
+            video.addEventListener('ended', () => {
+                this.showNotification('✅ Đã hoàn thành bài học!', 'success');
+                this.saveProgress();
+                this.saveCoursesToStorage();
+            });
+        }
+
+        console.log('✅ Event listeners attached');
+    }
+
+    setupUploadForm() {
+        const uploadForm = document.getElementById('uploadForm');
+        if (uploadForm) {
+            uploadForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                this.handleUpload();
+            });
+        }
+
+        this.setupFileUpload('videoFile', 'videoUploadArea', 'videoFileList');
+        this.setupFileUpload('slideFile', 'slideUploadArea', 'slideFileList');
+    }
+
+    setupFileUpload(inputId, areaId, listId) {
+        const input = document.getElementById(inputId);
+        const area = document.getElementById(areaId);
+        const list = document.getElementById(listId);
+
+        if (!input || !area || !list) {
+            console.warn(`⚠️ Upload element not found: ${inputId}, ${areaId}, or ${listId}`);
+            return;
+        }
+
+        area.addEventListener('click', () => input.click());
+
+        area.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            area.style.borderColor = '#6366f1';
+            area.style.background = 'rgba(99, 102, 241, 0.1)';
         });
 
-        // ✅ THÊM: Reset về mẫu (chỉ để test)
-        document.getElementById('resetBtn').addEventListener('click', () => {
-            this.resetToSampleCourses();
+        area.addEventListener('dragleave', () => {
+            area.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+            area.style.background = 'rgba(255, 255, 255, 0.03)';
+        });
+
+        area.addEventListener('drop', (e) => {
+            e.preventDefault();
+            area.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+            area.style.background = 'rgba(255, 255, 255, 0.03)';
+            this.displayFiles(e.dataTransfer.files, list);
+        });
+
+        input.addEventListener('change', (e) => {
+            this.displayFiles(e.target.files, list);
         });
     }
 
-    // ✅ THÊM: Reset về mẫu (chỉ để test)
+    displayFiles(files, listElement) {
+        if (!listElement) return;
+        
+        const fileArray = Array.from(files);
+        const html = fileArray.map((file) => `
+            <div class="file-item">
+                <span><i class="fas fa-file"></i> ${file.name} (${this.formatFileSize(file.size)})</span>
+                <button type="button" onclick="this.closest('.file-item').remove()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        `).join('');
+        listElement.innerHTML = html;
+    }
+
+    formatFileSize(bytes) {
+        if (bytes === 0) return '0 Bytes';
+        const k = 1024;
+        const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
+    }
+
+    handleUpload() {
+        const courseName = document.getElementById('courseName');
+        const courseDescription = document.getElementById('courseDescriptionInput');
+
+        if (!courseName || !courseName.value.trim()) {
+            this.showNotification('⚠️ Nhập tên khóa học', 'warning');
+            return;
+        }
+
+        this.showNotification('🚀 Đang tải lên...', 'info');
+
+        setTimeout(() => {
+            const newCourse = {
+                id: Date.now(),
+                title: courseName.value.trim(),
+                instructor: 'Admin',
+                progress: 0,
+                thumbnail: '📘',
+                gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                description: courseDescription ? courseDescription.value.trim() : 'Khóa học mới',
+                category: 'Khác',
+                duration: 'N/A',
+                students: 0,
+                rating: 5.0,
+                lessons: [],
+                resources: []
+            };
+
+            this.courses.push(newCourse);
+            this.saveCoursesToStorage();
+            this.showNotification('✅ Tải lên thành công!', 'success');
+            this.closeModal();
+            this.renderCourses();
+            
+            const uploadForm = document.getElementById('uploadForm');
+            if (uploadForm) uploadForm.reset();
+            
+            document.querySelectorAll('.file-list').forEach(list => list.innerHTML = '');
+        }, 2000);
+    }
+
     resetToSampleCourses() {
         this.initializeSampleCourses();
         this.renderCourses();
         this.showNotification('🔄 Đã reset về khóa học mẫu', 'success');
     }
-} // ← ✅ THÊM DẤU ĐÓNG NÀY
+}
 
-// Khởi tạo app
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
         window.app = new CourseApp();
