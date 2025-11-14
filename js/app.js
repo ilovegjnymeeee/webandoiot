@@ -328,10 +328,10 @@ class CourseApp {
                     
                     <div class="course-actions">
                         <button class="btn-action btn-join" onclick="event.stopPropagation(); app.openCourse(${course.id})">
-                            <i class="fas fa-play-circle"></i> Vào học
+                            ▶ Vào học
                         </button>
                         <button class="btn-action btn-detail" onclick="event.stopPropagation(); app.openCourse(${course.id})">
-                            <i class="fas fa-info-circle"></i> Chi tiết
+                            ℹ Chi tiết
                         </button>
                     </div>
                 </div>
