@@ -323,15 +323,23 @@ class CourseApp {
                         <div class="progress-bar-bg">
                             <div class="progress-bar-fill" style="width: 0%" data-width="${course.progress}%"></div>
                         </div>
-                        <p class="progress-text">${course.progress > 0 ? '📈 ' + course.progress.toFixed(1) + '%' : '⏸️ Chưa học'}</p>
+                        <p class="progress-text">${course.progress > 0 ? course.progress.toFixed(1) + '%' : '⏸️ Chưa học'}</p>
                     </div>
                     
                     <div class="course-actions">
-                        <button class="btn-action btn-join" onclick="event.stopPropagation(); app.openCourse(${course.id})">
-                            ▶ Vào học
+                        <button class="btn-action btn-primary" onclick="event.stopPropagation(); app.openCourse(${course.id})">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                            </svg>
+                            <span>Vào học</span>
                         </button>
-                        <button class="btn-action btn-detail" onclick="event.stopPropagation(); app.openCourse(${course.id})">
-                            ℹ Chi tiết
+                        <button class="btn-action btn-secondary" onclick="event.stopPropagation(); app.openCourse(${course.id})">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="12" y1="16" x2="12" y2="12"></line>
+                                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                            </svg>
+                            <span>Chi tiết</span>
                         </button>
                     </div>
                 </div>

@@ -1546,62 +1546,158 @@ body {
     to { transform: rotate(360deg); }
 }
 
+/* ===================================
+   COURSE ACTIONS - NÚT MỚI ĐẸP HƠN
+   =================================== */
+
+.course-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.btn-action {
+    flex: 1;
+    padding: 13px 18px;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-action svg {
+    transition: transform 0.3s ease;
+}
+
+.btn-action span {
+    position: relative;
+    z-index: 1;
+}
+
+/* Nút Vào học - Primary */
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #7c8ff0 0%, #8b5ab5 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+}
+
+.btn-primary:hover::before {
+    opacity: 1;
+}
+
+.btn-primary:hover svg {
+    transform: translateX(3px);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+}
+
+/* Nút Chi tiết - Secondary */
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.08);
+    color: white;
+    border: 1.5px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.35);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.btn-secondary:hover svg {
+    transform: scale(1.1);
+}
+
+.btn-secondary:active {
+    transform: translateY(0);
+    background: rgba(255, 255, 255, 0.12);
+}
+
+/* Animation khi load */
+@keyframes slideUpFade {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.course-card .course-actions {
+    animation: slideUpFade 0.4s ease 0.2s both;
+}
+
 /* Responsive */
-@media (max-width: 1200px) {
-    .course-grid {
-        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    }
-}
-
 @media (max-width: 768px) {
-    .header-container {
-        flex-wrap: wrap;
-        gap: 20px;
-    }
-
-    .nav {
-        order: 3;
-        width: 100%;
-        justify-content: center;
-    }
-
-    .hero-content h1 {
-        font-size: 42px;
-    }
-
-    .stats {
-        gap: 30px;
-    }
-
-    .course-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .footer-content {
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
-
-    .section-header {
+    .course-actions {
         flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .filters {
-        width: 100%;
-    }
-
-    .form-row {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 480px) {
-    .modal-container {
-        width: 95%;
+        gap: 10px;
     }
     
-    .hero-content h1 {
-        font-size: 32px;
+    .btn-action {
+        width: 100%;
+        padding: 15px 20px;
+        font-size: 15px;
     }
+}
+
+/* Dark mode enhancement */
+.course-card:hover .btn-primary {
+    box-shadow: 0 6px 25px rgba(102, 126, 234, 0.6);
+}
+
+.course-card:hover .btn-secondary {
+    background: rgba(255, 255, 255, 0.18);
+}
+
+/* Loading state (optional) */
+.btn-action.loading {
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+.btn-action.loading::after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
 }
