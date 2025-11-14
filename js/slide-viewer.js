@@ -1,23 +1,24 @@
 class SlideViewer {
-    constructor(containerId) {
-        // ✅ Tự tạo container nếu chưa có
-        this.container = document.getElementById(containerId);
+    constructor(containerId = 'slideViewerContainer') {
+        // ✅ TỰ ĐỘNG TẠO CONTAINER NẾU CHƯA CÓ
+        let container = document.getElementById(containerId);
         
-        if (!this.container) {
-            this.container = document.createElement('div');
-            this.container.id = containerId;
-            document.body.appendChild(this.container);
-            console.log('✅ Created slide container');
+        if (!container) {
+            container = document.createElement('div');
+            container.id = containerId;
+            document.body.appendChild(container);
+            console.log('✅ Created slide container automatically');
         }
-
+        
+        this.container = container;
         this.slides = [];
         this.currentSlide = 0;
         this.isFullscreen = false;
         this.autoPlayInterval = null;
-        this.autoPlayDelay = 5000; // 5 seconds
+        this.autoPlayDelay = 5000;
         
         this.init();
-        console.log('📊 SlideViewer initialized!');
+        console.log('📊 SlideViewer initialized successfully!');
     }
 
     init() {
@@ -297,7 +298,6 @@ class SlideViewer {
     }
 
     bindSlideEvents(viewer) {
-        // Navigation
         const prevBtn = viewer.querySelector('#prevSlideBtn');
         const nextBtn = viewer.querySelector('#nextSlideBtn');
         
@@ -308,25 +308,21 @@ class SlideViewer {
             nextBtn.addEventListener('click', () => this.nextSlide());
         }
 
-        // Close
         const closeBtn = viewer.querySelector('#closeSlideBtn');
         if (closeBtn) {
             closeBtn.addEventListener('click', () => this.close());
         }
 
-        // Auto play
         const autoPlayBtn = viewer.querySelector('#autoPlayBtn');
         if (autoPlayBtn) {
             autoPlayBtn.addEventListener('click', () => this.toggleAutoPlay());
         }
 
-        // Fullscreen
         const fullscreenBtn = viewer.querySelector('#fullscreenSlideBtn');
         if (fullscreenBtn) {
             fullscreenBtn.addEventListener('click', () => this.toggleFullscreen());
         }
 
-        // Download
         const downloadBtn = viewer.querySelector('#downloadSlideBtn');
         if (downloadBtn) {
             downloadBtn.addEventListener('click', () => this.downloadCurrentSlide());
@@ -397,7 +393,7 @@ class SlideViewer {
         if (!container) return;
 
         container.innerHTML = this.slides.map((url, index) => `
-            <div class="slide-thumb ${index === 0 ? 'active' : ''}" onclick="slideViewer.goToSlide(${index})">
+            <div class="slide-thumb ${index === 0 ? 'active' : ''}" onclick="window.slideViewer.goToSlide(${index})">
                 <img src="${url}" alt="Slide ${index + 1}" loading="lazy">
                 <div class="slide-thumb-number">${index + 1}</div>
             </div>
@@ -411,11 +407,9 @@ class SlideViewer {
         const slideImage = document.querySelector('.slide-image');
         const slideLoading = document.querySelector('.slide-loading');
         
-        // Show loading
         slideImage.classList.remove('loaded');
         slideLoading.classList.remove('hidden');
 
-        // Load new slide
         const img = new Image();
         img.onload = () => {
             slideImage.src = this.slides[index];
@@ -431,27 +425,22 @@ class SlideViewer {
     }
 
     updateUI() {
-        // Update counter
         document.querySelector('.slide-counter').textContent = 
             `${this.currentSlide + 1} / ${this.slides.length}`;
 
-        // Update navigation buttons
         const prevBtn = document.getElementById('prevSlideBtn');
         const nextBtn = document.getElementById('nextSlideBtn');
         
         if (prevBtn) prevBtn.disabled = this.currentSlide === 0;
         if (nextBtn) nextBtn.disabled = this.currentSlide === this.slides.length - 1;
 
-        // Update thumbnails
         document.querySelectorAll('.slide-thumb').forEach((thumb, index) => {
             thumb.classList.toggle('active', index === this.currentSlide);
         });
 
-        // Update progress
         const progress = ((this.currentSlide + 1) / this.slides.length) * 100;
         document.querySelector('.slide-progress-fill').style.width = progress + '%';
 
-        // Scroll thumbnail into view
         const activeThumb = document.querySelector('.slide-thumb.active');
         if (activeThumb) {
             activeThumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
@@ -462,7 +451,6 @@ class SlideViewer {
         if (this.currentSlide < this.slides.length - 1) {
             this.showSlide(this.currentSlide + 1);
         } else if (this.autoPlayInterval) {
-            // Loop to first slide if auto-playing
             this.showSlide(0);
         }
     }
@@ -540,13 +528,11 @@ class SlideViewer {
             document.body.style.overflow = 'auto';
         }
 
-        // Stop auto-play
         if (this.autoPlayInterval) {
             clearInterval(this.autoPlayInterval);
             this.autoPlayInterval = null;
         }
 
-        // Exit fullscreen
         if (document.fullscreenElement) {
             document.exitFullscreen();
         }
@@ -568,16 +554,22 @@ class SlideViewer {
     }
 }
 
-// Initialize global instance
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-        window.slideViewer = new SlideViewer('slideViewerContainer');
-    });
-} else {
-    window.slideViewer = new SlideViewer('slideViewerContainer');
+// ✅ KHỞI TẠO AN TOÀN
+function initSlideViewer() {
+    try {
+        window.slideViewer = new SlideViewer();
+        console.log('✅ SlideViewer ready!');
+    } catch (error) {
+        console.error('❌ SlideViewer init error:', error);
+    }
 }
 
-// Export for use in other files
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSlideViewer);
+} else {
+    initSlideViewer();
+}
+
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = SlideViewer;
 }
