@@ -285,7 +285,7 @@ class CourseApp {
             path = '/' + path;
         }
         
-        // ✅ FIX: Encode each path segment to handle Unicode/spaces
+        // Encode each path segment
         const segments = path.split('/').filter(s => s);
         const encodedPath = '/' + segments.map(seg => encodeURIComponent(seg)).join('/');
         
@@ -319,21 +319,12 @@ class CourseApp {
         });
 
         video.addEventListener('error', (e) => {
-            console.error('❌ Video error:', {
-                originalPath: lesson.videoUrl,
-                encodedPath: encodedPath,
-                error: e
-            });
-            
+            console.error('❌ Video error:', e);
             container.innerHTML = `
                 <div class="video-error">
                     <i class="fas fa-exclamation-triangle"></i>
                     <h3>Không thể tải video</h3>
-                    <p><strong>File:</strong> <code>${lesson.videoUrl}</code></p>
-                    <p><strong>Encoded:</strong> <code>${encodedPath}</code></p>
-                    <button class="btn-secondary" onclick="courseApp.retryVideo()">
-                        <i class="fas fa-redo"></i> Thử lại
-                    </button>
+                    <p>Path: ${encodedPath}</p>
                 </div>`;
         });
     }
@@ -428,4 +419,10 @@ class CourseApp {
         });
         
         const selectedPane = document.getElementById(`tab-${tabName}`);
-        if
+        if (selectedPane) {
+            selectedPane.classList.add('active');
+        }
+    }
+
+    // ...existing code...
+}
