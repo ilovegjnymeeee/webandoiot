@@ -276,69 +276,65 @@ class CourseApp {
     }
 
     loadVideo(lesson) {
-        const videoContainer = document.querySelector('.video-container');
-        
-        if (!videoContainer) {
-            console.error('❌ Video container not found');
-            return;
-        }
+        const container = document.querySelector('.video-container');
+        if (!container) return;
 
-        let videoPath = lesson.videoUrl.replace(/^\.\//, '').replace(/\/+/g, '/');
-        
-        if (!videoPath.startsWith('/')) {
-            videoPath = '/' + videoPath;
+        // Clean path
+        let path = lesson.videoUrl.replace(/^\.\//, '').replace(/\/+/g, '/');
+        if (!path.startsWith('/')) {
+            path = '/' + path;
         }
         
-        console.log('🎬 Loading video:', videoPath);
-
-        videoContainer.innerHTML = `
+        // ✅ FIX: Encode each path segment to handle Unicode/spaces
+        const segments = path.split('/').filter(s => s);
+        const encodedPath = '/' + segments.map(seg => encodeURIComponent(seg)).join('/');
+        
+        console.log('🎬 Loading video:', encodedPath);
+        
+        container.innerHTML = `
             <div class="video-loading">
                 <i class="fas fa-spinner fa-spin"></i>
                 <p>Đang tải video...</p>
-            </div>
-        `;
+            </div>`;
 
         const video = document.createElement('video');
         video.id = 'courseVideo';
         video.controls = true;
         video.preload = 'metadata';
         video.style.width = '100%';
-        video.style.height = 'auto';
         video.style.backgroundColor = '#000';
 
         const source = document.createElement('source');
-        source.src = videoPath;
+        source.src = encodedPath;
         source.type = 'video/mp4';
         video.appendChild(source);
 
         video.addEventListener('loadedmetadata', () => {
-            console.log('✅ Video loaded:', lesson.title);
-            videoContainer.innerHTML = '';
-            videoContainer.appendChild(video);
-            video.play().catch(err => console.warn('Auto-play blocked:', err));
+            console.log('✅ Video loaded successfully');
+            container.innerHTML = '';
+            container.appendChild(video);
+            video.play().catch(err => {
+                console.log('⚠️ Autoplay blocked (normal)');
+            });
         });
 
         video.addEventListener('error', (e) => {
-            console.error('❌ Video error:', videoPath);
+            console.error('❌ Video error:', {
+                originalPath: lesson.videoUrl,
+                encodedPath: encodedPath,
+                error: e
+            });
             
-            videoContainer.innerHTML = `
+            container.innerHTML = `
                 <div class="video-error">
                     <i class="fas fa-exclamation-triangle"></i>
                     <h3>Không thể tải video</h3>
-                    <p class="error-detail"><strong>File:</strong> ${videoPath}</p>
-                    <p class="error-hint">
-                        <strong>Nguyên nhân có thể:</strong><br>
-                        • Video chưa được upload vào folder <code>videos/</code><br>
-                        • File đang được quản lý bởi Git LFS (chạy: <code>git lfs pull</code>)<br>
-                        • Đường dẫn không đúng trong <code>courses.json</code>
-                    </p>
-                    <div style="margin-top: 20px;">
-                        <button class="btn-secondary" onclick="courseApp.retryVideo()">
-                            <i class="fas fa-redo"></i> Thử lại
-                        </button>
-                    </div>
-                </div>
-            `;
+                    <p><strong>File:</strong> <code>${lesson.videoUrl}</code></p>
+                    <p><strong>Encoded:</strong> <code>${encodedPath}</code></p>
+                    <button class="btn-secondary" onclick="courseApp.retryVideo()">
+                        <i class="fas fa-redo"></i> Thử lại
+                    </button>
+                </div>`;
         });
     }
 
@@ -432,274 +428,4 @@ class CourseApp {
         });
         
         const selectedPane = document.getElementById(`tab-${tabName}`);
-        if (selectedPane) {
-            selectedPane.classList.add('active');
-        }
-    }
-
-    closeModal() {
-        const modal = document.getElementById('courseModal');
-        if (modal) {
-            modal.style.display = 'none';
-        }
-
-        const video = document.getElementById('courseVideo');
-        if (video) {
-            video.pause();
-            video.currentTime = 0;
-        }
-
-        this.currentCourse = null;
-        this.currentLesson = null;
-    }
-
-    handleSearch(query) {
-        const searchTerm = query.toLowerCase().trim();
-        
-        if (!searchTerm) {
-            this.filteredCourses = [...this.courses];
-        } else {
-            this.filteredCourses = this.courses.filter(course => 
-                course.title.toLowerCase().includes(searchTerm) ||
-                course.instructor.toLowerCase().includes(searchTerm) ||
-                course.category.toLowerCase().includes(searchTerm)
-            );
-        }
-        
-        this.currentPage = 1;
-        this.renderCourses();
-        this.renderPagination();
-    }
-
-    handleFilterStatus(status) {
-        if (status === 'all') {
-            this.filteredCourses = [...this.courses];
-        } else {
-            this.filteredCourses = this.courses.filter(course => {
-                const progress = this.calculateProgress(course);
-                const courseStatus = this.getStatusClass(progress);
-                return courseStatus === status;
-            });
-        }
-        
-        this.currentPage = 1;
-        this.renderCourses();
-        this.renderPagination();
-    }
-
-    handleFilterStage(stage) {
-        if (stage === 'all') {
-            this.filteredCourses = [...this.courses];
-        } else {
-            this.filteredCourses = this.courses.filter(course => 
-                course.category.includes(stage)
-            );
-        }
-        
-        this.currentPage = 1;
-        this.renderCourses();
-        this.renderPagination();
-    }
-
-    handleSort(sortBy) {
-        switch(sortBy) {
-            case 'newest':
-                this.filteredCourses.sort((a, b) => b.id - a.id);
-                break;
-            case 'oldest':
-                this.filteredCourses.sort((a, b) => a.id - b.id);
-                break;
-            case 'name-asc':
-                this.filteredCourses.sort((a, b) => a.title.localeCompare(b.title));
-                break;
-            case 'name-desc':
-                this.filteredCourses.sort((a, b) => b.title.localeCompare(a.title));
-                break;
-            case 'progress':
-                this.filteredCourses.sort((a, b) => 
-                    this.calculateProgress(b) - this.calculateProgress(a)
-                );
-                break;
-        }
-        
-        this.renderCourses();
-    }
-
-    resetFilters() {
-        document.getElementById('searchInput').value = '';
-        document.getElementById('filterStatus').value = 'all';
-        document.getElementById('filterStage').value = 'all';
-        document.getElementById('sortSelect').value = 'newest';
-        
-        this.filteredCourses = [...this.courses];
-        this.currentPage = 1;
-        this.renderCourses();
-        this.renderPagination();
-    }
-
-    toggleView(mode) {
-        this.viewMode = mode;
-        
-        document.querySelectorAll('.view-btn').forEach(btn => {
-            btn.classList.toggle('active', btn.dataset.view === mode);
-        });
-        
-        this.renderCourses();
-    }
-
-    renderPagination() {
-        const paginationContainer = document.getElementById('pagination');
-        if (!paginationContainer) return;
-
-        const totalPages = Math.ceil(this.filteredCourses.length / this.itemsPerPage);
-        
-        if (totalPages <= 1) {
-            paginationContainer.innerHTML = '';
-            return;
-        }
-
-        let paginationHTML = `
-            <button class="pagination-btn" ${this.currentPage === 1 ? 'disabled' : ''} 
-                    onclick="courseApp.goToPage(${this.currentPage - 1})">
-                <i class="fas fa-chevron-left"></i>
-            </button>
-        `;
-
-        for (let i = 1; i <= totalPages; i++) {
-            if (
-                i === 1 || 
-                i === totalPages || 
-                (i >= this.currentPage - 1 && i <= this.currentPage + 1)
-            ) {
-                paginationHTML += `
-                    <button class="pagination-btn ${i === this.currentPage ? 'active' : ''}" 
-                            onclick="courseApp.goToPage(${i})">
-                        ${i}
-                    </button>
-                `;
-            } else if (i === this.currentPage - 2 || i === this.currentPage + 2) {
-                paginationHTML += `<span class="pagination-dots">...</span>`;
-            }
-        }
-
-        paginationHTML += `
-            <button class="pagination-btn" ${this.currentPage === totalPages ? 'disabled' : ''} 
-                    onclick="courseApp.goToPage(${this.currentPage + 1})">
-                <i class="fas fa-chevron-right"></i>
-            </button>
-        `;
-
-        paginationContainer.innerHTML = paginationHTML;
-    }
-
-    goToPage(page) {
-        this.currentPage = page;
-        this.renderCourses();
-        this.renderPagination();
-        document.getElementById('courses-section').scrollIntoView({ behavior: 'smooth' });
-    }
-
-    confirmDelete(courseId) {
-        this.deleteTargetId = courseId;
-        const course = this.courses.find(c => c.id === courseId);
-        
-        if (!course) return;
-        
-        const modal = document.getElementById('confirmDeleteModal');
-        if (modal) {
-            const modalBody = modal.querySelector('.modal-body');
-            modalBody.innerHTML = `
-                <div style="text-align: center; margin-bottom: 20px;">
-                    <div style="font-size: 60px; margin-bottom: 15px;">${course.thumbnail}</div>
-                    <h3 style="margin: 0 0 10px 0; color: #fff;">${course.title}</h3>
-                    <p style="color: rgba(255, 255, 255, 0.7); margin: 0;">
-                        <i class="fas fa-user"></i> ${course.instructor} • 
-                        <i class="fas fa-video"></i> ${course.lessons?.length || 0} bài học
-                    </p>
-                </div>
-                <p style="text-align: center; color: rgba(255, 255, 255, 0.9); margin-bottom: 10px;">
-                    Bạn có chắc chắn muốn xóa khóa học này?
-                </p>
-                <p class="text-warning" style="text-align: center; color: #ff3b30; font-weight: 600;">
-                    <i class="fas fa-exclamation-triangle"></i> Hành động này không thể hoàn tác!
-                </p>
-                
-                <div class="form-actions" style="margin-top: 30px;">
-                    <button class="btn-secondary" onclick="courseApp.closeConfirmDeleteModal()">
-                        <i class="fas fa-times"></i> Hủy
-                    </button>
-                    <button class="btn-danger" onclick="courseApp.deleteCourse()">
-                        <i class="fas fa-trash-alt"></i> Xóa khóa học
-                    </button>
-                </div>
-            `;
-            
-            modal.style.display = 'flex';
-        }
-    }
-
-    deleteCourse() {
-        if (!this.deleteTargetId) return;
-        
-        this.courses = this.courses.filter(c => c.id !== this.deleteTargetId);
-        this.filteredCourses = this.filteredCourses.filter(c => c.id !== this.deleteTargetId);
-        
-        this.saveCourses();
-        this.renderCourses();
-        this.updateStats();
-        this.renderPagination();
-        this.closeConfirmDeleteModal();
-        this.showNotification('✅ Đã xóa khóa học thành công!', 'success');
-        
-        this.deleteTargetId = null;
-    }
-
-    closeConfirmDeleteModal() {
-        const modal = document.getElementById('confirmDeleteModal');
-        if (modal) {
-            modal.style.display = 'none';
-        }
-        this.deleteTargetId = null;
-    }
-
-    openUploadModal() {
-        const modal = document.getElementById('uploadModal');
-        if (modal) {
-            modal.style.display = 'flex';
-        }
-    }
-
-    closeUploadModal() {
-        const modal = document.getElementById('uploadModal');
-        if (modal) {
-            modal.style.display = 'none';
-        }
-    }
-
-    showNotification(message, type = 'success') {
-        const notification = document.getElementById('notification');
-        const notificationText = document.getElementById('notificationText');
-        
-        if (notification && notificationText) {
-            notificationText.textContent = message;
-            notification.className = `notification ${type} show`;
-            
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 3000);
-        }
-    }
-
-    async refreshCourses() {
-        this.showNotification('🔄 Đang làm mới...', 'info');
-        await this.init();
-        this.showNotification('✅ Đã cập nhật!', 'success');
-    }
-}
-
-// Initialize app
-let courseApp;
-document.addEventListener('DOMContentLoaded', () => {
-    courseApp = new CourseApp();
-    console.log('✅ CourseApp initialized');
-});
+        if
